@@ -13,6 +13,11 @@ const Signup = () => {
 
     const [passwordShown, setPasswordShown] = useState(false);
 
+    
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+      };
+
     const onSubmit = (data) => {
         console.log(data)
 
@@ -26,10 +31,6 @@ const Signup = () => {
     };
 
     const { register, handleSubmit, errors } = useForm();
-
-    const togglePasswordVisiblity = () => {
-        setPasswordShown(passwordShown ? false : true);
-      };
 
     return (
         <div className="signup">
@@ -57,15 +58,16 @@ const Signup = () => {
                         <div className="form-group col-md-6 has-feedback">
                             <label>Password</label>
                             <input className="form-control" type={passwordShown ? "text" : "password"} placeholder="Password" name="password" ref={register({ required: "PASSWORD REQUIRED", minLength: { value: 7, message: "TOO SHORT" } })} />
-                            <i onClick={togglePasswordVisiblity}>{eye}</i>
+                            <i className="eye-icon" onClick={togglePasswordVisiblity}>{eye}</i>
                         </div>
                         <div className="form-group col-md-6">
                             <label>Confirm Password</label>
-                            <input className="form-control" type="password" placeholder="Confirm Password" name="password_confirmation" ref={register({ })} />
+                            <input className="form-control" type={passwordShown ? "text" : "password"} placeholder="Confirm Password" name="password_confirmation" ref={register({ })} />
+                            <i className="eye-icon" onClick={togglePasswordVisiblity}>{eye}</i>
                         </div>
                         <div className="col-md-6 col-md-offset-3">
                             <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
-                            <span>Already have an account? <Link to='/' className="link">Sign in</Link></span>
+                            <span>Already have an account? <Link to='/login' className="link">Sign in</Link></span>
                         </div>
                     </div>
                 </form>
