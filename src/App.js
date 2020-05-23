@@ -1,11 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Switch, Route } from 'react-router-dom';
+import Signup from './pages/signup/Signup'
 
 function App() {
   return (
     <div className="App">
-      
+      <Signup />
     </div>
   );
 }

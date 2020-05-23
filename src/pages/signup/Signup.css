@@ -1,0 +1,47 @@
+.signup h3 {
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 56px;
+    font-weight: 500;
+    font-size: 24px;
+}
+.form_container {
+    width: 970px;
+}
+.signup input {
+    /* width: 379px; */
+    height: 41px;
+    border: 1.5px solid #BDBDBD;
+    border-radius: 4px;
+    margin-right: 60px;
+    padding-left: 5px; 
+}
+.signup button {
+    background-color: #2B3C4E;
+    color: #ffffff;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    /* width: 520px; */
+    height: 50px;
+}
+.signup label {
+    /* margin-left: 0 auto; */
+    font-weight: normal;
+    font-size: 14px;
+}
+.signup span {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 14px;
+}
+.link {
+    text-decoration: none;
+}
+/* i {
+  position: absolute;
+} */
+i:hover {
+    color: #00fcb6;
+    cursor: pointer;
+  }
