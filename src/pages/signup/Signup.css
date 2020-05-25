@@ -30,6 +30,7 @@
     margin-right: 10px;
     margin-left: -25px;
     margin-top: -28px;
+    position: relative;
     z-index: 2;
 }
 i:hover {

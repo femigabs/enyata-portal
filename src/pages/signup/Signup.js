@@ -13,6 +13,11 @@ const Signup = () => {
 
     const [passwordShown, setPasswordShown] = useState(false);
 
+    
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+      };
+
     const onSubmit = (data) => {
         console.log(data)
 
@@ -30,7 +35,6 @@ const Signup = () => {
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
     };
-
     return (
         <div className="signup">
             <div className="card">
