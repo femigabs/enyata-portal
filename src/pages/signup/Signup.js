@@ -33,6 +33,7 @@ const Signup = () => {
 
     return (
         <div className="signup">
+            <div className="card">
             <UserLogo />
             <h3>Applicant Sign Up</h3>
             <div className="col-md-6 col-md-offset-3">
@@ -141,6 +142,7 @@ const Signup = () => {
                         </div>
                     </div>
                 </form>
+            </div>
             </div>
         </div>
     )
