@@ -1,28 +1,28 @@
-.signup h3 {
+.login h3 {
     font-style: italic;
     margin-top: 10px;
     margin-bottom: 56px;
     font-weight: 500;
     font-size: 24px;
 }
-.signup button {
+.login button {
     background-color: #2B3C4E;
     color: #ffffff;
     margin-top: 30px;
     margin-bottom: 10px;
 }
-.signup label {
+.login label {
     display: block;
     text-align: left;
     font-weight: normal;
     font-size: 14px;
 }
-.signup span {
+.login span {
     font-style: italic;
     font-weight: normal;
     font-size: 14px;
 }
-.link {
+.login-text Link {
     text-decoration: none;
 }
 .eye-icon {
@@ -30,15 +30,18 @@
     margin-right: 10px;
     margin-left: -25px;
     margin-top: -28px;
-    position: relative;
     z-index: 2;
 }
 i:hover {
     color: #00fcb6;
     cursor: pointer;
   }
-  .signup p {
-    display: block;
-    text-align: left;
-    color: red;
-}
+  .login-text {
+      display: flex;
+      justify-content: space-between;
+  }
+  .login p {
+      display: block;
+      text-align: left;
+      color: red;
+  }
