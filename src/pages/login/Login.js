@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -16,16 +17,16 @@ const Login = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = (state) => {
+    console.log(state)
 
-    // axios.post("/api/v2/blog", state)
-    //     .then(response => {
-    //         console.log(response.data)
-    //     })
-    //     .catch(err => {
-    //         console.log(err.response.data)
-    //     })
+    axios.post("/api/v1/login", state)
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
   };
 
   const { register, handleSubmit, errors } = useForm();
