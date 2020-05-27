@@ -44,8 +44,8 @@ const Application = () => {
     });
 
     const onSubmit = () => {
-       
-        axios.post("https://academy-porta.herokuapp.com/api/v1/application", state)
+       console.log(state)
+        axios.post("/api/v1/application", state)
             .then(response => {
                 console.log(response)
             })
