@@ -18,8 +18,8 @@ const Signup = () => {
         setPasswordShown(passwordShown ? false : true);
       };
 
-    const onSubmit = (data) => {
-        console.log(data)
+    // const onSubmit = (state) => {
+    //     console.log(state)
 
         // axios.post("/api/v2/blog", state)
         //     .then(response => {
@@ -28,13 +28,38 @@ const Signup = () => {
         //     .catch(err => {
         //         console.log(err.response.data)
         //     })
+
+    //     const url = "https://academy-porta.herokuapp.com/api/v1/signup";
+    // fetch(url, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   mode: "no-cors",
+    //   body: JSON.stringify(state)
+    // })
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     console.log(json);
+    //   })
+    //   .catch((err) => {
+    //     console.log("Error:", err.message);
+    //   });
+    // };
+    const onSubmit = (state) => {
+        console.log(state)
+        axios.post("/api/v1/signup", state)
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
     };
 
     const { register, handleSubmit, errors, watch } = useForm();
 
-    const togglePasswordVisiblity = () => {
-        setPasswordShown(passwordShown ? false : true);
-    };
+
     return (
         <div className="signup">
             <div className="card">
