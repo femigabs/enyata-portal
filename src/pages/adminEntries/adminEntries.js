@@ -1,12 +1,12 @@
-import React, { useState,useEffect } from 'react';
-import '../pages/dashBoard/DashBoard.css';
-import SideNav from '../components/sideNav/SideNav';
-import menu from '../Assets/Icons/menu.svg'
-import Cookies from "js-cookie"
-import axios from "axios"
+import React, { useState, useEffect } from 'react';
+import './AdminEntries.css';
+import AdminNav from '../../components/adminNav/AdminNav';
+import menu from '../../Assets/Icons/menu.svg';
+import Cookies from "js-cookie";
+import axios from "axios";
 import Moment from 'react-moment';
 
-const adminEntries = () => {
+const AdminEntries = () => {
     useEffect(() => {
         let hamburger = document.getElementById("img"),
             menuLink = document.getElementById("sidenav")
@@ -64,7 +64,7 @@ const url = `/api/v1/specific_batch/${value.value}`
                 <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
             </div>
             <div className="dashboard">
-                <SideNav />
+                <AdminNav />
                 <div className="container dashboard-contents">
                     <div className="dashboard-heading">
                         <h1>Entries -       
@@ -103,4 +103,4 @@ const url = `/api/v1/specific_batch/${value.value}`
     )
 }
 
-export default adminEntries;
+export default AdminEntries;

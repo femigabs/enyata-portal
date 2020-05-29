@@ -1,6 +1,6 @@
 import React from 'react';
-import './adminBoard.css';
-import AdminNav from '../../components/adminNav/adminNav';
+import './AdminBoard.css';
+import AdminNav from '../../components/adminNav/AdminNav';
 
 const AdminBoard = () => {
     return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './adminNav.css';
+import './AdminNav.css';
 import board from '../../Assets/Icons/dashboard-icon.png';
 import create from '../../Assets/Icons/createapp-icon.png';
 import entry from '../../Assets/Icons/appentries-icon.png';
@@ -23,7 +23,7 @@ const AdminNav = () => {
 
         axios.post('https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload', formData)
             .then(res => {
-                setImage(res.data.secure_url)
+                setImage(res.data.secure_url) 
                 setLoading(false)
             })
             .catch(err => console.log(err))
