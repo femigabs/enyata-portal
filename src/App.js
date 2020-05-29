@@ -8,6 +8,7 @@ import Application from './pages/application/Application';
 import Assessment from './pages/assessment/Assessment';
 import admin from './pages/admin/admin';
 import adminBoard from './pages/adminBoard/adminBoard';
+import adminEntries from './pages/adminEntries/adminEntries';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route exact path='/assessment' component={Assessment} />
         <Route exact path='/admin' component={admin} />
         <Route exact path='/adminBoard' component={adminBoard} />
+        {/* <Route exact path='/adminEntries' component={adminEntries} /> */}
       </Switch>
     </div>
   );
