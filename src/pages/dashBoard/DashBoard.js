@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './DashBoard.css';
 import SideNav from '../../components/sideNav/SideNav';
-import menu from '../../Assets/Icons/menu.svg'
+import menu from '../../Assets/Icons/menu.svg';
+import Cookies from "js-cookie";
+import axios from "axios";
+import Moment from 'react-moment';
 
 const DashBoard = () => {
     useEffect(() => {
@@ -12,8 +15,45 @@ const DashBoard = () => {
             menuLink.classList.toggle('hidden-xs')
             e.preventDefault()
         })
-        console.log(hamburger, menuLink)
     })
+
+    const [state, setState] = useState({ data: [] });
+    useEffect(() => {
+        axios.get("/api/v1/application", {
+            "headers": {
+                "Content-Type": "application/json",
+                "token": Cookies.get("token")
+            }
+        })
+            .then(response => {
+                setState({
+                    data: response.data
+                })
+            })
+            .catch((err) => {
+                console.log("Error:", err.message);
+            });
+    }, []);
+
+    const [update, setUpdate] = useState({ updates: [] });
+    useEffect(() => {
+        axios.get("/api/v1/getUpdate", {
+            "headers": {
+                "Content-Type": "application/json",
+                "token": Cookies.get("token")
+            }
+        })
+            .then(response => {
+                setUpdate({
+                    updates: response.data
+                })
+            })
+            .catch((err) => {
+                console.log("Error:", err.message);
+            });
+    }, []);
+
+    const day = <Moment format="DD.MM.YY">{state.data.Application_date}</Moment>
 
     return (
         <div>
@@ -30,29 +70,32 @@ const DashBoard = () => {
                     <div className="row application-info">
                         <div className="col-md-3 application-date">
                             <h5>Date of Application</h5>
-                            <h2>09.09.19</h2>
+                            <h2>{day}</h2>
                             <p>4 days since applied</p>
                         </div>
                         <div className="col-md-3 application-status">
                             <h5>Application Status</h5>
-                            <h2>Pending</h2>
+                            <h2>{state.data.Application_status}</h2>
                             <p>we will get back to you</p>
                         </div>
                     </div>
                     <div className="row dashboard-info">
                         <div className="col-md-6">
                             <div className="card update">
-                                <div class="card-body">
+                                <div className="card-body">
                                     <h6>Updates</h6>
-                                    <div className="update-info"></div>
+                                    <div className="update-info">
+                                    <h5>{update.updates.instruction}</h5>
+                                    <a href={update.updates.link}>Apply Now</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <div className="card assessment">
-                                <div class="card-body">
+                            <div className="card take-assessment">
+                                <div className="card-body">
                                     <h6>Assessment</h6>
-                                    <p>We have 4 days left until the next assessment <br/>Watch this space</p>
+                                    <p>We have 4 days left until the next assessment <br />Watch this space</p>
                                     <button className="btn btn-default">Take Assessment</button>
                                 </div>
                             </div>

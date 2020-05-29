@@ -6,6 +6,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+import Cookies from "js-cookie"
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -24,6 +25,7 @@ const Signup = () => {
         axios.post("/api/v1/signup", state)
             .then(response => {
                 console.log(response.data)
+                Cookies.set('token', response.data.token);
             })
             .catch(err => {
                 console.log(err.response)

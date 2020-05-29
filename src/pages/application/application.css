@@ -26,8 +26,19 @@
     align-items: center;
     justify-content: center;
 }
-.cv h6 {
-    padding-left: 15px;
+.cv label {
+    cursor: pointer;
+}
+.cv img {
+    padding-right: 15px;
+}
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 .files-dropzone {
     display: flex;
