@@ -5,7 +5,11 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import axios from "axios";
+=======
+import axios from 'axios';
+>>>>>>> ad564da1e3227ec2cfce311e619fd11fe8e8bec5
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -17,6 +21,7 @@ const Login = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
+<<<<<<< HEAD
   // const onSubmit = (data) => {
   //   console.log(data)
 
@@ -50,6 +55,11 @@ const Login = () => {
   // };
   const onSubmit = (state) => {
     console.log(state)
+=======
+  const onSubmit = (state) => {
+    console.log(state)
+
+>>>>>>> ad564da1e3227ec2cfce311e619fd11fe8e8bec5
     axios.post("/api/v1/login", state)
         .then(response => {
             console.log(response.data)
