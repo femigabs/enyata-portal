@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AdminEntries.css';
 import AdminNav from '../../components/adminNav/AdminNav';
+import menu from '../../Assets/Icons/menu.svg';
 import Cookies from "js-cookie";
 import axios from "axios";
 import Moment from 'react-moment';
