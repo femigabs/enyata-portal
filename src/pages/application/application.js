@@ -22,7 +22,7 @@ const Application = (props) => {
 
     const { register, handleSubmit } = useForm({
         defaultValues: {
-            created_at: new Date(),
+            created_at: "2020/04/05",
             closure_date: batch_id.slice(2),
             batch_id: batch_id.slice(0, 1)
         }

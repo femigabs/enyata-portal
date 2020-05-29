@@ -6,9 +6,14 @@ import hourglass from '../../Assets/Images/hourglass (1).png';
 import Cookies from "js-cookie";
 import axios from "axios";
 import Moment from 'react-moment';
+import Countdown, { zeroPad, calcTimeDelta, formatTimeDelta } from 'react-countdown-now';
 
 const Assessment = () => {
 
+    const renderer = ({minutes, seconds}) => {
+           return <span>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></span>;
+         
+    };
     useEffect(() => {
         let hamburger = document.getElementById("img"),
             menuLink = document.getElementById("sidenav")
@@ -34,7 +39,10 @@ const Assessment = () => {
                         </div>
                         <div className="timer">
                             <p>Timer</p>
-                            <h1>00<sub>min</sub> 000<sub>sec</sub></h1>
+                            <h1><Countdown
+                            date={Date.now() + 180000}
+                            renderer={renderer}
+                        /></h1>
                         </div>
                     </div>
                     <div className="card">
