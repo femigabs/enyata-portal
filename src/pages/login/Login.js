@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';
+import Cookies from "js-cookie"
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -21,14 +22,14 @@ const Login = () => {
     console.log(state)
 
     axios.post("/api/v1/login", state)
-        .then(response => {
-            console.log(response.data)
-        })
-        .catch(err => {
-            console.log(err.response)
-        })
+      .then(response => {
+        console.log(response.data)
+        Cookies.set('token', response.data.token);
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
   };
-
   const { register, handleSubmit, errors } = useForm();
 
   return (

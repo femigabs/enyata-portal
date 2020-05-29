@@ -34,7 +34,11 @@ const SideNav = () => {
             <div className="user-profile">
                 <input className="inputfile" id="file" type="file" name="file" onChange={uploadImage} />
                 <div className="user-image">
+<<<<<<< HEAD
                     <label for="file">Choose a files</label>
+=======
+                    <label htmlFor="file">Choose a files</label>
+>>>>>>> 38fe27767693fe78ade5ccf09ef59d3a602ba248
                     {loading ? "loading..." : <img src={image} alt="" />}
                 </div>
                 <h3>John doe</h3>
@@ -44,10 +48,12 @@ const SideNav = () => {
                 <div className="sidenav-links">
                     <NavLink
                         className="nav-link"
+                        style={{textDecoration: "none"}}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold", color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/dashboard"
                     >
@@ -58,13 +64,15 @@ const SideNav = () => {
                 <div className="sidenav-links">
                     <NavLink
                         className="nav-link"
+                        style={{textDecoration: "none"}}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
-                        exact to="/"
+                        exact to="/assessment"
                     >
                         <img className="img" src={assessment} alt="assessment" />
                         Assessment
@@ -73,11 +81,13 @@ const SideNav = () => {
                 <div className="sidenav-logout">
                     <NavLink
                         className="nav-link"
+                        style={{textDecoration: "none"}}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/">
                         <img className="img" src={logout} alt="logout" />

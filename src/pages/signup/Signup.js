@@ -6,6 +6,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+import Cookies from "js-cookie"
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -18,40 +19,13 @@ const Signup = () => {
         setPasswordShown(passwordShown ? false : true);
     };
 
-    // const onSubmit = (state) => {
-    //     console.log(state)
-
-        // axios.post("/api/v2/blog", state)
-        //     .then(response => {
-        //         console.log(response.data)
-        //     })
-        //     .catch(err => {
-        //         console.log(err.response.data)
-        //     })
-
-    //     const url = "https://academy-porta.herokuapp.com/api/v1/signup";
-    // fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   mode: "no-cors",
-    //   body: JSON.stringify(state)
-    // })
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     console.log(json);
-    //   })
-    //   .catch((err) => {
-    //     console.log("Error:", err.message);
-    //   });
-    // };
     const onSubmit = (state) => {
         console.log(state)
 
         axios.post("/api/v1/signup", state)
             .then(response => {
                 console.log(response.data)
+                Cookies.set('token', response.data.token);
             })
             .catch(err => {
                 console.log(err.response)
@@ -59,7 +33,6 @@ const Signup = () => {
     };
 
     const { register, handleSubmit, errors, watch } = useForm();
-
 
     return (
         <div className="signup">
