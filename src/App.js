@@ -6,6 +6,7 @@ import Login from './pages/login/Login';
 import DashBoard from './pages/dashBoard/DashBoard';
 import application from './pages/application/application';
 import admin from './pages/admin/admin';
+import adminBoard from './pages/adminBoard/adminBoard';
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
         <Route exact path='/login' component={Login} />
         <Route exact path='/dashboard' component={DashBoard} />
         <Route exact path='/' component={Signup} />
-        <Route exact path='/application' component={application} />
+        <Route path='/application' component={application} />
         <Route exact path='/admin' component={admin} />
+        <Route exact path='/adminBoard' component={adminBoard} />
       </Switch>
     </div>
   );
