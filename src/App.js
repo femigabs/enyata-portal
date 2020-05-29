@@ -6,6 +6,9 @@ import Login from './pages/login/Login';
 import DashBoard from './pages/dashBoard/DashBoard';
 import Application from './pages/application/Application';
 import Assessment from './pages/assessment/Assessment';
+import admin from './pages/admin/admin';
+import adminBoard from './pages/adminBoard/adminBoard';
+
 
 function App() {
   return (
@@ -16,6 +19,8 @@ function App() {
         <Route exact path='/dashboard' component={DashBoard} />
         <Route exact path='/application/:id' component={Application} />
         <Route exact path='/assessment' component={Assessment} />
+        <Route exact path='/admin' component={admin} />
+        <Route exact path='/adminBoard' component={adminBoard} />
       </Switch>
     </div>
   );
