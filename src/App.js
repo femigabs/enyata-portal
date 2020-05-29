@@ -7,7 +7,9 @@ import DashBoard from './pages/dashBoard/DashBoard';
 import Application from './pages/application/Application';
 import Assessment from './pages/assessment/Assessment';
 import admin from './pages/admin/admin';
-import adminBoard from './pages/adminBoard/adminBoard';
+import adminBoard from './pages/adminBoard/AdminBoard';
+import AdminEntries from './pages/adminEntries/AdminEntries'
+
 
 
 function App() {
@@ -20,7 +22,8 @@ function App() {
         <Route exact path='/application/:id' component={Application} />
         <Route exact path='/assessment' component={Assessment} />
         <Route exact path='/admin' component={admin} />
-        <Route exact path='/adminBoard' component={adminBoard} />
+        <Route exact path='/adminboard' component={adminBoard} />
+        <Route exact path='/adminentries' component={AdminEntries} />
       </Switch>
     </div>
   );
