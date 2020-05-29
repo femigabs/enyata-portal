@@ -18,7 +18,6 @@ const Signup = () => {
         setPasswordShown(passwordShown ? false : true);
     };
 
-<<<<<<< HEAD
     // const onSubmit = (state) => {
     //     console.log(state)
 
@@ -49,11 +48,7 @@ const Signup = () => {
     // };
     const onSubmit = (state) => {
         console.log(state)
-=======
-    const onSubmit = (state) => {
-        console.log(state)
 
->>>>>>> ad564da1e3227ec2cfce311e619fd11fe8e8bec5
         axios.post("/api/v1/signup", state)
             .then(response => {
                 console.log(response.data)
@@ -65,10 +60,7 @@ const Signup = () => {
 
     const { register, handleSubmit, errors, watch } = useForm();
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ad564da1e3227ec2cfce311e619fd11fe8e8bec5
     return (
         <div className="signup">
             <div className="card">

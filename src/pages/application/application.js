@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import './application.css';
+import './Application.css';
 import UserLogo from '../../components/userLogo/UserLogo';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Plus from '../../Assets/Icons/createapp-icon.png';
 import Files from 'react-files';
-import moment from 'react-moment';
 
 
 
