@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';
+import Cookies from "js-cookie"
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -17,48 +18,17 @@ const Login = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
-  // const onSubmit = (data) => {
-  //   console.log(data)
-
-    // axios.post("https://academy-porta.herokuapp.com/api/v1/login", data)
-    //     .then(response => {
-    //         console.log(response)
-    //     })
-    //     .catch(err => {
-    //         console.log(err.response)
-    //     })
-  //   const url = "https://academy-porta.herokuapp.com/api/v1/login";
-  //   const state = {
-  //     email_address: "rilwan@gmail.com",
-  //     password: "majjaguun"
-  //   }
-  //   fetch(url, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     mode: "no-cors",
-  //     body: state
-  //   })
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       console.log(json);
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error:", err.message);
-  //     });
-  // };
   const onSubmit = (state) => {
     console.log(state)
     axios.post("/api/v1/login", state)
-        .then(response => {
-            console.log(response.data)
-        })
-        .catch(err => {
-            console.log(err.response)
-        })
+      .then(response => {
+        console.log(response.data)
+        Cookies.set('token', response.data.token);
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
   };
-
   const { register, handleSubmit, errors } = useForm();
 
   return (

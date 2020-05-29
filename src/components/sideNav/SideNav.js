@@ -11,28 +11,31 @@ const SideNav = () => {
     const [image, setImage] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const uploadImage = (e) => {
+    const uploadImage = async (e) => {
         const files = e.target.files[0];
         const formData = new FormData();
         formData.append("upload_preset", "q3swu36z");
         formData.append("file", files);
-        setLoading(true);
-
-        axios.post('https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload', formData)
-            .then(res => {
-                setImage(res.data.secure_url)
-                setLoading(false)
-            })
-            .catch(err => console.log(err))
-
-    }
+        try {
+            setLoading(true);
+            const res = await axios.post("https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload", formData);
+            const imageUrl = res.data.secure_url;
+            // const image = await axios.post("", { imageUrl });
+            setLoading(false)
+            setImage(imageUrl.data);
+        } catch (err) {
+            console.log(err)
+        };
+    };
 
     return (
-        <div className="sidenav">
+        <div id="sidenav" className="sidenav hidden-xs">
+            {/* <div className="nav"> */}
             <div className="user-profile">
-                <input type="file" name="file" onChange={uploadImage} />
+                <input className="inputfile" id="file" type="file" name="file" onChange={uploadImage} />
                 <div className="user-image">
-                    {loading ? "loading..." : <img src={image} alt="image" />}
+                    <label htmlFor="file">Choose a files</label>
+                    {loading ? "loading..." : <img src={image} alt="" />}
                 </div>
                 <h3>John doe</h3>
                 <p>joe@enyata.com</p>
@@ -41,10 +44,12 @@ const SideNav = () => {
                 <div className="sidenav-links">
                     <NavLink
                         className="nav-link"
+                        style={{textDecoration: "none"}}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold", color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/dashboard"
                     >
@@ -55,13 +60,15 @@ const SideNav = () => {
                 <div className="sidenav-links">
                     <NavLink
                         className="nav-link"
+                        style={{textDecoration: "none"}}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
-                        exact to="/"
+                        exact to="/assessment"
                     >
                         <img className="img" src={assessment} alt="assessment" />
                         Assessment
@@ -70,11 +77,13 @@ const SideNav = () => {
                 <div className="sidenav-logout">
                     <NavLink
                         className="nav-link"
+                        style={{textDecoration: "none"}}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/">
                         <img className="img" src={logout} alt="logout" />

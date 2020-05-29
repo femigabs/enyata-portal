@@ -1,0 +1,15 @@
+.assessment {
+    display: flex
+}
+.assessment-contents {
+    margin-left: 47px;
+}
+.assessment-heading {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    margin-top: 100px;
+}
+.take-ass {
+    margin-top: 156px;
+}
