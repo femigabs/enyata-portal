@@ -13,3 +13,10 @@
 .take-ass {
     margin-top: 156px;
 }
+.take-ass p {
+    margin-top: 21px;
+    margin-bottom: 25px;
+}
+.take-ass button {
+    background-color: #B1B1B1;
+}

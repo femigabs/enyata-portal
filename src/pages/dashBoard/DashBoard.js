@@ -85,8 +85,8 @@ const DashBoard = () => {
                                 <div className="card-body">
                                     <h6>Updates</h6>
                                     <div className="update-info">
-                                    <h5>{update.updates.instruction}</h5>
-                                    <a href={update.updates.link}>Apply Now</a>
+                                        <h5>{update.updates.instruction}</h5>
+                                        <a href={update.updates.link}>Apply Now</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './adminNav.css';
+import './AdminNav.css';
 import board from '../../Assets/Icons/dashboard-icon.png';
 import create from '../../Assets/Icons/createapp-icon.png';
 import entry from '../../Assets/Icons/appentries-icon.png';
@@ -14,27 +14,29 @@ const AdminNav = () => {
     const [image, setImage] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const uploadImage = (e) => {
+    const uploadImage = async (e) => {
         const files = e.target.files[0];
         const formData = new FormData();
         formData.append("upload_preset", "q3swu36z");
         formData.append("file", files);
-        setLoading(true);
-
-        axios.post('https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload', formData)
-            .then(res => {
-                setImage(res.data.secure_url)
-                setLoading(false)
-            })
-            .catch(err => console.log(err))
-    }
+        try {
+            setLoading(true);
+            const res = await axios.post("https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload", formData);
+            const imageUrl = res.data.secure_url;
+            setLoading(false)
+            setImage(imageUrl.data);
+        } catch (err) {
+            console.log(err)
+        };
+    };
 
     return (
         <div className="adminnav">
             <div className="profile">
-                <input type="file" name="file" onChange={uploadImage} />
+                <input className="inputfile" id="file" type="file" name="file" onChange={uploadImage} />
                 <div className="ad-image">
-                    {loading ? "loading..." : <img src={image} alt="image" />}
+                    <label htmlFor="file">Choose a files</label>
+                    {loading ? "loading..." : <img src={image} alt="" />}
                 </div>
                 <h3>John Doe</h3>
                 <p>joe@enyata.com</p>
@@ -42,13 +44,16 @@ const AdminNav = () => {
             <div className="adminnav-text">
                 <div className="adminnav-links">
                     <NavLink
-                    className="nav-link"
-                    activeStyle={{
-                        borderLeft: "solid 4px #31D283",
-                        fontWeight: "bold", color: "black",
-                        paddingLeft: "36px"
-                    }}
-                    exact to="/adminBoard">
+                        className="nav-link"
+                        style={{ textDecoration: "none" }}
+                        activeStyle={{
+                            borderLeft: "solid 4px #31D283",
+                            fontWeight: "bold", color: "black",
+                            paddingLeft: "36px",
+                            textDecoration: "none"
+                        }}
+                        exact to="/adminboard"
+                    >
                         <img className="img" src={board} alt="board" />
                         Dashboard
                     </NavLink>
@@ -56,11 +61,13 @@ const AdminNav = () => {
                 <div className="adminnav-links">
                     <NavLink
                         className="nav-link"
+                        style={{ textDecoration: "none" }}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/"
                     >
@@ -71,11 +78,13 @@ const AdminNav = () => {
                 <div className="adminnav-links">
                     <NavLink
                         className="nav-link"
+                        style={{ textDecoration: "none" }}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/"
                     >
@@ -86,11 +95,13 @@ const AdminNav = () => {
                 <div className="adminnav-links">
                     <NavLink
                         className="nav-link"
+                        style={{ textDecoration: "none" }}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/"
                     >
@@ -101,11 +112,13 @@ const AdminNav = () => {
                 <div className="adminnav-links">
                     <NavLink
                         className="nav-link"
+                        style={{ textDecoration: "none" }}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/"
                     >
@@ -116,11 +129,13 @@ const AdminNav = () => {
                 <div className="adminnav-links">
                     <NavLink
                         className="nav-link"
+                        style={{ textDecoration: "none" }}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
                             fontWeight: "bold",
                             color: "black",
-                            paddingLeft: "36px"
+                            paddingLeft: "36px",
+                            textDecoration: "none"
                         }}
                         exact to="/"
                     >

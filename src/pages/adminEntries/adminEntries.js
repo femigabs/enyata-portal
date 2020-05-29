@@ -61,7 +61,7 @@ const AdminEntries = () => {
     return (
         <div>
             <div className="menu">
-                <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
+                <img src={menu} alt="" id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
             </div>
             <div className="dashboard">
                 <AdminNav />
