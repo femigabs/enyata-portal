@@ -7,6 +7,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from "js-cookie"
+import { useHistory } from 'react-router-dom';
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -17,13 +18,14 @@ const Login = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-
-  const onSubmit = (state) => {
+const history = useHistory()
+  const onSubmit = (state,props) => {
     console.log(state)
     axios.post("/api/v1/login", state)
       .then(response => {
         console.log(response.data)
         Cookies.set('token', response.data.token);
+        history.push('/dashboard')
       })
       .catch(err => {
         console.log(err.response)

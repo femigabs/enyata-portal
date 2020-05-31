@@ -40,7 +40,7 @@ const Assessment = () => {
                         <div className="timer">
                             <p>Timer</p>
                             <h1><Countdown
-                            date={Date.now() + 180000}
+                            date={Date.now() + 1800000}
                             renderer={renderer}
                         /></h1>
                         </div>

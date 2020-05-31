@@ -55,6 +55,7 @@ const url = `/api/v1/specific_batch/${value.value}`
             <td>{items.address}</td>
             <td>{items.university}</td>
             <td>{items.cgpa}</td>
+            <td>{items.score}</td>
             </tr>
         })
     }
@@ -72,6 +73,8 @@ const url = `/api/v1/specific_batch/${value.value}`
                         <option selected value="1">Batch 1</option>
                         <option value="2">Batch 2</option>
                         <option value="3">Batch 3</option> 
+                        <option value="4">Batch 4</option>
+                        <option value="5">Batch 5</option> 
                         </select></h1>
                          <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
@@ -89,6 +92,8 @@ const url = `/api/v1/specific_batch/${value.value}`
                         <th class="th-sm">University
                         </th>
                         <th class="th-sm">cgpa
+                        </th>
+                        <th class="th-sm">score
                         </th>
                         </tr>
                     </thead>

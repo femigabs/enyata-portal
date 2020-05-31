@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Plus from '../../Assets/Icons/createapp-icon.png';
 import Files from 'react-files';
 import Cookies from "js-cookie";
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -18,7 +19,7 @@ const Application = (props) => {
     const batch_id = params.get("id");
 
     const [image, setImage] = useState({ data: [] });
-
+    const [status, setStatus] = useState()
 
     const { register, handleSubmit } = useForm({
         defaultValues: {
@@ -27,7 +28,7 @@ const Application = (props) => {
             batch_id: batch_id.slice(0, 1)
         }
     });
-
+    const history = useHistory()
     const onSubmit = (state) => {
         console.log(state)
         axios.post("/api/v1/application", state, {
@@ -40,10 +41,14 @@ const Application = (props) => {
                 console.log(response)
             })
             .catch(err => {
-                console.log(err.response)
+                console.log(err.response.data)
+                setStatus(err.response.data.message)
+                if(err.response.data.message=="Authorization Failed"){
+                    history.push("/signup")
+                }
             })
     };
-
+console.log(status)
     const uploadFile = async (e) => {
         const files = e.target.files[0];
         console.log(e.target.files[0])
@@ -228,6 +233,7 @@ const Application = (props) => {
                             </div>
                             <div className="col-md-6 col-md-offset-3">
                                 <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                                <span style={{ color: "red" }}>{status}</span>
                             </div>
                         </div>
                     </form>

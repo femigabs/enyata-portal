@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import comp from '../../Assets/Images/computer-img.png';
+import Cookies from "js-cookie"
+import { useHistory } from 'react-router-dom';
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -17,13 +19,15 @@ const Admin = () => {
     const togglePasswordVisibility = () => {
         setPasswordShown(passwordShown ? false : true);
     };
-
+    const history = useHistory()
     const onSubmit = (state) => {
         console.log(state)
         axios.post("/api/v1/admin/login", state)
-            .then(response => {
-                console.log(response.data)
-            })
+        .then(response => {
+            console.log(response.data)
+            Cookies.set('token', response.data.token);
+            history.push('/adminboard')
+          })
             .catch(err => {
                 console.log(err.response)
             })
