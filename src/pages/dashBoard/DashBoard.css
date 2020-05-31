@@ -64,6 +64,7 @@
 }
 .update-info a {
     color: blue;
+    font-size: bold;
     text-decoration: none;
 }
 .take-assessment {

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Cookies from "js-cookie"
 
 const eye = <FontAwesomeIcon icon={faEye} />;
@@ -19,6 +19,8 @@ const Signup = () => {
         setPasswordShown(passwordShown ? false : true);
     };
 
+    const history = useHistory()
+
     const onSubmit = (state) => {
         console.log(state)
 
@@ -26,6 +28,7 @@ const Signup = () => {
             .then(response => {
                 console.log(response.data)
                 Cookies.set('token', response.data.token);
+                history.push("/dashboard");
             })
             .catch(err => {
                 console.log(err.response)

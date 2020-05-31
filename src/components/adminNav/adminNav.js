@@ -69,7 +69,7 @@ const AdminNav = () => {
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}
-                        exact to="/"
+                        exact to="/createapplication"
                     >
                         <img className="img" src={create} alt="craetapp" />
                         Create Application
@@ -86,7 +86,7 @@ const AdminNav = () => {
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}
-                        exact to="/"
+                        exact to="/adminentries"
                     >
                         <img className="img" src={entry} alt="appentries" />
                         Application Entries
@@ -103,7 +103,7 @@ const AdminNav = () => {
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}
-                        exact to="/"
+                        exact to="/composeassessment"
                     >
                         <img className="img" src={compose} alt="composeass" />
                         Compose Assessment
@@ -120,7 +120,7 @@ const AdminNav = () => {
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}
-                        exact to="/"
+                        exact to="/assessmenthistory"
                     >
                         <img className="img" src={history} alt="asshistory" />
                         Assessment History
@@ -137,7 +137,7 @@ const AdminNav = () => {
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}
-                        exact to="/"
+                        exact to="/results"
                     >
                         <img className="img" src={result} alt="result" />
                         Results

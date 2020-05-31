@@ -1,0 +1,42 @@
+.compose{
+    display: -webkit-box;
+}
+.compose-structure{
+    margin-left: 47px;    
+}  
+.compose-structure label {
+    display: block;
+    text-align: left;
+    font-weight: normal;
+    font-size: 14px;
+}
+/* .compose-structure h1{
+    font-weight: 300;
+    padding-top: 6%;
+}
+h3{
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    padding-top: 30px;
+}
+    
+    
+.compose-input{
+    height: 100px;
+    width: 100%; 
+}
+    label{
+    font-weight: 400;
+    }
+    .time{
+    text-align: center;
+    }
+    .my-question input[type=text]{
+    
+    height: 150px;
+    border: 1px solid black;
+    }
+    input[type=text]{
+    border: 1px solid black;
+    } */

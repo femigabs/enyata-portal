@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import './Admin.css';
 import AdminLogo from '../../components/adminLogo/AdminLogo';
+import white from '../../Assets/Images/enyata-logo2.png'
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import comp from '../../Assets/Images/computer-img.png';
+import Cookies from "js-cookie";
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const Admin = () => {
 
+    const history = useHistory()
     const [passwordShown, setPasswordShown] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -23,17 +26,24 @@ const Admin = () => {
         axios.post("/api/v1/admin/login", state)
             .then(response => {
                 console.log(response.data)
+                Cookies.set('token', response.data.token);
+                history.push("/admindashboard")
             })
             .catch(err => {
                 console.log(err.response)
             })
-      };
+    };
 
     const { register, handleSubmit, errors } = useForm();
 
     return (
         <div className="admin">
-            <AdminLogo />
+            <div className="adminLogo">
+                <div className="whit">
+                    <img src={white} alt="enyata white" />
+                </div>
+                <h1>enyata</h1>
+            </div>
             <h3>Admin Log In</h3>
             <div className="col-md-4 col-md-offset-4">
                 <form onSubmit={handleSubmit(onSubmit)}>
