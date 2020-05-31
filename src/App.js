@@ -13,6 +13,7 @@ import AdminBoard from './pages/adminBoard/AdminBoard';
 import AdminEntries from './pages/adminEntries/AdminEntries'
 import CreateApplication from './pages/createApplication/CreateApplication';
 import ComposeAssessment from './pages/composeAssessment/ComposeAssessment';
+import AssessmentResult from './pages/assessmentResult/AssessmentResult';
 
 
 
@@ -32,6 +33,7 @@ function App() {
         <Route exact path='/adminentries' component={AdminEntries} />
         <Route exact path='/createapplication' component={CreateApplication} />
         <Route exact path='/composeassessment' component={ComposeAssessment} />
+        <Route exact path='/results' component={AssessmentResult} />
       </Switch>
     </div>
   );

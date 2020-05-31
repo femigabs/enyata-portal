@@ -27,7 +27,7 @@ const Admin = () => {
             .then(response => {
                 console.log(response.data)
                 Cookies.set('token', response.data.token);
-                history.push("/admindashboard")
+                history.push("/adminboard")
             })
             .catch(err => {
                 console.log(err.response)
