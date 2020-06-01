@@ -7,6 +7,7 @@ import axios from "axios";
 import Moment from 'react-moment';
 
 const adminEntries = () => {
+
     useEffect(() => {
         let hamburger = document.getElementById("img"),
             menuLink = document.getElementById("sidenav")
@@ -16,6 +17,7 @@ const adminEntries = () => {
             e.preventDefault()
         })
     })
+
     const [value, setValue] = useState({
         value: 1
     });
@@ -76,7 +78,7 @@ const adminEntries = () => {
                         <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
                     <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                        <thead>
+                        <thead className="table-head">
                             <tr>
                                 <th class="th-sm">Name</th>
                                 <th class="th-sm">Email</th>
@@ -86,9 +88,19 @@ const adminEntries = () => {
                                 <th class="th-sm">cgpa</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <>{itemsToRender}</>
-                        </tbody>
+                        <tbody className="table-body">
+
+
+     <>{itemsToRender}</> 
+     <tr>
+         <td>Amaechi</td>
+         <td>amaechi@gmail.com</td>
+         <td>2/2/2010 <span>12</span></td>
+         <td>12, Enyata Close, Illepeju, lagos.</td>
+         <td>Funnab</td>
+         <td>1.0</td>
+     </tr>
+ </tbody>
                     </table>
 
                 </div>
