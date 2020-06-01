@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Cookies from "js-cookie"
-import { useHistory } from 'react-router-dom';
+
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -28,7 +28,7 @@ const Signup = () => {
             .then(response => {
                 console.log(response.data)
                 Cookies.set('token', response.data.token);
-                history.push('/dashboard')
+                history.push("/dashboard");
             })
             .catch(err => {
                 console.log(err.response)

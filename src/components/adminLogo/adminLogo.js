@@ -1,5 +1,5 @@
 import React from 'react';
-import './adminLogo.css';
+import './AdminLogo.css';
 import white from '../../Assets/Images/enyata-logo2.png'
 
 const AdminLogo = () => {

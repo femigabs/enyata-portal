@@ -4,10 +4,9 @@ import UserLogo from '../../components/userLogo/UserLogo';
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from "js-cookie"
-import { useHistory } from 'react-router-dom';
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -18,14 +17,16 @@ const Login = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-const history = useHistory()
-  const onSubmit = (state,props) => {
+  
+  const history = useHistory()
+
+  const onSubmit = (state) => {
     console.log(state)
     axios.post("/api/v1/login", state)
       .then(response => {
         console.log(response.data)
         Cookies.set('token', response.data.token);
-        history.push('/dashboard')
+        history.push("/dashboard")
       })
       .catch(err => {
         console.log(err.response)
@@ -75,10 +76,10 @@ const history = useHistory()
               <p>{errors.password && errors.password.message}</p>
             </div>
             <div className="col-md-12">
-              <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+              <button type="submit" className="btn btn-primary btn-block">Sign In</button>
               <div className="login-text">
                 <span>Don't have an account yet? <Link to='/signup' className="link">Sign up</Link></span>
-                <span><Link to='/'>Forgot password?</Link></span>
+                <span><Link to='/' className="link">Forgot password?</Link></span>
               </div>
             </div>
           </div>

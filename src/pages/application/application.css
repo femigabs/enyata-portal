@@ -1,7 +1,7 @@
 .application h3 {
     font-style: italic;
     margin-top: 10px;
-    margin-bottom: 56px;
+    margin-bottom: 26px;
     font-weight: 500;
     font-size: 24px;
 }
@@ -16,6 +16,11 @@
     text-align: left;
     font-weight: normal;
     font-size: 14px;
+}
+.form-body {
+    padding: 53px 70px 40px 70px;
+    border-radius: 8px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
 }
 .cv {
     border: 1.5px dashed #2B3C4E;

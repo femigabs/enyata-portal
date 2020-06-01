@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import './Assessment.css';
+import './CompletedAssessment.css';
 import SideNav from '../../components/sideNav/SideNav';
 import menu from '../../Assets/Icons/menu.svg';
-import hourglass from '../../Assets/Images/hourglass (1).png';
+import confetti from '../../Assets/Images/confetti (1).png';
 import Cookies from "js-cookie";
 import axios from "axios";
 import Moment from 'react-moment';
-import Countdown, {zeroPad } from 'react-countdown';
+import Countdown, { zeroPad } from 'react-countdown';
 import { useHistory } from 'react-router-dom';
 
-const Assessment = () => {
+const CompletedAssessment = () => {
 
     const history = useHistory()
 
     const renderer = ({ minutes, seconds }) => {
-        return <div>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></div>
+        return <span>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></span>
     };
         useEffect(() => {
             let hamburger = document.getElementById("img"),
@@ -24,11 +24,12 @@ const Assessment = () => {
                 menuLink.classList.toggle('hidden-xs')
                 e.preventDefault()
             })
-        });
+        })
 
         const handleSubmit = (e) => {
-            e.preventDefault();
-            history.push("/quiz");
+            e.preventDefault()
+            history.push("/dashboard")
+    
         }
 
         return (
@@ -42,7 +43,7 @@ const Assessment = () => {
                         <div className="assessment-heading">
                             <div className="ass">
                                 <h1>Take Assessment</h1>
-                                <p>Click the button below to start assessment, you have limited time for this test</p>
+                                <p>Thank you!</p>
                             </div>
                             <div className="timer">
                                 <p>Timer</p>
@@ -55,10 +56,10 @@ const Assessment = () => {
                             </div>
                         </div>
                         <div className="card">
-                            <div className="card-body take-ass">
-                                <img src={hourglass} />
-                                <p>We have 4 days left until the next assessment <br />Watch this space</p>
-                                <button onClick={handleSubmit} className="btn btn-default">Take Assessment</button>
+                            <div className="card-body completed-ass">
+                                <img src={confetti} />
+                                <p>We have received your assessment test, we will get back to you soon.<br/>Best of luck</p>
+                                <button onClick={handleSubmit} className="btn btn-success">Home</button>
                             </div>
                         </div>
 
@@ -68,4 +69,4 @@ const Assessment = () => {
         )
     }
 
-    export default Assessment
+    export default CompletedAssessment
