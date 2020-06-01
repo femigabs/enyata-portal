@@ -1,0 +1,10 @@
+.table-head {
+    background-color: #2B3C4E;
+    color: #ffffff;
+}
+.table-head th {
+    text-align: center;
+}
+tbody:active {
+    border-left: "solid 4px #31D283",
+}
