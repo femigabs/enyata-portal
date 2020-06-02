@@ -20,7 +20,6 @@ const SideNav = () => {
             setLoading(true);
             const res = await axios.post("https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload", formData);
             const imageUrl = res.data.secure_url;
-            // const image = await axios.post("", { imageUrl });
             setLoading(false)
             setImage(imageUrl.data);
         } catch (err) {
@@ -30,7 +29,6 @@ const SideNav = () => {
 
     return (
         <div id="sidenav" className="sidenav hidden-xs">
-            {/* <div className="nav"> */}
             <div className="user-profile">
                 <input className="inputfile" id="file" type="file" name="file" onChange={uploadImage} />
                 <div className="user-image">
@@ -47,7 +45,8 @@ const SideNav = () => {
                         style={{textDecoration: "none"}}
                         activeStyle={{
                             borderLeft: "solid 4px #31D283",
-                            fontWeight: "bold", color: "black",
+                            fontWeight: "bold", 
+                            color: "black",
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}

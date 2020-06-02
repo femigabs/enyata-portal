@@ -22,6 +22,9 @@
     font-weight: normal;
     font-size: 14px;
 }
+.link {
+    color: black
+}
 .login-text Link {
     text-decoration: none;
 }

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './AdminEntries.css';
+import './AssessmentResult.css';
 import AdminNav from '../../components/adminNav/AdminNav';
 import menu from '../../Assets/Icons/menu.svg';
 import Cookies from "js-cookie";
 import axios from "axios";
 import Moment from 'react-moment';
 
-const AdminEntries = () => {
+const AssessmentResult = () => {
     useEffect(() => {
         let hamburger = document.getElementById("img"),
             menuLink = document.getElementById("sidenav")
@@ -16,7 +16,6 @@ const AdminEntries = () => {
             e.preventDefault()
         })
     })
-
     const [value, setValue] = useState({
         value: 1
     });
@@ -56,6 +55,7 @@ const AdminEntries = () => {
                 <td>{items.address}</td>
                 <td>{items.university}</td>
                 <td>{items.cgpa}</td>
+                <td>{items.score}</td>
             </tr>
         })
     }
@@ -69,44 +69,30 @@ const AdminEntries = () => {
                 <div className="container dashboard-contents">
                     <div className="dashboard-heading">
                         <h1>Entries -
-                        <select class="browser-default custom-select batch-select" onChange={handleChange}  >                     
-                                <option selected value="1">Batch 1</option>                             
+                        <select class="browser-default custom-select" onChange={handleChange}>
+                                <option selected value="1">Batch 1</option>
                                 <option value="2">Batch 2</option>
                                 <option value="3">Batch 3</option>
+                                <option value="4">Batch 4</option>
+                                <option value="5">Batch 5</option>
+                                <option value="6">Batch 6</option>
                             </select></h1>
                         <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
-                    <table className="table table-responsive  table-sm" cellspacing="0" width="100%">
-                        <thead  className="table-head">
+                    <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                        <thead>
                             <tr>
-                                <th className="th-sm">Name</th>
-                                <th className="th-sm">Email</th>
-                                <th className="th-sm">DOB- <span>AGE
-                                    {/* <select class="browser-default custom-select">
-                                        <option>Ascending</option>                               
-                                    </select> */}
-                                     </span> </th>
-                                <th className="th-sm">Address</th>
-                                <th className="th-sm">University</th>
-                                <th className="th-sm">CGPA
-                                    {/* <select>
-                                        <option>Ascending</option>                               
-                                    </select> */}
-                                     </th>
+                                <th class="th-sm">Name</th>
+                                <th class="th-sm">Email</th>
+                                <th class="th-sm">DOB-AGE</th>
+                                <th class="th-sm">Address</th>
+                                <th class="th-sm">University</th>
+                                <th class="th-sm">cgpa</th>
+                                <th class="th-sm">Test Scores</th>
                             </tr>
                         </thead>
-                        <tbody className="table-body">
-
-
-                            {/* <>{itemsToRender}</>  */}
-                            <tr>
-                                <td>Amaechi</td>
-                                <td>amaechi@gmail.com</td>
-                                <td>2/2/2010 <span> - &nbsp; 12</span></td>
-                                <td>12, Enyata Close, Illepeju, lagos.</td>
-                                <td>Funnab</td>
-                                <td>1.0</td>
-                            </tr>
+                        <tbody>
+                            <>{itemsToRender}</>
                         </tbody>
                     </table>
 
@@ -116,4 +102,4 @@ const AdminEntries = () => {
     )
 }
 
-export default AdminEntries;
+export default AssessmentResult;
