@@ -89,41 +89,28 @@ const handleFinish = (e) => {
 
 
 
-
-const handleNext = (e) => {
-    e.preventDefault();
-    setCount(count + 1)
-    const index = selectAnswer.findIndex(question => question.question_id == state.question[count].id);
-        if(index == -1){
-            setSelectAnswer([
-                ...selectAnswer,{
-                    "question_id": state.question[count].id,
-                    "user_answer": "",
-                }
-            ])
-        }
-}
-
-
-const handlePrevious = (e) => {
-    e.preventDefault();
-    setCount(count - 1)
-}
-
-const answer = selectAnswer
-
-return (
-    <div>
-        <div className="menu">
-            <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-        </div>
-        <div className="assessment">
-            <SideNav />
-            <div className="container assessment-contents">
-                <div className="assessment-heading">
-                    <div className="ass">
-                        <h1>Take Assessment</h1>
-                        <p>Click the finish button below to submit assessment, you can go back at any time to edit your answers.</p>
+    return (
+        <div>
+            <div className="menu">
+                <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
+            </div>
+            <div className="assessment">
+                <SideNav />
+                <div className="container assessment-contents">
+                    <div className="assessment-heading">
+                        <div className="ass">
+                            <h1>Take Assessment</h1>
+                            <p>Click the finish button below to submit assessment, you can go back at any time to edit your answers.</p>
+                        </div>
+                        <div className="timer">
+                            <p>Timer</p>
+                            <h1>
+                                <Countdown //onComplete={handleFinish}
+                                    date={Date.now() + 10000}
+                                    renderer={renderer}
+                                />
+                            </h1>
+                        </div>
                     </div>
                     <div className="timer">
                         <p>Timer</p>
