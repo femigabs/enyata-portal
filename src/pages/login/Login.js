@@ -20,7 +20,7 @@ const Login = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-  
+
   const history = useHistory()
 
   const onSubmit = (state) => {
@@ -30,7 +30,7 @@ const Login = () => {
         history.push("/dashboard")
       })
       .catch(err => {
-        setStates({errorMessage: err.response.data.message});
+        setStates({ errorMessage: err.response.data.message });
       })
   };
   const { register, handleSubmit, errors } = useForm();
@@ -76,8 +76,8 @@ const Login = () => {
               <i className="eye-icon" onClick={togglePasswordVisiblity}>{eye}</i>
               <p>{errors.password && errors.password.message}</p>
             </div>
-            { states.errorMessage &&
-                <h4 className="error" style={{color:"Red"}}> { states.errorMessage } </h4> }
+            {states.errorMessage &&
+              <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
             <div className="col-md-12">
               <button type="submit" className="btn btn-primary btn-block">Sign In</button>
               <div className="login-text">
@@ -93,3 +93,4 @@ const Login = () => {
 }
 
 export default Login
+

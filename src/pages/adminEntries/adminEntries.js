@@ -69,13 +69,13 @@ const url = `/api/v1/specific_batch/${value.value}`
                     <div className="dashboard-heading">
                         <h1>Entries -       
                         <select class="browser-default custom-select" onChange={handleChange}>
-                        <option selected value="1">Batch 1</option>
-                        <option value="2">Batch 2</option>
-                        <option value="3">Batch 3</option> 
-                        <option value="4">Batch 4</option>
-                        <option value="5">Batch 5</option> 
-                        </select></h1>
-                         <p>Comprises of all that applied for batch {value.value}</p>
+                                <option selected value="1">Batch 1</option>
+                                <option value="2">Batch 2</option>
+                                <option value="3">Batch 3</option>
+                                <option value="4">Batch 4</option>
+                                <option value="5">Batch 5</option>
+                            </select></h1>
+                        <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
                     <table className="table table-responsive table-sm" cellspacing="0" width="100%">
                         <thead className="table-head">

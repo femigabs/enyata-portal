@@ -4,13 +4,13 @@
 .compose-structure{
     margin-left: 47px;    
 }  
-/* .compose-structure label {
+ .compose-structure label {
     display: block;
     text-align: left;
     font-weight: normal;
     font-size: 14px;
-} */
-/* .compose-structure h1{
+} 
+ .compose-structure h1{
     font-weight: 300;
     padding-top: 6%;
 }
@@ -39,4 +39,4 @@ h3{
     }
     input[type=text]{
     border: 1px solid black;
-    } */
+    } 

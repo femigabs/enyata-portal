@@ -4,34 +4,32 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 
-
-
 const Count_down = (props) => {
     const renderer = ({ minutes, seconds }) => {
-    return <span>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></span>
+        return <span>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></span>
     };
     const history = useHistory()
-    const Complete = () =>{
+    const Complete = () => {
         // axios.post("/api/v1/userAns", props.answer, {
-        //     "headers": {
-        //         "Content-Type": "application/json",
-        //         "token": Cookies.get("token")
-        //     }
+        // "headers": {
+        // "Content-Type": "application/json",
+        // "token": Cookies.get("token")
+        // }
         // })
-        //     .then(response => {
-        //         console.log(response.data)
-        //         history.push("/completed")
-        //     })
-        //     .catch(err => {
-        //         console.log(err.response)
-        //     })
+        // .then(response => {
+        // console.log(response.data)
+        // history.push("/completed")
+        // })
+        // .catch(err => {
+        // console.log(err.response)
+        // })
         history.push("/completed")
     }
     return (
         <>
-             <Countdown onComplete={Complete}
-            date={Date.now() + 180000}
-            renderer={renderer}
+            <Countdown onComplete={Complete}
+                date={Date.now() + 180000}
+                renderer={renderer}
             />
         </>
     )

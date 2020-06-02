@@ -126,11 +126,7 @@ const AdminBoard = () => {
                         </div>
                         <div className="col-md-3 academy">
                             <h5>Academy's</h5>
-<<<<<<< HEAD
-                            <h2>4</h2>
-=======
                             <h2>{academy.data.count}4</h2>
->>>>>>> 2d46478d82d1c0d15fdf4beb16108c246837e503
                             <p>so far</p>
                         </div>
                     </div>
@@ -139,13 +135,7 @@ const AdminBoard = () => {
                             <div className="history">
                                 <h6>History</h6>
                                 <p>Last Update, {day} </p>
-<<<<<<< HEAD
-                            </div>
-                            <div>
-                                <div className="">
-=======
                                 <div className="history-info">
->>>>>>> 2d46478d82d1c0d15fdf4beb16108c246837e503
                                     <table
                                         className="table table-body table-sm"
                                         width="100%">

@@ -68,7 +68,7 @@ const AssessmentResult = () => {
                 <AdminNav />
                 <div className="container dashboard-contents">
                     <div className="dashboard-heading">
-                        <h1>Entries -
+                        <h1>Results -
                         <select class="browser-default custom-select" onChange={handleChange}>
                                 <option selected value="1">Batch 1</option>
                                 <option value="2">Batch 2</option>
