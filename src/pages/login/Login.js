@@ -13,23 +13,24 @@ const eye = <FontAwesomeIcon icon={faEye} />;
 const Login = () => {
 
   const [passwordShown, setPasswordShown] = useState(false);
-
+  const [states, setStates] = useState({
+    items: [],
+    errorMessage: ''
+  })
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-  
+
   const history = useHistory()
 
   const onSubmit = (state) => {
-    console.log(state)
     axios.post("/api/v1/login", state)
       .then(response => {
-        console.log(response.data)
         Cookies.set('token', response.data.token);
         history.push("/dashboard")
       })
       .catch(err => {
-        console.log(err.response)
+        setStates({ errorMessage: err.response.data.message });
       })
   };
   const { register, handleSubmit, errors } = useForm();
@@ -75,6 +76,8 @@ const Login = () => {
               <i className="eye-icon" onClick={togglePasswordVisiblity}>{eye}</i>
               <p>{errors.password && errors.password.message}</p>
             </div>
+            {states.errorMessage &&
+              <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
             <div className="col-md-12">
               <button type="submit" className="btn btn-primary btn-block">Sign In</button>
               <div className="login-text">
@@ -90,3 +93,4 @@ const Login = () => {
 }
 
 export default Login
+

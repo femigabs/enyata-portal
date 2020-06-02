@@ -49,14 +49,14 @@ const AdminEntries = () => {
     let itemsToRender;
     if (state.data) {
         itemsToRender = state.data.map((items, index) => {
-            return <tr key={index}>
-                <td>{items.first_name} {items.last_name}</td>
-                <td>{items.email}</td>
-                <td><Moment format="DD/MM/YY">{items.date_of_birth}</Moment>-{items.age}</td>
-                <td>{items.address}</td>
-                <td>{items.university}</td>
-                <td>{items.cgpa}</td>
-            </tr>
+            return <tr className="tab-row" key={index}>
+                        <td>{items.first_name} {items.last_name}</td>
+                        <td>{items.email}</td>
+                        <td><Moment format="DD/MM/YY">{items.date_of_birth}</Moment>-{items.age}</td>
+                        <td>{items.address}</td>
+                        <td>{items.university}</td>
+                        <td>{items.cgpa}</td>
+                    </tr>
         })
     }
     return (
@@ -73,11 +73,18 @@ const AdminEntries = () => {
                                 <option selected value="1">Batch 1</option>                             
                                 <option value="2">Batch 2</option>
                                 <option value="3">Batch 3</option>
+                                <option value="4">Batch 4</option>
+                                <option value="5">Batch 5</option>
                             </select></h1>
                         <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
+<<<<<<< HEAD
                     <table className="table table-responsive  table-sm" cellspacing="0" width="100%">
                         <thead  className="table-head">
+=======
+                    <table className="table table-responsive table-sm" cellspacing="0" width="100%">
+                        <thead className="table-head">
+>>>>>>> e1671b1520fb080133cca50ef035906c9e3ae5fb
                             <tr>
                                 <th className="th-sm">Name</th>
                                 <th className="th-sm">Email</th>

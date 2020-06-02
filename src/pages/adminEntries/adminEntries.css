@@ -6,6 +6,7 @@
 .table-head th {
     text-align: center;
 }
+<<<<<<< HEAD
 .dashboard-heading{
     padding-bottom: 50px;
     line-height: 2px;
@@ -23,4 +24,8 @@
 .batch-select option{
     font-weight: 200;
     font-size: 20px;
+=======
+.table-row td {
+    padding: 20px 30px;
+>>>>>>> e1671b1520fb080133cca50ef035906c9e3ae5fb
 }
