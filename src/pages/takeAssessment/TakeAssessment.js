@@ -4,10 +4,10 @@ import SideNav from '../../components/sideNav/SideNav';
 import menu from '../../Assets/Icons/menu.svg';
 import Cookies from "js-cookie";
 import axios from "axios";
-import Countdown, { zeroPad } from 'react-countdown';
 import { useHistory } from 'react-router-dom';
+import CountDown from '../../components/CountDown'
 
-const TakeAssessment = () => {
+const TakeAssessment = (props) => {
 
     const history = useHistory()
 
@@ -15,22 +15,25 @@ const TakeAssessment = () => {
     const [state, setState] = useState({
         question: []
     })
-    const [selectAnswer, setSelectAnswer] = useState([{
-            "question_id": state.question[count].id,
-            "user_answer": ""
-    }])
+    const [selectAnswer, setSelectAnswer] = useState([])
 
     const handleAnswer = (e) => {
-        setSelectAnswer([...selectAnswer, {
-            "question_id": e.target.id,
-            "user_answer": e.target.value
-        }])
+        const index = selectAnswer.findIndex(question => question.question_id == state.question[count].id);
+        if (index == -1) {
+            setSelectAnswer([...selectAnswer, {
+                "question_id": e.target.className,
+                "user_answer": e.target.value,
+            }])
+        }
+        if (index || index == 0) {
+            selectAnswer[index] = {
+                "question_id": e.target.className,
+                "user_answer": e.target.value,
+            }
+        }
+
     }
     console.log(selectAnswer)
-
-    const renderer = ({ minutes, seconds }) => {
-        return <span>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></span>
-    };
 
     useEffect(() => {
         let hamburger = document.getElementById("img"),
@@ -64,7 +67,9 @@ const TakeAssessment = () => {
             });
     }, []);
 
-    const handleFinish = () => {
+    const handleFinish = (e) => {
+        e.preventDefault();
+
         axios.post("/api/v1/userAns", selectAnswer, {
             "headers": {
                 "Content-Type": "application/json",
@@ -83,12 +88,23 @@ const TakeAssessment = () => {
     const handleNext = (e) => {
         e.preventDefault();
         setCount(count + 1)
+        const index = selectAnswer.findIndex(question => question.question_id == state.question[count].id);
+        if (index == -1) {
+            setSelectAnswer([
+                ...selectAnswer, {
+                    "question_id": state.question[count].id,
+                    "user_answer": "",
+                }
+            ])
+        }
     }
 
     const handlePrevious = (e) => {
         e.preventDefault();
         setCount(count - 1)
     }
+
+    const answer = selectAnswer
 
     return (
         <div>
@@ -106,10 +122,7 @@ const TakeAssessment = () => {
                         <div className="timer">
                             <p>Timer</p>
                             <h1>
-                                <Countdown //onComplete={handleFinish}
-                                    date={Date.now() + 10000}
-                                    renderer={renderer}
-                                />
+                                <CountDown />
                             </h1>
                         </div>
                     </div>
@@ -121,19 +134,19 @@ const TakeAssessment = () => {
                                         <h3>{state.question[count].question}</h3>
                                         <form className="quiz-form">
                                             <div className="questions">
-                                                <input type="radio" id={state.question[count].id} name="option" value="a" onChange={handleAnswer} />
+                                                <input type="radio" id="option_a" className={state.question[count].id} name="option" value="a" onChange={handleAnswer} />
                                                 <label htmlFor="option_a">{state.question[count].option_a}</label><br />
                                             </div>
                                             <div className="questions">
-                                                <input type="radio" id={state.question[count].id} name="option" value="b" onChange={handleAnswer} />
+                                                <input type="radio" id="option_b" className={state.question[count].id} name="option" value="b" onChange={handleAnswer} />
                                                 <label htmlFor="option_b">{state.question[count].option_b}</label><br />
                                             </div>
                                             <div className="questions">
-                                                <input type="radio" id={state.question[count].id} name="option" value="c" onChange={handleAnswer} />
+                                                <input type="radio" id="option_c" className={state.question[count].id} name="option" value="c" onChange={handleAnswer} />
                                                 <label htmlFor="option_c">{state.question[count].option_c}</label><br />
                                             </div>
                                             <div className="questions">
-                                                <input type="radio" id={state.question[count].id} name="option" value="d" onChange={handleAnswer} />
+                                                <input type="radio" id="option_d" className={state.question[count].id} name="option" value="d" onChange={handleAnswer} />
                                                 <label htmlFor="option_d">{state.question[count].option_d}</label><br />
                                             </div>
                                         </form></>}

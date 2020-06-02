@@ -72,6 +72,8 @@ const AdminEntries = () => {
                                 <option selected value="1">Batch 1</option>
                                 <option value="2">Batch 2</option>
                                 <option value="3">Batch 3</option>
+                                <option value="4">Batch 4</option>
+                                <option value="5">Batch 5</option>
                             </select></h1>
                         <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
