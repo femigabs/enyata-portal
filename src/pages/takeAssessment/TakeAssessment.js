@@ -6,8 +6,9 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Countdown, { zeroPad } from 'react-countdown';
 import { useHistory } from 'react-router-dom';
+import Count_down from '../../components/adminLogo/Count_down';
 
-const TakeAssessment = () => {
+const TakeAssessment = (props) => {
 
     const history = useHistory()
 
@@ -21,23 +22,19 @@ const TakeAssessment = () => {
     const index = selectAnswer.findIndex(question => question.question_id == state.question[count].id);
     if(index==-1){
         setSelectAnswer([...selectAnswer,{
-            "question_id": e.target.id,
+            "question_id": e.target.className,
             "user_answer": e.target.value,
         }])
     }
     if(index || index==0){
         selectAnswer[index]={
-            "question_id": e.target.id,
+            "question_id": e.target.className,
             "user_answer": e.target.value,
         }
     }
         
     }
     console.log(selectAnswer)
-
-const renderer = ({ minutes, seconds }) => {
-    return <span>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></span>
-};
 
 useEffect(() => {
     let hamburger = document.getElementById("img"),
@@ -113,22 +110,7 @@ const handlePrevious = (e) => {
     setCount(count - 1)
 }
 
-const Complete = () =>{
-    // axios.post("/api/v1/userAns", selectAnswer, {
-    //     "headers": {
-    //         "Content-Type": "application/json",
-    //         "token": Cookies.get("token")
-    //     }
-    // })
-    //     .then(response => {
-    //         console.log(response.data)
-    //         history.push("/completed")
-    //     })
-    //     .catch(err => {
-    //         console.log(err.response)
-    //     })
-
-}
+const answer = selectAnswer
 
 return (
     <div>
@@ -146,9 +128,11 @@ return (
                     <div className="timer">
                         <p>Timer</p>
                         <h1>
-                            <Countdown onComplete={Complete}
-                                date={Date.now() + 100000}
+                            {/* <Countdown //onComplete={Complete}
+                                date={Date.now() + 1000000}
                                 renderer={renderer}
+                            /> */}
+                            <Count_down 
                             />
                         </h1>
                     </div>
@@ -161,19 +145,19 @@ return (
                                     <h3>{state.question[count].question}</h3>
                                     <form className="quiz-form">
                                         <div className="questions">
-                                            <input type="radio" id={state.question[count].id} name="option" value="a"  onChange={handleAnswer} />
+                                            <input type="radio" id="option_a" className={state.question[count].id} name="option" value="a"  onChange={handleAnswer} />
                                             <label htmlFor="option_a">{state.question[count].option_a}</label><br />
                                         </div>
                                         <div className="questions">
-                                            <input type="radio" id={state.question[count].id} name="option" value="b" onChange={handleAnswer} />
+                                            <input type="radio" id="option_b" className={state.question[count].id} name="option" value="b" onChange={handleAnswer} />
                                             <label htmlFor="option_b">{state.question[count].option_b}</label><br />
                                         </div>
                                         <div className="questions">
-                                            <input type="radio" id={state.question[count].id} name="option" value="c" onChange={handleAnswer} />
+                                            <input type="radio" id="option_c" className={state.question[count].id} name="option" value="c" onChange={handleAnswer} />
                                             <label htmlFor="option_c">{state.question[count].option_c}</label><br />
                                         </div>
                                         <div className="questions">
-                                            <input type="radio" id={state.question[count].id} name="option" value="d" onChange={handleAnswer} />
+                                            <input type="radio" id="option_d" className={state.question[count].id} name="option" value="d" onChange={handleAnswer} />
                                             <label htmlFor="option_d">{state.question[count].option_d}</label><br />
                                         </div>
                                     </form></>}
@@ -186,7 +170,6 @@ return (
                             <button disabled={count==state.question.length-1} onClick={handleNext} className="btn btn-primary">Next</button>
                         </div>
                         <div className="col-md-12 finish-button">
-                            <onComplete/>
                             <button onClick={handleFinish} className="btn btn-default">Finish</button>
                         </div>
                     </div>

@@ -30,18 +30,19 @@ const ComposeAssessment = () => {
             e.preventDefault()
         })
     })
+    let assessments = []
     const onSubmit = (state) => {
         console.log(state)
-
-        axios.post("/api/v1/assessment", state)
-            .then(response => {
-                console.log(response.data)
-                Cookies.set('token', response.data.token);
-                // history.push("/history")
-            })
-            .catch(err => {
-                console.log(err.response)
-            })
+        assessments=[state]
+        // axios.post("/api/v1/assessment", state)
+        //     .then(response => {
+        //         console.log(response.data)
+        //         Cookies.set('token', response.data.token);
+        //         // history.push("/history")
+        //     })
+        //     .catch(err => {
+        //         console.log(err.response)
+        //     })
     }
     const [image, setImage] = useState({ data: [] });
     const uploadFile = async (e) => {
@@ -65,12 +66,13 @@ const ComposeAssessment = () => {
         e.preventDefault();
         setCount(count + 1)
     }
-
+   
     const handlePrevious = (e) => {
         e.preventDefault();
         setCount(count - 1)
+      
     }
-
+console.log(assessments)
     const { register, handleSubmit, errors, watch } = useForm();
 
     return (
@@ -79,7 +81,7 @@ const ComposeAssessment = () => {
                 <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
             </div>
             <div className="compose">
-                <AdminNav />
+                {/* <AdminNav /> */}
                 <div className="compose-structure">
                     <h1>Compose Assessment</h1>
                     <h3>15/30</h3>
@@ -99,7 +101,7 @@ const ComposeAssessment = () => {
                                 <option value="30">30</option>
                             </select>
                         </div>
-                        <form onSubmit={handleSubmit(onSubmit)} className="form-body">
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-group col-md-12 my-question">
                                 <label>Question</label>
                                 <textarea

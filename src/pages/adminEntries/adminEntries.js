@@ -48,14 +48,13 @@ const url = `/api/v1/specific_batch/${value.value}`
     let itemsToRender;
     if(state.data){
         itemsToRender = state.data.map((items, index) => {
-            return  <tr key={index}>
-            <td>{items.first_name}</td>
-            <td>{items.email}</td>
-            <td><Moment format="DD/MM/YY">{items.date_of_birth}</Moment>-{items.age}</td>
-            <td>{items.address}</td>
-            <td>{items.university}</td>
-            <td>{items.cgpa}</td>
-            <td>{items.score}</td>
+            return <tr key={index}>
+                <td>{items.first_name} {items.last_name}</td>
+                <td>{items.email}</td>
+                <td><Moment format="DD/MM/YY">{items.date_of_birth}</Moment>-{items.age}</td>
+                <td>{items.address}</td>
+                <td>{items.university}</td>
+                <td>{items.cgpa}</td>
             </tr>
         })
     }
@@ -78,28 +77,20 @@ const url = `/api/v1/specific_batch/${value.value}`
                         </select></h1>
                          <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
-                    <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                        <th class="th-sm">Name
-                        </th>
-                        <th class="th-sm">Email
-                        </th>
-                        <th class="th-sm">DOB-AGE
-                        </th>
-                        <th class="th-sm">Address
-                        </th>
-                        <th class="th-sm">University
-                        </th>
-                        <th class="th-sm">cgpa
-                        </th>
-                        <th class="th-sm">score
-                        </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       <>{itemsToRender}</>
-                    </tbody>
+                    <table className="table table-responsive table-hover table-sm" cellspacing="0" width="100%">
+                        <thead  className="table-head">
+                            <tr>
+                                <th className="th-sm">Name</th>
+                                <th className="th-sm">Email</th>
+                                <th className="th-sm">DOB-AGE</th>
+                                <th className="th-sm">Address</th>
+                                <th className="th-sm">University</th>
+                                <th className="th-sm">CGPA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <>{itemsToRender}</>
+                        </tbody>
                     </table>
                 
                 </div>

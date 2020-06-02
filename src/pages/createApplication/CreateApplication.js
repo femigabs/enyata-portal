@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CreateApplication.css';
-import AdminNav from '../../components/adminNav/AdminNav';
+// import AdminNav from '../../components/adminNav/AdminNav';
 import Sign from '../../Assets/Icons/createapp-icon.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -48,7 +48,7 @@ const CreateApplication = () => {
 
     return (
         <div className="createapp">
-            <AdminNav />
+            {/* <AdminNav /> */}
             <div className="container create-contents">
                 <div className="create-heading">
                     <h1>Create Application</h1>
