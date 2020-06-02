@@ -1,19 +1,20 @@
-.admin {
-    background-color: #111E2B;
-    /* background-size: 100% 100%; */
-    /* height: 657px; */
-    /* background-image: url("../../Assets/Images/computer-img.png");
-    background-repeat: no-repeat; */
+.admin{
+    background: #111E2B;
+    background-size: cover;
+    height: 100em;
 }
-.background img {
-    /* width: 100%;
-    height: 50%; */
-    /* margin-left: 480px; */
-    justify-content: right;
+    
+.admin-flex{
+    display: flex;
 }
-.form-control {
-    background: none;
+.background img{
+    width: 100%;
+    height: 110%;
+    position: absolute;
+    top: 15%;
+    margin-left: 5%;
 }
+
 a {
     color: #ffffff;
 }
@@ -21,8 +22,6 @@ a {
     background-color: #ffffff;
     color: #2B3C4E;
     font-weight: bold;
-    /* margin-top: 30px; */
-    /* margin-bottom: 10px; */
 }
 .admin h3 {
     color: #ffffff;
@@ -53,14 +52,27 @@ a {
 i:hover {
     color: #00fcb6;
     cursor: pointer;
-  }
-  .admin-text {
-      display: right;
-      justify-content: space-between;
-      text-align: right;
-  }
-  .admin p {
-      display: block;
-      text-align: left;
-      color: red;
-  }
+}
+.admin-text {
+    display: right;
+    justify-content: space-between;
+    text-align: right;
+}
+.admin p {
+    display: block;
+    text-align: left;
+    color: red;
+}
+.admin h3{
+    font-weight: 400;
+}
+form{
+    padding-top: 50px;
+    font-weight: 300;
+}
+input[type=text]{
+    background: none;
+}
+input[type=password]{
+    background: none;
+}

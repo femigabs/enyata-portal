@@ -48,14 +48,14 @@ const AdminEntries = () => {
     let itemsToRender;
     if (state.data) {
         itemsToRender = state.data.map((items, index) => {
-            return <tr key={index}>
-                <td>{items.first_name} {items.last_name}</td>
-                <td>{items.email}</td>
-                <td><Moment format="DD/MM/YY">{items.date_of_birth}</Moment>-{items.age}</td>
-                <td>{items.address}</td>
-                <td>{items.university}</td>
-                <td>{items.cgpa}</td>
-            </tr>
+            return <tr className="tab-row" key={index}>
+                        <td>{items.first_name} {items.last_name}</td>
+                        <td>{items.email}</td>
+                        <td><Moment format="DD/MM/YY">{items.date_of_birth}</Moment>-{items.age}</td>
+                        <td>{items.address}</td>
+                        <td>{items.university}</td>
+                        <td>{items.cgpa}</td>
+                    </tr>
         })
     }
     return (
@@ -75,8 +75,8 @@ const AdminEntries = () => {
                             </select></h1>
                         <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
-                    <table className="table table-responsive table-hover table-sm" cellspacing="0" width="100%">
-                        <thead  className="table-head">
+                    <table className="table table-responsive table-sm" cellspacing="0" width="100%">
+                        <thead className="table-head">
                             <tr>
                                 <th className="th-sm">Name</th>
                                 <th className="th-sm">Email</th>

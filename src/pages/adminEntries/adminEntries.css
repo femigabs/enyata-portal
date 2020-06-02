@@ -5,6 +5,6 @@
 .table-head th {
     text-align: center;
 }
-tbody:active {
-    border-left: "solid 4px #31D283",
+.table-row td {
+    padding: 20px 30px;
 }

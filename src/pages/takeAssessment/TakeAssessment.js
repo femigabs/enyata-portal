@@ -106,7 +106,7 @@ const TakeAssessment = () => {
                         <div className="timer">
                             <p>Timer</p>
                             <h1>
-                                <Countdown onComplete={handleFinish}
+                                <Countdown //onComplete={handleFinish}
                                     date={Date.now() + 10000}
                                     renderer={renderer}
                                 />

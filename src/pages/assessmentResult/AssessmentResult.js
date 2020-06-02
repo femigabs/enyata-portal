@@ -48,7 +48,7 @@ const AssessmentResult = () => {
     let itemsToRender;
     if (state.data) {
         itemsToRender = state.data.map((items, index) => {
-            return <tr key={index}>
+            return <tr className="tab-row" key={index}>
                 <td>{items.first_name} {items.last_name}</td>
                 <td>{items.email}</td>
                 <td><Moment format="DD/MM/YY">{items.date_of_birth}</Moment>-{items.age}</td>
@@ -79,8 +79,8 @@ const AssessmentResult = () => {
                             </select></h1>
                         <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
-                    <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                        <thead>
+                    <table class="table table-responsive table-sm" cellspacing="0" width="100%">
+                        <thead className="table-head">
                             <tr>
                                 <th class="th-sm">Name</th>
                                 <th class="th-sm">Email</th>
