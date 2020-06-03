@@ -6,7 +6,7 @@ import entry from '../../Assets/Icons/appentries-icon.png';
 import compose from '../../Assets/Icons/composeass-icon.png';
 import result from '../../Assets/Icons/result-icon.png';
 import history from '../../Assets/Icons/asshistory-icon.png';
-import logout from '../../Assets/Icons/logout.svg';
+import logout from '../../Assets/Icons/logout-icon.png';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 
@@ -145,7 +145,7 @@ const AdminNav = () => {
                         Results
                     </NavLink>
                 </div>
-                <div className="adminnav-links">
+                                <div className="adminnav-links">
                     <NavLink
                         className="nav-link"
                         style={{ textDecoration: "none" }}
@@ -156,7 +156,7 @@ const AdminNav = () => {
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}
-                        exact to="/logout"
+                        exact to="/admin"
                     >
                         <img className="img" src={logout} alt="result" />
                         Logout

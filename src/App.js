@@ -14,7 +14,7 @@ import AdminEntries from './pages/adminEntries/AdminEntries'
 import CreateApplication from './pages/createApplication/CreateApplication';
 import ComposeAssessment from './pages/composeAssessment/ComposeAssessment';
 import AssessmentResult from './pages/assessmentResult/AssessmentResult';
-
+import AssessmentHistory from './pages/assessmentHistory/AssessmentHistory';
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
         <Route exact path='/createapplication' component={CreateApplication} />
         <Route exact path='/composeassessment' component={ComposeAssessment} />
         <Route exact path='/results' component={AssessmentResult} />
+        <Route exact path='/assessmenthistory' component={AssessmentHistory} />
       </Switch>
     </div>
   );

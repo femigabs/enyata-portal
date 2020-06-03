@@ -69,8 +69,8 @@ const AdminEntries = () => {
                 <div className="container dashboard-contents">
                     <div className="dashboard-heading">
                         <h1>Entries -
-                        <select class="browser-default custom-select batch-select" onChange={handleChange}  >                     
-                                <option selected value="1">Batch 1</option>                             
+                        <select class="browser-default custom-select batch-select" onChange={handleChange}>
+                                <option selected value="1">Batch 1</option>
                                 <option value="2">Batch 2</option>
                                 <option value="3">Batch 3</option>
                                 <option value="4">Batch 4</option>
