@@ -1,0 +1,81 @@
+.dash {
+    display: flex
+}
+.dash-contents {
+    margin-left: 47px;
+}
+.dash-heading {
+    display: grid;
+    text-align: left;
+}
+.dash-heading h1 {
+    font-weight: 300;
+    font-size: 43px;
+    margin-top: 100px;
+}
+.dash-heading p {
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+}
+.application-info {
+    text-align: left;
+    margin-top: 60px;
+}
+.application-info h2 {
+    font-weight: 300;
+    font-size: 48px;
+    padding-bottom: 20px;
+    border-bottom: 4px solid #006DF0;
+    border-radius: 4px;
+    width: 130px;
+}
+.application-info h5 {
+    font-size: 14px;
+    font-weight: normal;
+    
+}
+.application-info p {
+    font-size: 12px;;
+}
+.application-total h2 {
+    border-bottom: 4px solid #F09000;
+}
+.dash-info {
+    margin-top: 100px;
+}
+.dash-info h6 {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+}
+.history {
+    padding: 25px 35px 100px 35px;
+    border: 1px solid #ECECF9;
+    border-radius: 4px;
+}
+.history h5 {
+    margin-bottom: 13px;
+    
+}
+.history-info {
+    margin-top: 75px;
+    border-bottom: 1px solid #CECECE;
+}
+.history-info a {
+    color: blue;
+    text-decoration: none;
+}
+.take-assessment {
+    padding: 25px 35px 100px 35px;
+    border: 1px solid #ECECF9;
+    border-radius: 4px;
+}
+.take-assessment p {
+    margin-top: 140px;
+    margin-bottom: 25px;
+}
+.take-assessment button {
+    background-color: #B1B1B1;
+}
+

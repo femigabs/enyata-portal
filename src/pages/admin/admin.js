@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './admin.css';
-import AdminLogo from '../../components/adminLogo/adminLogo';
+import './Admin.css';
+import AdminLogo from '../../components/adminLogo/AdminLogo';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -26,10 +26,6 @@
     align-items: center;
     justify-content: center;
 }
-<<<<<<< HEAD
-.cv h6 {
-    padding-left: 15px;
-=======
 .cv label {
     cursor: pointer;
 }
@@ -43,7 +39,6 @@
     overflow: hidden;
     position: absolute;
     z-index: -1;
->>>>>>> 38fe27767693fe78ade5ccf09ef59d3a602ba248
 }
 .files-dropzone {
     display: flex;

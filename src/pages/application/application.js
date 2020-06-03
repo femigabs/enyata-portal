@@ -5,75 +5,9 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Plus from '../../Assets/Icons/createapp-icon.png';
-import Files from 'react-files';
-<<<<<<< HEAD
-=======
 import Cookies from "js-cookie";
->>>>>>> 38fe27767693fe78ade5ccf09ef59d3a602ba248
 
 
-
-
-<<<<<<< HEAD
-    const [image, setImage] = useState({
-        cv_url: '',
-        first_name: '',
-    })
-    const [state, setState] = useState({
-        cv_url: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        date_of_birth: '',
-        address: '',
-        university: '',
-        course_of_study: '',
-        cgpa: '',
-        created_at: new Date()
-
-
-    })
-
-
-    // const d = new Date();
-    // const date = moment(d).format("YYYY-MM-DD");
-
-    const [file, setFile] = useState('');
-    const { register, handleSubmit, setValue } = useForm({
-        defaultValues: {
-            created_at: new Date(),
-            // cv_url: image
-        }
-    });
-
-    const onSubmit = () => {
-       console.log(state)
-        axios.post("/api/v1/application", state)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(err => {
-                console.log(err.response)
-            })
-        // e.preventDefault();
-    };
-
-    const uploadFile = async (e) => {
-        const files = e.target.files[0];
-        const formData = new FormData();
-        formData.append("upload_preset", "q3swu36z");
-        formData.append("file", files);
-        try {
-            const res = await axios.post("https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload", formData);
-            const imageUrl = res.data.secure_url;
-            setValue({
-                cv_url: imageUrl
-            })
-
-            // console.log(cv_url)
-            // const image = await axios.post("", { imageUrl });
-            // setFile(image.data);
-=======
 const Application = (props) => {
 
     const search = props.location.search;
@@ -116,10 +50,10 @@ const Application = (props) => {
         try {
             const res = await axios.post("https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload", formData);
             const fileUrl = res.data.secure_url;
+            console.log(fileUrl)
             setImage({
                 data: fileUrl
             })
->>>>>>> 38fe27767693fe78ade5ccf09ef59d3a602ba248
         } catch (err) {
             console.log(err)
         };
@@ -138,21 +72,12 @@ const Application = (props) => {
                                     className="files-dropzone"
                                     onChange={uploadFile}
                                     name="cv_url"
-<<<<<<< HEAD
-                                    // accepts={[".pdf"]}
-                                    maxFileSize={300000}
-                                    minFileSize={0}
-                                > */}
-                                <input id="file" type="file" name="cv_url" onChange={uploadFile} />
-                                <img src={Plus} alt="createapp-icon" /><h6>Upload Cv</h6>
-=======
                                     accepts={['image/png', '.pdf', 'audio/*']}
                                     maxFileSize={300000}
                                     minFileSize={0}
                                 > */}
                                 <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
                                 <label for="file"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
->>>>>>> 38fe27767693fe78ade5ccf09ef59d3a602ba248
                                 {/* </Files> */}
                             </div>
                             <div className="form-group col-md-6">
