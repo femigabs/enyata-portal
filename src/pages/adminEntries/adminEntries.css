@@ -1,10 +1,22 @@
+.dashboard-heading {
+    margin-top: -15px;
+    margin-bottom: 40px;
+}
 .table-head {
     background-color: #2B3C4E;
     color: #ffffff;
+    border-bottom: 20px solid white;
 }
 .table-head th {
     text-align: center;
 }
 .table-row td {
     padding: 20px 30px;
+}
+.batch-select {
+    border: none;
+}
+.batch-select option {
+    font-weight: 200;
+    font-size: 20px;
 }
