@@ -62,7 +62,7 @@ const AssessmentHistory = () => {
     };
     const { register, handleSubmit, errors, watch } = useForm();
 
-    const url = `/api/v1/specific_batch/${value.value}`
+    const url = `/api/v1/getHistory`
     const [state, setState] = useState({ data: [] });
     useEffect(() => {
         fetch(url, {
@@ -76,21 +76,20 @@ const AssessmentHistory = () => {
             .then((response) => response.json())
             .then((json) => {
                 setState({
-                    data: json.data
+                    data: json.rows
                 })
-
             })
             .catch((err) => {
                 console.log("Error:", err.message);
             });
-    }, [value.value]);
+    }, []);
     let itemsToRender;
     if (state.data) {
         itemsToRender = state.data.map((items, index) => {
-            return <tr key={index}>
-                <td>{items.batch}</td>
-                <td><Moment format="DD/MM/YY">{items.date_composed}</Moment>-{items.date}</td>
-                <td>{items.number_of_questions}</td>
+            return <tr key={index} className="tab_row">
+                <td>{items.batch_id}</td>
+                <td><Moment format="DD/MM/YY">{items.date_composed}</Moment></td>
+                <td>{items.number_of_question}</td>
                 <td>{items.time_allocated}</td>
                 <td>{items.status}</td>
             </tr>
@@ -107,20 +106,22 @@ const AssessmentHistory = () => {
                     <div className="dashboard-heading">
                         <h1>Assessment History</h1>
                     </div>
-                    <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th class="th-sm">Batch</th>
-                                <th class="th-sm">Date Composed</th>
-                                <th class="th-sm">Number of Questions</th>
-                                <th class="th-sm">Time Allocated</th>
-                                <th class="th-sm">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <>{itemsToRender}</>
-                        </tbody>
-                    </table>
+                    <div className="table-body">
+                        <table  class="table table-sm table-responsive" cellspacing="0" width="100%">
+                            <thead className="table-head">
+                                <tr>
+                                    <th class="th-sm">Batch</th>
+                                    <th class="th-sm">Date Composed</th>
+                                    <th class="th-sm">Number of Questions</th>
+                                    <th class="th-sm">Time Allocated</th>
+                                    <th class="th-sm">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <>{itemsToRender}</>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div className="compose-structure">
                         <h3>15/30</h3>

@@ -21,7 +21,14 @@ const Application = (props) => {
     const batch_id = params.get("id");
 
     const [image, setImage] = useState({ data: [] });
-
+    const [states, setStates] = useState({
+        items: [],
+        errorMessage: '',
+        message:""
+      })
+      setTimeout(() => {
+        setStates({ errorMessage: "" })
+      }, 10000);
     const d = new Date()
     const date = moment(d).format("YYYY/MM/DD")
 
@@ -42,12 +49,14 @@ const Application = (props) => {
         })
             .then(response => {
                 console.log(response)
+                setStates({message:response.data.message})
                 history.push("/dashboard")
             })
             .catch(err => {
-                console.log(err.response)
-                if (err.response.data.message == "Authorization Failed") {
-                    history.push("/signup")
+                if(err.response.data.message== "Authorization Failed"){
+                    setStates({errorMessage:"Login in "})
+                }else{
+                    setStates({errorMessage:err.response.data.message})
                 }
             })
     };
@@ -226,6 +235,8 @@ const Application = (props) => {
                                     />
                                 </div>
                                 <div className="col-md-6 col-md-offset-3">
+                                {states.errorMessage &&
+                                <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
                                     <button type="submit" className="btn btn-primary btn-block">Submit</button>
                                 </div>
                             </div>

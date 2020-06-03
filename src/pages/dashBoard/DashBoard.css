@@ -26,7 +26,6 @@
     font-weight: 300;
     font-size: 48px;
     padding-bottom: 20px;
-    border-bottom: 4px solid #006DF0;
     border-radius: 4px;
     width: 130px;
 }
@@ -80,4 +79,6 @@
 .take-assessment button {
     background-color: #B1B1B1;
 }
-
+.application-date h2 {
+    border-bottom: 4px solid #006DF0;
+}

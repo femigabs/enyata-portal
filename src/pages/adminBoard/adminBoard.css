@@ -26,7 +26,6 @@
     font-weight: 300;
     font-size: 48px;
     padding-bottom: 20px;
-    border-bottom: 4px solid #006DF0;
     border-radius: 4px;
     width: 130px;
 }
@@ -37,9 +36,7 @@
 .application-info p {
     font-size: 12px;;
 }
-.application-total h2 {
-    border-bottom: 4px solid #F09000;
-}
+
 .dash-info {
     margin-top: 100px;
 }
@@ -84,4 +81,13 @@ td {
 }
 .create-assessment button {
     background-color: #B1B1B1;
+}
+.application-curr h2 {
+    border-bottom: 4px solid #006DF0;
+}
+.application-total h2 {
+    border-bottom: 4px solid #00F026;
+}
+.academy h2 {
+    border-bottom: 4px solid #F09000;
 }

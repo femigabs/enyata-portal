@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import './AdminNav.css';
 import board from '../../Assets/Icons/dashboard-icon.png';
 import create from '../../Assets/Icons/createapp-icon.png';
@@ -8,6 +8,7 @@ import result from '../../Assets/Icons/result-icon.png';
 import history from '../../Assets/Icons/asshistory-icon.png';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
+import Cookies from "js-cookie"
 
 const AdminNav = () => {
 
@@ -29,6 +30,23 @@ const AdminNav = () => {
             console.log(err)
         };
     };
+    const [state, setState] = useState({ data: [] });
+    useEffect(() => {
+        axios.get("/api/v1/details", {
+            "headers": {
+                "Content-Type": "application/json",
+                "token": Cookies.get("token")
+            }
+        })
+            .then(response => {
+                setState({
+                    data: response.data
+                })
+            })
+            .catch((err) => {
+                console.log("Error:", err.message);
+            });
+    }, []);
 
     return (
         <div className="adminnav">
@@ -38,8 +56,8 @@ const AdminNav = () => {
                     <label htmlFor="file">Choose a files</label>
                     {loading ? "loading..." : <img src={image} alt="" />}
                 </div>
-                <h3>John Doe</h3>
-                <p>joe@enyata.com</p>
+                <h3>{state.data.first_name} {state.data.last_name}</h3>
+                <p>{state.data.email}</p>
             </div>
             <div className="adminnav-text">
                 <div className="adminnav-links">

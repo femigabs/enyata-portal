@@ -35,7 +35,7 @@ const AdminBoard = () => {
                 })
             })
             .catch((err) => {
-                console.log("Error:", err.message);
+                console.log(err.response.data.message);
             });
     }, []);
 
@@ -53,7 +53,7 @@ const AdminBoard = () => {
                 })
             })
             .catch((err) => {
-                console.log("Error:", err.message);
+                console.log("Error:", err.response);
             });
     }, []);
     console.log(academy.data)

@@ -13,6 +13,12 @@ const Assessment = () => {
 
     const history = useHistory()
 
+    const [states, setStates] = useState({
+        items: [],
+        errorMessage: '',
+        message:""
+      })
+
     const renderer = ({ minutes, seconds }) => {
         return <div>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></div>
     };
@@ -31,6 +37,22 @@ const Assessment = () => {
             history.push("/quiz");
         }
 
+        useEffect(() => {
+            axios.get("/api/v1/getQuestion",{
+                "headers": {
+                    "Content-Type": "application/json",
+                    "token": Cookies.get("token")
+                }
+            })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(err => {
+                    console.log(err.response.data.message)
+                    setStates({errorMessage:err.response.data.message})
+                })
+        }, []);
+
         return (
             <div>
                 <div className="menu">
@@ -38,6 +60,8 @@ const Assessment = () => {
                 </div>
                 <div className="assessment">
                     <SideNav />
+                    {/* {states.errorMessage ?
+                        <h4 className="container assessment-contents" style={{ color: "Red" }}> {states.errorMessage} </h4>: */}
                     <div className="container assessment-contents">
                         <div className="assessment-heading">
                             <div className="ass">
@@ -62,7 +86,7 @@ const Assessment = () => {
                             </div>
                         </div>
 
-                    </div>
+                    </div> //}
                 </div>
             </div>
         )

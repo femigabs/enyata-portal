@@ -7,7 +7,7 @@ import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import CountDown from '../../components/CountDown'
 
-const TakeAssessment = (props) => {
+const TakeAssessment = () => {
 
     const history = useHistory()
 
@@ -60,11 +60,30 @@ const TakeAssessment = (props) => {
                 setState({ question: json })
             })
             .catch(err => {
-                console.log("Error:", err);
-                // if (err.response.data.message == "Assessment already taken"){
-                // history.push("/dashboard")
-                // }
+                console.log("Error:", err.response);
+                if (err.response.data.message == "Assessment already taken"){
+                history.push("/dashboard")
+                }
             });
+            // axios.get(url,{
+            //     "headers": {
+            //         "Content-Type": "application/json",
+            //         "token": Cookies.get("token")
+            //     }
+            // })
+            //     .then(response => {
+            //         console.log(response)
+            //         setState({ question: response })
+            //     })
+            //     .catch(err => {
+            //         console.log(err.response.data.message)
+                // setStates({errorMessage:err.response.data.message})
+                // if(err.response.data.message== "Authorization Failed"){
+                //     setStates({errorMessage:"Login in "})
+                // }else{
+                //     setStates({errorMessage:err.response.data.message})
+                // }
+            // })
     }, []);
 
     const handleFinish = (e) => {

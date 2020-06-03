@@ -11,7 +11,14 @@ import Cookies from "js-cookie";
 const CreateApplication = () => {
 
     const [image, setImage] = useState({ data: [] });
-
+    const [states, setStates] = useState({
+        items: [],
+        successMessage:"",
+        errorMessage: ''
+      })
+      setTimeout(() => {
+        setStates({ errorMessage: "" })
+      }, 10000);
     const { register, handleSubmit } = useForm();
 
     const onSubmit = (state) => {
@@ -24,9 +31,12 @@ const CreateApplication = () => {
         })
             .then(response => {
                 console.log(response)
+                setStates({successMessage: response.data.message});
             })
             .catch(err => {
-                console.log(err.response)
+                console.log(err.response.data.message)
+                setStates({errorMessage: err.response.data.message});
+
             })
     };
 
@@ -123,6 +133,8 @@ const CreateApplication = () => {
                             />
                         </div>
                         <div className="col-md-4 col-md-offset-4">
+                        {states.errorMessage &&
+                                <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
                             <button type="submit" className="btn btn-primary btn-block">Submit</button>
                         </div>
                     </div>

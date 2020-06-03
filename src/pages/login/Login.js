@@ -17,6 +17,9 @@ const Login = () => {
     items: [],
     errorMessage: ''
   })
+  setTimeout(() => {
+    setStates({ errorMessage: "" })
+  }, 10000);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };

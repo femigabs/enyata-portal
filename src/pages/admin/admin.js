@@ -20,6 +20,9 @@ const Admin = () => {
         items: [],
         errorMessage: ''
       })
+      setTimeout(() => {
+        setStates({ errorMessage: "" })
+      }, 10000);
     const togglePasswordVisibility = () => {
         setPasswordShown(passwordShown ? false : true);
     };
@@ -33,7 +36,6 @@ const Admin = () => {
                 history.push("/adminboard")
             })
             .catch(err => {
-                console.log(err.response.data.message)
                setStates({errorMessage: err.response.data.message});
             })
     };
@@ -85,6 +87,8 @@ const Admin = () => {
                                     <i className="eye-icon" onClick={togglePasswordVisibility}>{eye}</i>
                                     <p>{errors.password && errors.password.message}</p>
                                 </div>
+                                {states.errorMessage &&
+                                <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
                                 <div className="col-md-12">
                                     <button type="submit" className="btn btn-primary btn-block">Sign In</button>
                                     <div className="admin-text">
