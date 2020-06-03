@@ -1,42 +1,81 @@
 .compose{
     display: -webkit-box;
+    
+      
 }
 .compose-structure{
-    margin-left: 47px;    
-}  
-/* .compose-structure label {
-    display: block;
+    padding-left: 47px;
+    padding-top: 50px;
+} 
+.compose-heading h1{
+    font-weight: 100;
     text-align: left;
-    font-weight: normal;
-    font-size: 14px;
-} */
-/* .compose-structure h1{
-    font-weight: 300;
-    padding-top: 6%;
 }
-h3{
+.compose-heading h3{
+    font-weight: 500;
     text-align: left;
-    font-size: 12px;
-    font-weight: 700;
-    padding-top: 30px;
+    font-size: 18px;
 }
-    
-    
-.compose-input{
-    height: 100px;
-    width: 100%; 
+.compose-file {
+    display: flex;
+    padding-top: 40px;
+    justify-content: space-between;
 }
-    label{
-    font-weight: 400;
-    }
-    .time{
+.compose-file .cv{
+    width: 75%;
+    height: 120px;
+    margin-bottom: 0;
+}
+.time{
+    padding-left: 10%;
+    width: 25%;
+}
+.time h2{
+    font-size: 15px;
+}
+.form{
+    text-align: left;
+}
+.my-question{
+    line-height: 2px;
+}
+.my-question label{
+    font-weight: 500;
+}
+.textarea{
+    margin-top: 10px;
+    border: 1px solid black;
+    color: black;
+}
+.option-grid{
+    
+    display: flex;
+    padding-top: 40px;
+    justify-content: space-between;
+}
+.option-grid label{
+    font-weight: 500;
+}
+.option-grid input[type=text]{
+     width: 220%;
+     border: 1px solid black;
+     color: black;
+}
+.option-grid2{
+    display: flex;
+    padding-top: 40px;
+    justify-content: space-between;
+}
+.option-grid2 label{
+    font-weight: 500;
+}
+.option-grid2 input[type=text]{
+    width: 220%;
+    border: 1px solid black;
+    color: black;
+}
+.quiz{
     text-align: center;
-    }
-    .my-question input[type=text]{
+    margin-left: 20%;
     
-    height: 150px;
-    border: 1px solid black;
-    }
-    input[type=text]{
-    border: 1px solid black;
-    } */
+}

@@ -6,26 +6,6 @@
 .table-head th {
     text-align: center;
 }
-<<<<<<< HEAD
-.dashboard-heading{
-    padding-bottom: 50px;
-    line-height: 2px;
-}
-
-
-.table-body:hover{ 
-    box-shadow: 8px 18px 20px rgba(79, 79, 79, 0.3);
-    /* border-left: 6px solid#31D283; */
-    border-radius: 10px;
-} 
-.batch-select{
-    border: none;
-}
-.batch-select option{
-    font-weight: 200;
-    font-size: 20px;
-=======
 .table-row td {
     padding: 20px 30px;
->>>>>>> e1671b1520fb080133cca50ef035906c9e3ae5fb
 }

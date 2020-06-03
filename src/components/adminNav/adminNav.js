@@ -145,7 +145,7 @@ const AdminNav = () => {
                         Results
                     </NavLink>
                 </div>
-                <div className="logout-links">
+                <div className="adminnav-links">
                     <NavLink
                         className="nav-link"
                         style={{ textDecoration: "none" }}

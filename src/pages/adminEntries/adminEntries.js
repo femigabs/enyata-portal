@@ -78,13 +78,8 @@ const AdminEntries = () => {
                             </select></h1>
                         <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
-<<<<<<< HEAD
-                    <table className="table table-responsive  table-sm" cellspacing="0" width="100%">
-                        <thead  className="table-head">
-=======
                     <table className="table table-responsive table-sm" cellspacing="0" width="100%">
                         <thead className="table-head">
->>>>>>> e1671b1520fb080133cca50ef035906c9e3ae5fb
                             <tr>
                                 <th className="th-sm">Name</th>
                                 <th className="th-sm">Email</th>

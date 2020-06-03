@@ -104,15 +104,18 @@ const ComposeAssessment = () => {
             <div className="compose">
                 <AdminNav />
                 <div className="compose-structure">
-                    <h1>Compose Assessment</h1>
-                    <h3>15/30</h3>
-                    <div className="form-row">
-                        <div className="col-md-6 compose-input cv">
+                    <div className="compose-heading">
+                        <h1>Compose Assessment</h1>
+                        <h3>15/30</h3>
+                    </div>
+                    
+                    <div className="compose-file">
+                        <div className="  cv">
                             <input className="inputfile" id="file_img" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
                             <label for="file_img"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
                         </div>
-                        <div className=" form-group col-md-6 time ">
-                            <h2>Set Timer</h2>
+                        <div className="  time ">
+                            <h2>Set Time</h2>
                             <select className="time-box" id="time" >
                                 <option value="5" selected>00</option>
                                 <option value="10">10</option>
@@ -122,24 +125,16 @@ const ComposeAssessment = () => {
                                 <option value="30">30</option>
                             </select>
                         </div>
+                    </div>
                         <form className="form">
-                            <div className="form-group col-md-12 my-question">
-                                <label>Question</label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    name="question"
-                                    value={state.question}
-                                    onChange={handleChange}
-                                // ref={
-                                //     register({
-                                //         required: "Question is empty",
-
-                                //     })
-                                // }
-                                />
+                            <div className=" my-question">
+                                <label>Questions</label>
+                                <textarea value={state.question} type="reset" id="question"
+                                style={{ height: "150px", width: "137%" }}  onChange={handleChange} className="textarea"></textarea>
+                                
                             </div>
-                            <div className="form-group col-md-6">
+                            <div className="option-grid">
+                            <div className="">
                                 <label>Option A</label>
                                 <input
                                     className="form-control"
@@ -155,7 +150,7 @@ const ComposeAssessment = () => {
                                 // }
                                 />
                             </div>
-                            <div className="form-group col-md-6">
+                            <div className="">
                                 <label>Option B</label>
                                 <input
                                     className="form-control"
@@ -171,7 +166,10 @@ const ComposeAssessment = () => {
                                 // }
                                 />
                             </div>
-                            <div className="form-group col-md-6">
+
+                            </div>
+                            <div  className="option-grid2">
+                            <div >
                                 <label>Option C</label>
                                 <input
                                     className="form-control"
@@ -187,7 +185,7 @@ const ComposeAssessment = () => {
                                 // }
                                 />
                             </div>
-                            <div className="form-group col-md-6">
+                            <div className="">
                                 <label>Option D</label>
                                 <input
                                     className="form-control"
@@ -203,7 +201,9 @@ const ComposeAssessment = () => {
                                 // }
                                 />
                             </div>
-                            <div className="form-group col-md-6" style={{ display: "none" }}>
+                            </div>
+                            
+                            <div className="" style={{ display: "none" }}>
                                 <label>cv_url</label>
                                 <input
                                     className="form-control"
@@ -214,6 +214,7 @@ const ComposeAssessment = () => {
                                 // ref={register()}
                                 />
                             </div>
+                            <div className="quiz">
                             <div className="col-md-6 quiz-button">
                                 <button onClick={handlePrevious} className="btn btn-primary">Previous</button>
                             </div>
@@ -223,8 +224,10 @@ const ComposeAssessment = () => {
                             <div className="col-md-12 finish-button">
                                 <button type="submit" className="btn btn-default">Finish</button>
                             </div>
+                            </div>
+                            
                         </form>
-                    </div>
+                    {/* </div> */}
                 </div>
 
             </div>
