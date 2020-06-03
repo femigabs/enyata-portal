@@ -237,6 +237,8 @@ const Application = (props) => {
                                 <div className="col-md-6 col-md-offset-3">
                                 {states.errorMessage &&
                                 <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                {states.Message &&
+                                <h5 className="success" style={{ color: "Green" }}> {states.rMessage} </h5>}
                                     <button type="submit" className="btn btn-primary btn-block">Submit</button>
                                 </div>
                             </div>

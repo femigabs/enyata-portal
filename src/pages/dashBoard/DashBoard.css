@@ -29,6 +29,9 @@
     border-radius: 4px;
     width: 130px;
 }
+.application-date h2 {
+    border-bottom: 4px solid #006DF0;
+}
 .application-info h5 {
     font-size: 14px;
     font-weight: normal;

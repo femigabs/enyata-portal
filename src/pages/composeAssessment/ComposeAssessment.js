@@ -12,17 +12,188 @@ import Moment from 'react-moment';
 const ComposeAssessment = () => {
 
     const history = useHistory()
-    // const [time, setTime] = useState()
-    const [state, setState] = useState([])
-    // const [questions, setQuestions] = useState([])
-    const [currentStep, setCurrentStep] = useState(1)
+
+    const [state, setState] = useState({
+        file_url: "",
+        question: "",
+        option_a: "",
+        option_b: "",
+        option_c: "",
+        option_d: "",
+        option_answer: ""
+    });
+
+    const [questions, updateQuestions] = useState([]);
+
+    const [questionStep, setQuestionStep] = useState({
+        currentQuestion: 0,
+        prevDisabled: true,
+        nextDisabled: false
+    })
+
+    const [time, setTime] = useState({
+        time_min: "00",
+        time_sec: "00"
+    })
+
+    const handleTime = (e) => {
+        e.preventDefault()
+        setTime({
+            ...time,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault()
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const [image, setImage] = useState();
+    const uploadFile = async (e) => {
+        const files = e.target.files[0];
+        console.log(e.target.files[0])
+        const formData = new FormData();
+        formData.append("upload_preset", "q3swu36z");
+        formData.append("file", files);
+        try {
+            const res = await axios.post("https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload", formData);
+            const fileUrl = res.data.secure_url;
+            console.log(fileUrl);
+            setImage(fileUrl)
+        } catch (err) {
+            console.log(err)
+        };
+    };
+
+    const handleNext = (e) => {
+        e.preventDefault()
+        const { currentQuestion } = questionStep
+        console.log(questionStep)
+        console.log(questions)
+        console.log(state)
+
+        if (currentQuestion == questions.length ) {
+            if (state.question && state.option_a && state.option_b && state.option_answer) {
+                updateQuestions([...questions, state])
+
+                setState({
+                    file_url: "",
+                    question: "",
+                    option_a: "",
+                    option_b: "",
+                    option_c: "",
+                    option_d: "",
+                    option_answer: ""
+                })
+
+                setQuestionStep({
+                    currentQuestion: currentQuestion + 1,
+                    prevDisabled: false
+                })
+            }
+
+        } else if (currentQuestion == questions.length - 1) {
+            if (state.question && state.option_a && state.option_b && state.option_answer) {
+                let copy = [...questions]
+                copy[currentQuestion] = state
+                updateQuestions([...copy])
+
+                setState({
+                    file_url: "",
+                    question: "",
+                    option_a: "",
+                    option_b: "",
+                    option_c: "",
+                    option_d: "",
+                    option_answer: "",
+                })
+
+                setQuestionStep({
+                    currentQuestion: currentQuestion + 1,
+                    prevDisabled: false,
+                })
+            }
+        } else {
+            if (state.question && state.option_a && state.option_b && state.option_answer) {
+                let copy = [...questions]
+                copy[currentQuestion] = state
+                updateQuestions([...copy])
+
+                setState({
+                    file_url: questions[currentQuestion + 1].file_url,
+                    question: questions[currentQuestion + 1].question,
+                    option_a: questions[currentQuestion + 1].option_a,
+                    option_b: questions[currentQuestion + 1].option_b,
+                    option_c: questions[currentQuestion + 1].option_c,
+                    option_d: questions[currentQuestion + 1].option_d,
+                    option_answer: questions[currentQuestion + 1].option_answer,
+                })
+
+                setQuestionStep({
+                    currentQuestion: currentQuestion + 1,
+                    prevDisabled: false,
+                })
+            }
+
+        }
+
+    }
+
+    const handlePrevious = (e) => {
+        e.preventDefault(e)
+        const { currentQuestion } = questionStep
+        console.log(questionStep)
+        console.log(questions)
+
+        if (currentQuestion == 1) {
+            let copy = [...questions]
+            copy[currentQuestion] = state
+            updateQuestions([...copy])
+
+            setState({
+                file_url: questions[currentQuestion - 1].file_url,
+                question: questions[currentQuestion - 1].question,
+                option_a: questions[currentQuestion - 1].option_a,
+                option_b: questions[currentQuestion - 1].option_b,
+                option_c: questions[currentQuestion - 1].option_c,
+                option_d: questions[currentQuestion - 1].option_d,
+                option_answer: questions[currentQuestion - 1].option_answer,
+            })
+
+            setQuestionStep({
+                currentQuestion: currentQuestion - 1,
+                prevDisabled: true,
+            })
+        } else {
+            if (state.question && state.option_a && state.option_b && state.option_answer) {
+                let copy = [...questions]
+                copy[currentQuestion] = state
+                updateQuestions([...copy])
+            }
+
+            setState({
+                file_url: questions[currentQuestion - 1].file_url,
+                question: questions[currentQuestion - 1].question,
+                option_a: questions[currentQuestion - 1].option_a,
+                option_b: questions[currentQuestion - 1].option_b,
+                option_c: questions[currentQuestion - 1].option_c,
+                option_d: questions[currentQuestion - 1].option_d,
+                option_answer: questions[currentQuestion - 1].option_answer,
+            })
+
+            setQuestionStep({
+                currentQuestion: currentQuestion - 1,
+                prevDisabled: false,
+            })
+        }
+    }
 
 
-    // handleTime = (e) => {
-    //     setTime({
-    //         ...time,
-    //     })
-    // }
+
 
     useEffect(() => {
         let hamburger = document.getElementById("img"),
@@ -35,66 +206,37 @@ const ComposeAssessment = () => {
     })
 
     const handleSubmit = (e) => {
-        console.log(state)
+        e.preventDefault()
+        let number_of_question = questions.length;
+        let time_allocated = (parseInt(time.time_min) * 60) + parseInt(time.time_sec);
+        let assRequest = { time_allocated, number_of_question };
 
-        // axios.post("/api/v1/assessment", state)
-        //     .then(response => {
-        //         console.log(response.data)
-        //         Cookies.set('token', response.data.token);
-        //         // history.push("/history")
-        //     })
-        //     .catch(err => {
-        //         console.log(err.response)
-        //     })
-    }
-    const [image, setImage] = useState({ data: [] });
-    const uploadFile = async (e) => {
-        const files = e.target.files[0];
-        console.log(e.target.files[0])
-        const formData = new FormData();
-        formData.append("upload_preset", "q3swu36z");
-        formData.append("file", files);
-        try {
-            const res = await axios.post("https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload", formData);
-            const fileUrl = res.data.secure_url;
-            console.log(fileUrl);
-            setImage({
-                data: fileUrl
+        axios.post("/api/v1/assessment", questions, {
+            "headers": {
+                "Content-Type": "application/json",
+                "token": Cookies.get("token")
+            }
+        })
+            .then(response => {
+                console.log(response.data)
             })
-        } catch (err) {
-            console.log(err)
-        };
-    };
+            .catch(err => {
+                console.log(err.response.data)
+            })
 
-    const handleChange = (e) => {
-        setState([
-            ...state,
-            [e.target.name] = e.target.value
-        ])
-    }
-
-    const handleNext = () => {
-        currentStep = currentStep >= 29 ? 30 : currentStep + 1;
-        console.log(currentStep)
-        setCurrentStep({
-            currentStep: currentStep
+        axios.post("/api/v1/assessmentHistory", assRequest, {
+            "headers": {
+                "Content-Type": "application/json",
+                "token": Cookies.get("token")
+            }
         })
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(err => {
+                console.log(err.response.data)
+            })
     }
-
-
-    const handlePrevious = () => {
-        currentStep = currentStep <= 1? 1: currentStep - 1;
-        console.log(currentStep)
-        setCurrentStep({
-            currentStep: currentStep
-        })
-    }
-
-    if (currentStep !== 1) {
-        return null
-      }
-
-    // const { register, handleSubmit, errors } = useForm();
 
     return (
         <div>
@@ -104,132 +246,140 @@ const ComposeAssessment = () => {
             <div className="compose">
                 <AdminNav />
                 <div className="compose-structure">
-                    <h1>Compose Assessment</h1>
-                    <h3>15/30</h3>
-                    <div className="form-row">
-                        <div className="col-md-6 compose-input cv">
-                            <input className="inputfile" id="file_img" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
-                            <label for="file_img"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
-                        </div>
-                        <div className=" form-group col-md-6 time ">
-                            <h2>Set Timer</h2>
-                            <select className="time-box" id="time" >
-                                <option value="5" selected>00</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="25">25</option>
-                                <option value="30">30</option>
-                            </select>
-                        </div>
-                        <form className="form">
-                            <div className="form-group col-md-12 my-question">
-                                <label>Question</label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    name="question"
-                                    value={state.question}
-                                    onChange={handleChange}
-                                // ref={
-                                //     register({
-                                //         required: "Question is empty",
+                    <div className="compose-heading">
+                        <h1>Compose Assessment</h1>
+                        <h3>{questionStep.currentQuestion + 1}/30</h3>
+                    </div>
 
-                                //     })
-                                // }
-                                />
+                    <form>
+                        <div className="">
+                            <div className="compose-file">
+                                <div className="cv">
+                                    <input className="inputfile" id="file_img" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
+                                    <label htmlFor="file_img"><img src={Plus} alt="createapp-icon" /> Upload file</label>
+                                </div>
+                                <div className="time">
+                                    <h2>Set Timer</h2>
+                                    <div className="time-boxes">
+                                        <div className="time-min">
+                                            <select name="time_min" value={time.time_min} onChange={handleTime} className="time-box" id="time" >
+                                                <option value="0" selected>00</option>
+                                                <option value="5">05</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                <option value="25">25</option>
+                                                <option value="30">30</option>
+                                            </select>
+                                            <sub>min</sub>
+                                        </div>
+                                        <div className="time-sec">
+                                            <select name="time_sec" value={time.time_sec} onChange={handleTime} className="time-box" id="time" >
+                                                <option value="00" selected>000</option>
+                                                <option value="10">010</option>
+                                                <option value="20">020</option>
+                                                <option value="30">030</option>
+                                                <option value="40">040</option>
+                                                <option value="50">050</option>
+                                                <option value="60">060</option>
+                                            </select>
+                                            <sub>sec</sub>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="form-group col-md-6">
-                                <label>Option A</label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    name="option_a"
-                                    value={state.option_a}
-                                    onChange={handleChange}
-                                // ref={
-                                //     register({
-                                //         required: "Option A cannot be empty",
-
-                                //     })
-                                // }
-                                />
-                            </div>
-                            <div className="form-group col-md-6">
-                                <label>Option B</label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    name="option_b"
-                                    value={state.option_b}
-                                    onChange={handleChange}
-                                // ref={
-                                //     register({
-                                //         required: "Option B cannot be empty",
-
-                                //     })
-                                // }
-                                />
-                            </div>
-                            <div className="form-group col-md-6">
-                                <label>Option C</label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    name="option_c"
-                                    value={state.option_c}
-                                    onChange={handleChange}
-                                // ref={
-                                //     register({
-                                //         required: "Option c cannot be empty",
-
-                                //     })
-                                // }
-                                />
-                            </div>
-                            <div className="form-group col-md-6">
-                                <label>Option D</label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    name="option_d"
-                                    value={state.option_d}
-                                    onChange={handleChange}
-                                // ref={
-                                //     register({
-                                //         required: "Option D cannot be empty",
-
-                                //     })
-                                // }
-                                />
+                            <div className="form">
+                                <div className="my-question">
+                                    <label>Question</label>
+                                    <textarea
+                                        className="form-control textarea"
+                                        type="text"
+                                        name="question"
+                                        value={state.question}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="option-grid">
+                                    <div className="">
+                                        <label>Option A</label>
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            name="option_a"
+                                            value={state.option_a}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="">
+                                        <label>Option B</label>
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            name="option_b"
+                                            value={state.option_b}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="option-grid2">
+                                    <div className="">
+                                        <label>Option C</label>
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            name="option_c"
+                                            value={state.option_c}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="">
+                                        <label>Option D</label>
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            name="option_d"
+                                            value={state.option_d}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-group answer">
+                                    <label>Answer</label>
+                                    <input
+                                        className="form-control"
+                                        type="text"
+                                        name="option_answer"
+                                        value={state.option_answer}
+                                        onChange={handleChange}
+                                    />
+                                </div>
                             </div>
                             <div className="form-group col-md-6" style={{ display: "none" }}>
-                                <label>cv_url</label>
+                                <label>file_url</label>
                                 <input
                                     className="form-control"
                                     type="text"
-                                    name="cv_url"
-                                    value={image.data}
-                                    onChange={handleChange}
-                                // ref={register()}
+                                    name="file_url"
+                                    value={image}
                                 />
                             </div>
-                            <div className="col-md-6 quiz-button">
-                                <button onClick={handlePrevious} className="btn btn-primary">Previous</button>
+                            <div className="quiz">
+                                <div className="col-md-6 quiz-button">
+                                    <button disabled={questionStep.prevDisabled} onClick={handlePrevious} className="btn btn-primary">Previous</button>
+                                </div>
+                                <div className="col-md-6 quiz-button">
+                                    <button disabled={questionStep.nextDisabled || questionStep.currentQuestion == 29} onClick={handleNext} className="btn btn-primary">Next</button>
+                                </div>
+                                <div className="col-md-12 finish-button">
+                                    <button onClick={handleSubmit} type="submit" className="btn btn-default">Finish</button>
+                                </div>
                             </div>
-                            <div className="col-md-6 quiz-button">
-                                <button onClick={handleNext} className="btn btn-primary">Next</button>
-                            </div>
-                            <div className="col-md-12 finish-button">
-                                <button type="submit" className="btn btn-default">Finish</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
-
             </div>
         </div>
     )
 }
 
-export default ComposeAssessment
+export default ComposeAssessment;

@@ -53,7 +53,7 @@ const SideNav = () => {
                     <label htmlFor="file">Choose a files</label>
                     {loading ? "loading..." : <img src={image} alt="" />}
                 </div>
-        <h3>{state.data.first_name} {state.data.last_name}</h3>
+        <h3>{state.data.first_name } {state.data.last_name}</h3>
                 <p>{state.data.email}</p>
             </div>
             <div className="sidenav-text">
@@ -93,6 +93,7 @@ const SideNav = () => {
                 </div>
                 <div className="sidenav-logout">
                     <NavLink
+                         onClick={()=> Cookies.remove('token')}
                         className="nav-link"
                         style={{textDecoration: "none"}}
                         activeStyle={{
@@ -102,7 +103,7 @@ const SideNav = () => {
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}
-                        exact to="/">
+                        exact to="/login">
                         <img className="img" src={logout} alt="logout" />
                         Log Out
                     </NavLink>

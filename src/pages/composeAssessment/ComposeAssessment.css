@@ -1,42 +1,121 @@
 .compose{
-    display: -webkit-box;
-}
-.compose-structure{
-    margin-left: 47px;    
+    display: grid;
+    grid-template-columns: 1fr 3fr;
 }  
- .compose-structure label {
-    display: block;
+.compose-structure{
+    padding-top: 50px;
+}
+
+.compose-heading h1{
+    font-weight: 100;
     text-align: left;
-    font-weight: normal;
-    font-size: 14px;
-} 
- .compose-structure h1{
+}
+
+.compose-heading h3{
+    font-weight: 500;
+    text-align: left;
+    font-size: 18px;
+}
+
+.compose-file {
+    display: flex;
+    padding-top: 40px;
+}
+
+.compose-file .cv{
+    width: 42%;
+    height: 120px;
+    margin-bottom: 0;
+}
+
+.time{
+    padding-left: 10%;
+    width: 25%;
+}
+.time h2{
+    font-size: 15px;
+    text-align: left;
+}
+.time-boxes {
+    display: flex;
+    justify-content: space-between;
+}
+.time-box {
+    border: none;
     font-weight: 300;
-    padding-top: 6%;
+    font-size: 48px;
+    line-height: 58px;
 }
-/* h3{
+.time-box option {
+    font-weight: 300;
+    font-size: 25px;
+}
+.time-min {
+    display: flex;
+}
+.time-boxes sub {
+    padding-top: 43px;
+}
+.time-sec {
+    display: flex;
+}
+
+.form{
     text-align: left;
-    font-size: 12px;
-    font-weight: 700;
-    padding-top: 30px;
+    margin-right: 101px;
 }
-    
-    
-.compose-input{
-    height: 100px;
-    width: 100%; 
+.my-question{
+    line-height: 2px;
+    margin-top: 25px;
 }
-    label{
-    font-weight: 400;
-    }
-    .time{
-    text-align: center;
-    }
-    .my-question input[type=text]{
-    
-    height: 150px;
+.my-question label{
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+
+.textarea{
     border: 1px solid black;
-    }
-    input[type=text]{
+    color: black;
+}
+
+.option-grid{
+    display: grid;
+    padding-top: 25px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px;
+}
+
+.option-grid label{
+    font-weight: 500;
+}
+.option-grid input[type=text]{
     border: 1px solid black;
-    }  */
+    color: black;
+}
+ .option-grid2{
+    display: grid;
+    padding-top: 25px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px;
+}
+.option-grid2 label{
+    font-weight: 500;
+}
+.option-grid2 input[type=text]{
+    border: 1px solid black;
+    color: black;
+}
+.answer {
+    margin-left: 35%;
+    margin-right: 4%;
+}
+.answer input {
+    width: 50%;
+    border: 1px solid black;
+    color: black;
+}
+.answer label{
+    margin-left: 21%;
+    font-weight: 500;
+    padding-top: 20px;
+}

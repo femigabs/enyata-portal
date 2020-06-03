@@ -9,6 +9,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from 'react-router-dom';
 import comp from '../../Assets/Images/computer-img.png';
 import Cookies from "js-cookie";
+import Skeleton from 'react-loading-skeleton';
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 

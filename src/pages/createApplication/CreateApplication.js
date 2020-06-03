@@ -30,7 +30,7 @@ const CreateApplication = () => {
             }
         })
             .then(response => {
-                console.log(response)
+                console.log(response.data.message)
                 setStates({successMessage: response.data.message});
             })
             .catch(err => {
@@ -60,7 +60,7 @@ const CreateApplication = () => {
     return (
         <div className="createapp">
             <AdminNav />
-            <div className="container create-contents">
+            <div className="container col-md-8 offset-4 create-contents">
                 <div className="create-heading">
                     <h1>Create Application</h1>
                 </div>
@@ -73,7 +73,7 @@ const CreateApplication = () => {
                         <div className="form-group col-md-6">
                             <label>Link</label>
                             <input
-                                className="form-control"
+                                className="form-control input"
                                 type="text"
                                 name="link_url"
                                 ref={
@@ -86,7 +86,7 @@ const CreateApplication = () => {
                         <div className="form-group col-md-6">
                             <label>Application closure date</label>
                             <input
-                                className="form-control"
+                                className="form-control input"
                                 type="text"
                                 name="closure_date"
                                 ref={
@@ -99,7 +99,7 @@ const CreateApplication = () => {
                         <div className="form-group col-md-6">
                             <label>Batch ID</label>
                             <input
-                                className="form-control"
+                                className="form-control input"
                                 type="text"
                                 name="batch_id"
                                 ref={
@@ -112,7 +112,7 @@ const CreateApplication = () => {
                         <div className="col-md-12">
                             <label>Instructions</label>
                             <textarea
-                                className="form-control"
+                                className="form-control input"
                                 type="text"
                                 name="instruction"
                                 ref={
@@ -133,8 +133,10 @@ const CreateApplication = () => {
                             />
                         </div>
                         <div className="col-md-4 col-md-offset-4">
-                        {states.errorMessage &&
+                                {states.errorMessage &&
                                 <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                 {states.successMessage&&
+                                <h5 className="success" style={{ color: "Green" }}> {states.successMessage} </h5>}
                             <button type="submit" className="btn btn-primary btn-block">Submit</button>
                         </div>
                     </div>

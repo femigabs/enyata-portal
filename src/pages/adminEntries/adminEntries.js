@@ -67,8 +67,8 @@ const url = `/api/v1/specific_batch/${value.value}`
                 <AdminNav />
                 <div className="container dashboard-contents">
                     <div className="dashboard-heading">
-                        <h1>Entries -       
-                        <select class="browser-default custom-select" onChange={handleChange}>
+                        <h1>Entries -
+                        <select class="browser-default custom-select batch-select" onChange={handleChange}>
                                 <option selected value="1">Batch 1</option>
                                 <option value="2">Batch 2</option>
                                 <option value="3">Batch 3</option>

@@ -15,7 +15,7 @@ import CreateApplication from './pages/createApplication/CreateApplication';
 import ComposeAssessment from './pages/composeAssessment/ComposeAssessment';
 import AssessmentResult from './pages/assessmentResult/AssessmentResult';
 import AssessmentHistory from './pages/assessmentHistory/AssessmentHistory';
-
+import Error_page from './pages/error/Error';
 
 
 function App() {
@@ -36,6 +36,7 @@ function App() {
         <Route exact path='/composeassessment' component={ComposeAssessment} />
         <Route exact path='/results' component={AssessmentResult} />
         <Route exact path='/assessmenthistory' component={AssessmentHistory} />
+        <Route component={Error_page}/>
       </Switch>
     </div>
   );

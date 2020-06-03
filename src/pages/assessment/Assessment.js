@@ -13,11 +13,10 @@ const Assessment = () => {
 
     const history = useHistory()
 
-    const [states, setStates] = useState({
-        items: [],
+    const [disable, setDisable] = useState( {
+        disable: false,
         errorMessage: '',
-        message:""
-      })
+        })
 
     const renderer = ({ minutes, seconds }) => {
         return <div>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></div>
@@ -49,7 +48,10 @@ const Assessment = () => {
                 })
                 .catch(err => {
                     console.log(err.response.data.message)
-                    setStates({errorMessage:err.response.data.message})
+                    setDisable({
+                        disable:true,
+                        errorMessage:err.response.data.message
+                    })
                 })
         }, []);
 
@@ -60,8 +62,6 @@ const Assessment = () => {
                 </div>
                 <div className="assessment">
                     <SideNav />
-                    {/* {states.errorMessage ?
-                        <h4 className="container assessment-contents" style={{ color: "Red" }}> {states.errorMessage} </h4>: */}
                     <div className="container assessment-contents">
                         <div className="assessment-heading">
                             <div className="ass">
@@ -82,7 +82,9 @@ const Assessment = () => {
                             <div className="card-body take-ass">
                                 <img src={hourglass} />
                                 <p>We have 4 days left until the next assessment <br />Watch this space</p>
-                                <button onClick={handleSubmit} className="btn btn-default">Take Assessment</button>
+                                <button onClick={handleSubmit} disabled={disable.disable}className="btn btn-default">Take Assessment</button>
+                                {disable.errorMessage && 
+                                <h5 className="error" style={{ color: "Red" }}> {disable.errorMessage}</h5>}
                             </div>
                         </div>
 

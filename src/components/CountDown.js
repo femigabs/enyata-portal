@@ -14,7 +14,13 @@ const Count_down = () => {
             "question_id": "",
             "user_answer": "",
 
+        },
+        {
+            "question_id": "",
+            "user_answer": "",
+
         }
+
     ])
     const history = useHistory()
     const Complete = () => {

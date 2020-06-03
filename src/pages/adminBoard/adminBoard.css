@@ -36,7 +36,15 @@
 .application-info p {
     font-size: 12px;;
 }
-
+.application-curr h2 {
+    border-bottom: 4px solid #006DF0;
+}
+.application-total h2 {
+    border-bottom: 4px solid #00F026;
+}
+.academy h2 {
+    border-bottom: 4px solid #F09000;
+}
 .dash-info {
     margin-top: 100px;
 }
