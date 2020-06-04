@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './AdminNav.css';
 import board from '../../Assets/Icons/dashboard-icon.png';
 import create from '../../Assets/Icons/createapp-icon.png';
+import profile from '../../Assets/Images/profile-pics.png';
 import entry from '../../Assets/Icons/appentries-icon.png';
 import compose from '../../Assets/Icons/composeass-icon.png';
 import result from '../../Assets/Icons/result-icon.png';
@@ -36,8 +37,9 @@ const AdminNav = () => {
             <div className="profile">
                 <input className="inputfile" id="file" type="file" name="file" onChange={uploadImage} />
                 <div className="ad-image">
-                    <label htmlFor="file">Choose a files</label>
-                    {loading ? "loading..." : <img src={image} alt="" />}
+                    {/* <label htmlFor="file">Choose a files</label>
+                    {loading ? "loading..." : <img src={image} alt="" />} */}
+                    <img src={profile} alt=""  />
                 </div>
                 <h3>John Doe</h3>
                 <p>joe@enyata.com</p>

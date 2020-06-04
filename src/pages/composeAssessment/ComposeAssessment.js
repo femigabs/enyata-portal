@@ -208,7 +208,7 @@ const ComposeAssessment = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let number_of_question = questions.length;
-        let time_allocated = (parseInt(time.time_min) * 60) + parseInt(time.time_sec);
+        let time_allocated = (parseInt(time.time_min) + (parseInt(time.time_sec) / 60 )).toFixed(2);
         let assRequest = { time_allocated, number_of_question };
 
         axios.post("/api/v1/assessment", questions, {

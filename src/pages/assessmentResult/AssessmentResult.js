@@ -3,8 +3,12 @@ import './AssessmentResult.css';
 import AdminNav from '../../components/adminNav/AdminNav';
 import menu from '../../Assets/Icons/menu.svg';
 import Cookies from "js-cookie";
+import { faSort } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Moment from 'react-moment';
+
+const sort = <FontAwesomeIcon className="fa fa-sort" icon={faSort} />;
 
 const AssessmentResult = () => {
     useEffect(() => {
@@ -22,6 +26,44 @@ const AssessmentResult = () => {
     const handleChange = (e) => {
         setValue({ value: e.target.value })
     }
+
+    const [sorting, setSorting] = useState(null)
+    const [sortState, setSortState] = useState({
+        currentSort: "default"
+    })
+
+    // fn function will use to sort the items in the array before we display it in the table
+    const sortTypes = {
+        up: {
+            class: 'sort-up',
+            fn: (a, b) => a[sorting] - b[sorting]
+        },
+        down: {
+            class: 'sort-down',
+            fn: (a, b) => b[sorting] - a[sorting]
+        },
+        default: {
+            class: 'sort',
+            fn: (a, b) => a
+        }
+    };
+
+    // method called every time the sort button is clicked
+    // it will change the currentSort value to the next one
+    const onSortChange = () => {
+        const { currentSort } = sortState;
+        let nextSort;
+
+        if (currentSort === 'down') nextSort = 'up';
+        else if (currentSort === 'up') nextSort = 'default';
+        else if (currentSort === 'default') nextSort = 'down';
+
+        setSortState({
+            currentSort: nextSort
+        });
+    };
+
+    const { currentSort } = sortState
 
     const url = `/api/v1/specific_batch/${value.value}`
     const [state, setState] = useState({ data: [] });
@@ -47,7 +89,7 @@ const AssessmentResult = () => {
     }, [value.value]);
     let itemsToRender;
     if (state.data) {
-        itemsToRender = state.data.map((items, index) => {
+        itemsToRender = state.data.sort(sortTypes[currentSort].fn).map((items, index) => {
             return <tr className="tab-row" key={index}>
                 <td>{items.first_name} {items.last_name}</td>
                 <td>{items.email}</td>
@@ -84,11 +126,17 @@ const AssessmentResult = () => {
                             <tr>
                                 <th class="th-sm">Name</th>
                                 <th class="th-sm">Email</th>
-                                <th class="th-sm">DOB-AGE</th>
+                                <th class="th-sm">DOB-AGE
+                                    <i onClick={() => { setSorting("age"); onSortChange() }} className={`fa fa-sort-${sortTypes[currentSort].class}`}>{sort}</i>
+                                </th>
                                 <th class="th-sm">Address</th>
                                 <th class="th-sm">University</th>
-                                <th class="th-sm">cgpa</th>
-                                <th class="th-sm">Test Scores</th>
+                                <th class="th-sm">cgpa
+                                    <i onClick={() => { setSorting("cgpa"); onSortChange() }} className={`fas fa${sortTypes[currentSort].class}`}>{sort}</i>
+                                </th>
+                                <th class="th-sm">Test Scores
+                                    <i onClick={() => { setSorting("score"); onSortChange() }} className={`fas fa-sort${sortTypes[currentSort].class}`}>{sort}</i>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
