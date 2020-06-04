@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
+import Skeleton , { SkeletonTheme } from "react-loading-skeleton"
 
 
 const DashBoard = () => {
@@ -24,7 +24,9 @@ const DashBoard = () => {
     })
    
 
-    const [state, setState] = useState({ data: [] });
+    const [state, setState] = useState({ 
+        data: [],
+        loading: true });
     useEffect(() => {
         axios.get("/api/v1/application", {
             "headers": {
@@ -36,6 +38,7 @@ const DashBoard = () => {
             .then(response =>{
                 setState({
                     data: response.data,
+                    loading: false
                 })
             })
             .catch((err) => {
@@ -80,7 +83,12 @@ const DashBoard = () => {
             <div className="dashboard">
                 <SideNav />
                 <div className="container dashboard-contents">
-                
+                {state.loading ? <SkeletonTheme color="#2B3C4E" highlightColor="rgb(145, 155, 167)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
+                    <>
                     <div className="dashboard-heading">
                         <h1>Dashboard</h1>
                         <p>Your Application is currently being review, you wil be notified if successful</p>
@@ -119,9 +127,11 @@ const DashBoard = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                    </>
+                }</div>
             </div>
-        </div>
+          
+                </div>
     )
 }
 

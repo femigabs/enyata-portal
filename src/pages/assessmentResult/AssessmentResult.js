@@ -7,6 +7,7 @@ import { faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Moment from 'react-moment';
+import Skeleton , { SkeletonTheme } from "react-loading-skeleton";
 
 const sort = <FontAwesomeIcon className="fa fa-sort" icon={faSort} />;
 
@@ -66,7 +67,9 @@ const AssessmentResult = () => {
     const { currentSort } = sortState
 
     const url = `/api/v1/specific_batch/${value.value}`
-    const [state, setState] = useState({ data: [] });
+    const [state, setState] = useState({ 
+        data: [],
+        loading: true });
     useEffect(() => {
         fetch(url, {
             method: "GET",
@@ -79,7 +82,8 @@ const AssessmentResult = () => {
             .then((response) => response.json())
             .then((json) => {
                 setState({
-                    data: json.data
+                    data: json.data,
+                    loading: false
                 })
 
             })
@@ -109,6 +113,12 @@ const AssessmentResult = () => {
             <div className="dashboard">
                 <AdminNav />
                 <div className="container dashboard-contents">
+                {state.loading ? <SkeletonTheme color=" #5ABEFD" highlightColor="rgb(184, 164, 164)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
+                    <>
                     <div className="dashboard-heading">
                         <h1>Results -
                         <select class="browser-default custom-select batch-select" onChange={handleChange}>
@@ -143,8 +153,8 @@ const AssessmentResult = () => {
                             <>{itemsToRender}</>
                         </tbody>
                     </table>
-
-                </div>
+        </>
+                }</div>
             </div>
         </div>
     )
