@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import CountDown from '../../components/CountDown'
-import Skeleton from "react-loading-skeleton"
+import Skeleton, {SkeletonTheme} from "react-loading-skeleton"
 
 const TakeAssessment = () => {
 
@@ -115,7 +115,11 @@ const TakeAssessment = () => {
             <div className="assessment">
                 <SideNav />
                 <div className="container assessment-contents">
-                    {state.loading? <Skeleton variant="react"/>:
+                    {state.loading? <SkeletonTheme color="#2B3C4E" highlightColor="rgb(145, 155, 167)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
                     <>
                     <div className="assessment-heading">
                         <div className="ass">

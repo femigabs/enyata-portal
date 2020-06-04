@@ -7,6 +7,7 @@ import { faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Moment from 'react-moment';
+import Skeleton , { SkeletonTheme } from "react-loading-skeleton";
 
 const sort = <FontAwesomeIcon icon={faSort} />;
 
@@ -69,7 +70,9 @@ const AdminEntries = () => {
 
 
     const url = `/api/v1/specific_batch/${value.value}`
-    const [state, setState] = useState({ data: [] });
+    const [state, setState] = useState({ 
+        data: [],
+        loading: true });
     useEffect(() => {
         fetch(url, {
             method: "GET",
@@ -82,7 +85,8 @@ const AdminEntries = () => {
             .then((response) => response.json())
             .then((json) => {
                 setState({
-                    data:json.data
+                    data:json.data,
+                    loading: false
                 })
                
             })
@@ -110,8 +114,15 @@ const AdminEntries = () => {
                 <img src={menu} alt="" id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
             </div>
             <div className="dashboard">
+
                 <AdminNav />
                 <div className="container dashboard-contents">
+                {state.loading ? <SkeletonTheme color=" #5ABEFD" highlightColor="rgb(184, 164, 164)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
+                    <>
                     <div className="dashboard-heading">
                         <h1>Entries -
                         <select class="browser-default custom-select batch-select" onChange={handleChange}>
@@ -139,14 +150,18 @@ const AdminEntries = () => {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <>{itemsToRender}</>
+                        <tbody className="table-body">
+
+
+                            <>{itemsToRender}</> 
+                            
                         </tbody>
                     </table>
-                
-                </div>
+                </>
+                }</div>
             </div>
         </div>
+          
     )
 }
 

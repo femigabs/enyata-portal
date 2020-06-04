@@ -4,6 +4,8 @@ import AdminNav from '../../components/adminNav/AdminNav';
 import Sign from '../../Assets/Icons/createapp-icon.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 
@@ -14,7 +16,8 @@ const CreateApplication = () => {
     const [states, setStates] = useState({
         items: [],
         successMessage:"",
-        errorMessage: ''
+        errorMessage: '',
+        loading:false
       })
       setTimeout(() => {
         setStates({ errorMessage: "" })
@@ -36,10 +39,18 @@ const CreateApplication = () => {
             })
             .catch(err => {
                 console.log(err.response.data.message)
-                setStates({errorMessage: err.response.data.message});
+                setStates({
+                    errorMessage: err.response.data.message,
+                    loading:false
+                });
 
             })
+        setStates({
+            loading:true
+        })
     };
+    console.log(states)
+
 
     const uploadFile = async (e) => {
         const files = e.target.files[0];
@@ -143,6 +154,13 @@ const CreateApplication = () => {
                             />
                         </div>
                         <div className="col-md-4 col-md-offset-4">
+                            {states.loading && <Loader
+                                    type="ThreeDots"
+                                    color="#00BFFF"
+                                    height={30}
+                                    width={100}
+                                    timeout={10000}
+                            />}
                                 {states.errorMessage &&
                                 <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
                                  {states.successMessage&&
