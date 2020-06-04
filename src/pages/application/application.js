@@ -8,9 +8,6 @@ import Plus from '../../Assets/Icons/createapp-icon.png';
 import moment from 'moment';
 import Cookies from "js-cookie";
 
-
-
-
 const Application = (props) => {
 
     const history = useHistory()
@@ -20,18 +17,24 @@ const Application = (props) => {
     const batch_id = params.get("id");
 
     const [image, setImage] = useState({ data: [] });
-
+    const [states, setStates] = useState({
+        items: [],
+        errorMessage: '',
+        message:""
+      })
+      setTimeout(() => {
+        setStates({ errorMessage: "" })
+      }, 10000);
     const d = new Date()
     const date = moment(d).format("YYYY/MM/DD")
 
-    const { register, handleSubmit, errors } = useForm({
+    const { register, handleSubmit, errors, watch } = useForm({
         defaultValues: {
             created_at: date,
             closure_date: batch_id.slice(2),
             batch_id: batch_id.slice(0, 1)
         }
     });
-
     const onSubmit = (state) => {
         console.log(state)
         axios.post("/api/v1/application", state, {
@@ -42,16 +45,17 @@ const Application = (props) => {
         })
             .then(response => {
                 console.log(response)
+                setStates({message:response.data.message})
                 history.push("/dashboard")
             })
             .catch(err => {
-                console.log(err.response)
-                if (err.response.data.message == "Authorization Failed") {
-                    history.push("/signup")
+                if(err.response.data.message== "Authorization Failed"){
+                    setStates({errorMessage:"Login in "})
+                }else{
+                    setStates({errorMessage:err.response.data.message})
                 }
             })
     };
-
     const uploadFile = async (e) => {
         const files = e.target.files[0];
         console.log(e.target.files[0])
@@ -79,11 +83,9 @@ const Application = (props) => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="row">
                                 <div className="col-md-4 col-md-offset-4 cv">
-                                    <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} ref={register({
-                                            required: "Please Upload CV"
-                                        })} />
+                                    <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
                                     <label htmlFor="file"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
-                                    <p>{errors.pick_file && errors.pick_file.message}</p>
+                                    <p>{errors.cv_url && errors.cv_url.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>First Name</label>
@@ -220,7 +222,10 @@ const Application = (props) => {
                                         type="text"
                                         name="cv_url"
                                         value={image.data}
-                                        ref={register()}
+                                        ref={register({
+                                            // required: "Please Upload CV",
+                                            // validate: (value) => value === watch('file_url') || "Upload CV"
+                                        })}
                                     />
                                 </div>
                                 <div className="form-group col-md-6" style={{ display: "none" }}>
@@ -242,6 +247,10 @@ const Application = (props) => {
                                     />
                                 </div>
                                 <div className="col-md-6 col-md-offset-3">
+                                {states.errorMessage &&
+                                <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                {states.Message &&
+                                <h5 className="success" style={{ color: "Green" }}> {states.rMessage} </h5>}
                                     <button type="submit" className="btn btn-primary btn-block">Submit</button>
                                 </div>
                             </div>

@@ -10,7 +10,6 @@
 }
 .finish-button button {
     width: 205px;
-    background-color: #B1B1B1;
     color: #ffffff;
 }
 .quiz p {
@@ -23,6 +22,18 @@
     font-size: 30px;
     font-weight: 400;
 }
-/* .body {
-    width: 406px;
-} */
+.questions {
+    display: flex;
+    margin-left: 40%;
+    margin-bottom: 16px;
+    padding: 2px;
+
+}
+.questions label {    
+    margin-left: 30px;
+    padding: 0px 35px 0px 8px;
+}
+.questions label:hover {
+    background-color: greenyellow;
+    cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ComposeAssessment.css';
+ import './ComposeAssessment.css';
 import { useForm } from "react-hook-form";
 import AdminNav from '../../components/adminNav/AdminNav';
 import menu from '../../Assets/Icons/menu.svg';
@@ -76,7 +76,7 @@ const ComposeAssessment = () => {
         console.log(questions)
         console.log(state)
 
-        if (currentQuestion == questions.length) {
+        if (currentQuestion == questions.length ) {
             if (state.question && state.option_a && state.option_b && state.option_answer) {
                 updateQuestions([...questions, state])
 
@@ -371,7 +371,7 @@ const ComposeAssessment = () => {
                                     <button disabled={questionStep.nextDisabled || questionStep.currentQuestion == 29} onClick={handleNext} className="btn btn-primary">Next</button>
                                 </div>
                                 <div className="col-md-12 finish-button">
-                                    <button onClick={handleSubmit} type="submit" className="btn btn-default">Finish</button>
+                                    <button onClick={handleSubmit} type="submit" className="btn btn-success">Finish</button>
                                 </div>
                             </div>
                         </div>

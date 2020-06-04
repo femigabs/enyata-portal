@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SideNav.css';
 import dashboard from '../../Assets/Icons/dashboard-icon.png';
 import assessment from '../../Assets/Icons/assessment-icon.png';
@@ -6,6 +6,8 @@ import profile from '../../Assets/Images/profile-pics2.png';
 import logout from '../../Assets/Icons/logout-icon.png';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
+import Cookies from "js-cookie"
+import Skeleton from 'react-loading-skeleton';
 
 const SideNav = () => {
 
@@ -28,6 +30,23 @@ const SideNav = () => {
         };
     };
 
+    const [state, setState] = useState({ data: [] });
+    useEffect(() => {
+        axios.get("/api/v1/details", {
+            "headers": {
+                "Content-Type": "application/json",
+                "token": Cookies.get("token")
+            }
+        })
+            .then(response => {
+                setState({
+                    data: response.data
+                })
+            })
+            .catch((err) => {
+                console.log("Error:", err.message);
+            });
+    }, []);
     return (
         <div id="sidenav" className="sidenav hidden-xs">
             <div className="user-profile">
@@ -37,8 +56,8 @@ const SideNav = () => {
                     {/* <label htmlFor="file">Choose a files</label>
                     {loading ? "loading..." : <img src={image} alt="" />} */}
                 </div>
-                <h3>John doe</h3>
-                <p>joe@enyata.com</p>
+        <h3>{state.data.first_name} {state.data.last_name}</h3>
+                <p>{state.data.email}</p>
             </div>
             <div className="sidenav-text">
                 <div className="sidenav-links">
@@ -77,6 +96,7 @@ const SideNav = () => {
                 </div>
                 <div className="sidenav-logout">
                     <NavLink
+                         onClick={()=> Cookies.remove('token')}
                         className="nav-link"
                         style={{textDecoration: "none"}}
                         activeStyle={{
@@ -86,7 +106,7 @@ const SideNav = () => {
                             paddingLeft: "36px",
                             textDecoration: "none"
                         }}
-                        exact to="/">
+                        exact to="/login">
                         <img className="img" src={logout} alt="logout" />
                         Log Out
                     </NavLink>

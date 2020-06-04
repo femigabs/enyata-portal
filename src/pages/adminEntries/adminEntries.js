@@ -22,13 +22,13 @@ const AdminEntries = () => {
     })
 
     const [value, setValue] = useState({
-        value: 1
+        value:1
     });
 
     const handleChange = (e) => {
-        setValue({ value: e.target.value })
-    }
-
+                setValue({ value : e.target.value})
+            }
+    
     const [sorting, setSorting] = useState(null)
     const [sortState, setSortState] = useState({
         currentSort: "default"
@@ -74,22 +74,22 @@ const AdminEntries = () => {
         fetch(url, {
             method: "GET",
             headers: {
-                "Content-Type": "application/json",
-                "token": Cookies.get("token")
+              "Content-Type": "application/json",
+              "token": Cookies.get("token")
             },
             mode: "cors",
-        })
+          })
             .then((response) => response.json())
             .then((json) => {
                 setState({
-                    data: json.data
+                    data:json.data
                 })
-
+               
             })
             .catch((err) => {
-                console.log("Error:", err.message);
+              console.log("Error:", err.message);
             });
-    }, [value.value]);
+      },[value.value]);
     let itemsToRender;
     if (state.data) {
         itemsToRender = state.data.sort(sortTypes[currentSort].fn).map((items, index) => {
@@ -143,7 +143,7 @@ const AdminEntries = () => {
                             <>{itemsToRender}</>
                         </tbody>
                     </table>
-
+                
                 </div>
             </div>
         </div>

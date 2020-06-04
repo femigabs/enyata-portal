@@ -4,23 +4,27 @@ import UserLogo from '../../components/userLogo/UserLogo';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye} from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from 'react-router-dom';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 import Cookies from "js-cookie"
 
+
 const eye = <FontAwesomeIcon icon={faEye} />;
-
 const Signup = () => {
-
     const [passwordShown, setPasswordShown] = useState(false);
 
-
+    const [states, setStates] = useState({
+        items: [],
+        errorMessage: '',
+        loading: false
+      })
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
     };
 
     const history = useHistory()
-
     const onSubmit = (state) => {
         console.log(state)
 
@@ -32,6 +36,13 @@ const Signup = () => {
             })
             .catch(err => {
                 console.log(err.response)
+                setStates({
+                    errorMessage: err.response.data.message,
+                    loading:false
+                })
+            })
+            setStates({
+                loading: true
             })
     };
 
@@ -141,6 +152,16 @@ const Signup = () => {
                                 <p>{errors.password_confirmation && errors.password_confirmation.message}</p>
                             </div>
                             <div className="col-md-6 col-md-offset-3">
+                                {states.loading && <Loader
+                                    type="ThreeDots"
+                                    color="#00BFFF"
+                                    height={100}
+                                    width={100}
+                                    timeout={10000}
+                                />}
+                                {states.errorMessage &&
+                                    <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>
+                                }
                                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                                 <span>Already have an account? <Link to='/login' className="link">Sign in</Link></span>
                             </div>
