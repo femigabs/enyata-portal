@@ -7,6 +7,7 @@
     height: 255px;
     padding-top: 75px;
     background: #2B3C4E;
+    color: rgb(145, 155, 167);
 }
 .user-profile h3 {
     font-size: 20px;
@@ -44,8 +45,6 @@
     width: 100%;
     height: 100%;
     border-radius: 50px;
-    margin-top: -109px;
-    
 }
 .sidenav-text {
     margin-top: 42px;

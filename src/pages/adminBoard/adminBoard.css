@@ -38,6 +38,7 @@
 }
 .application-curr h2 {
     border-bottom: 4px solid #006DF0;
+    color: rgb(184, 164, 164)
 }
 .application-total h2 {
     border-bottom: 4px solid #00F026;
@@ -89,4 +90,13 @@ td {
 }
 .create-assessment button {
     background-color: #B1B1B1;
+}
+.application-curr h2 {
+    border-bottom: 4px solid #006DF0;
+}
+.application-total h2 {
+    border-bottom: 4px solid #00F026;
+}
+.academy h2 {
+    border-bottom: 4px solid #F09000;
 }

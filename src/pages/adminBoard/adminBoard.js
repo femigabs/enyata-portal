@@ -4,9 +4,9 @@ import AdminNav from '../../components/adminNav/AdminNav';
 import Cookies from "js-cookie";
 import menud from '../../Assets/Icons/menu.svg';
 import axios from "axios";
-import { useHistory } from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 import Moment from 'react-moment';
-
+import Skeleton , { SkeletonTheme } from "react-loading-skeleton";
 const AdminBoard = () => {
 
     const history = useHistory()
@@ -21,7 +21,10 @@ const AdminBoard = () => {
         })
     })
 
-    const [state, setState] = useState({ data: [] });
+    const [state, setState] = useState({ 
+        data: [],
+        loading:true
+    });
     useEffect(() => {
         axios.get("/api/v1/getTotal", {
             "headers": {
@@ -31,14 +34,17 @@ const AdminBoard = () => {
         })
             .then(response => {
                 setState({
-                    data: response.data
+                    data: response.data,
+                    loading:false
                 })
             })
             .catch((err) => {
-                console.log("Error:", err.message);
+                console.log(err.response);
+                if(err.response.data.message=="Authorization Failed"){
+                    history.push("/admin")
+                }
             });
     }, []);
-    console.log(state.data)
 
     const [academy, setAcademy] = useState({ data: [] });
     useEffect(() => {
@@ -50,14 +56,13 @@ const AdminBoard = () => {
         })
             .then(response => {
                 setAcademy({
-                    data: response.data
+                    data: response.data.rows[0].count
                 })
             })
             .catch((err) => {
-                console.log("Error:", err.message);
+                console.log("Error:", err.response);
             });
     }, []);
-    console.log(academy.data)
 
     const [total, setTotal] = useState({ data: [] });
     useEffect(() => {
@@ -69,27 +74,36 @@ const AdminBoard = () => {
         })
             .then(response => {
                 setTotal({
-                    data: response.data
+                    data: response.data.rows
                 })
             })
             .catch((err) => {
                 console.log("Error:", err.message);
             });
     }, []);
-    console.log(total.data)
+    let histories
+    if (total.data){
+        histories = total.data.map((items)=>{
+            return(
+                <tr className="table-row">
+                <td>academy {items.batch_id}</td>
+                <td>students {items.students}</td>
+                <td>started  <Moment format="DD/MM/YY">{items.started}</Moment></td>
+            </tr>
+            )
+        })
+    }
 
-    const [update, setUpdate] = useState({ updates: [] });
+    const [currentAcademy, setCurrentAcademy] = useState();
     useEffect(() => {
-        axios.get("/api/v1/getUpdate", {
+        axios.get("/api/v1/getCurrentAcademy", {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
             }
         })
             .then(response => {
-                setUpdate({
-                    updates: response.data
-                })
+                setCurrentAcademy(response.data)
             })
             .catch((err) => {
                 console.log("Error:", err.message);
@@ -111,6 +125,12 @@ const AdminBoard = () => {
             <div className="dash">
                 <AdminNav />
                 <div className="container dash-contents">
+                    {state.loading ? <SkeletonTheme color=" #5ABEFD" highlightColor="rgb(184, 164, 164)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
+                    <>
                     <div className="dash-heading">
                         <h1>Dashboard</h1>
                     </div>
@@ -118,7 +138,7 @@ const AdminBoard = () => {
                         <div className="col-md-3 application-curr">
                             <h5>Current Applications</h5>
                             <h2>{state.data.currentApplication}</h2>
-                            <p>Academy 2.0</p>
+                            <p>Academy {currentAcademy}</p>
                         </div>
                         <div className="col-md-3 application-total">
                             <h5>Total Application</h5>
@@ -127,7 +147,7 @@ const AdminBoard = () => {
                         </div>
                         <div className="col-md-3 academy">
                             <h5>Academy's</h5>
-                            <h2>{academy.data.count}4</h2>
+                            <h2>{academy.data}</h2>
                             <p>so far</p>
                         </div>
                     </div>
@@ -140,21 +160,7 @@ const AdminBoard = () => {
                                     <table
                                         className="table table-body table-sm"
                                         width="100%">
-                                        <tr className="table-row">
-                                            <td>academy 1</td>
-                                            <td>academy 2</td>
-                                            <td>academy 3</td>
-                                        </tr>
-                                        <tr className="table-row">
-                                            <td>academy 1</td>
-                                            <td>academy 2</td>
-                                            <td>academy 3</td>
-                                        </tr>
-                                        <tr className="table-row">
-                                            <td>academy 1</td>
-                                            <td>academy 2</td>
-                                            <td>academy 3</td>
-                                        </tr>
+                                        {histories}
                                     </table>
                                 </div>
                             </div>
@@ -169,7 +175,8 @@ const AdminBoard = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </>
+            }</div>
             </div>
         </div>
     )

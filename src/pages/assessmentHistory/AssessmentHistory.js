@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Plus from "../../Assets/Icons/createapp-icon.png";
 import Moment from 'react-moment';
+import Skeleton , { SkeletonTheme } from "react-loading-skeleton";
 
 const AssessmentHistory = () => {
 
@@ -236,7 +237,9 @@ const AssessmentHistory = () => {
 
 
     const url = `/api/v1/getHistory`
-    const [history, getHistory] = useState({ data: [] });
+    const [history, getHistory] = useState({ 
+        data: [],
+        loading: true });
     useEffect(() => {
         fetch(url, {
             method: "GET",
@@ -249,7 +252,8 @@ const AssessmentHistory = () => {
             .then((response) => response.json())
             .then((json) => {
                 getHistory({
-                    data: json.rows
+                    data: json.rows,
+                    loading: false
                 })
             })
             .catch((err) => {
@@ -277,6 +281,12 @@ const AssessmentHistory = () => {
             <div className="dashboard">
                 <AdminNav />
                 <div className="container dashboard-contents">
+                {history.loading ? <SkeletonTheme color=" #5ABEFD" highlightColor="rgb(184, 164, 164)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
+                    <>
                     <div className="dashboard-heading">
                         <h1>Assessment History</h1>
                     </div>
@@ -431,7 +441,8 @@ const AssessmentHistory = () => {
                             </form>
                         </div>
                     </div>
-                </div>
+                    </>
+                }</div>
             </div>
         </div>
     )

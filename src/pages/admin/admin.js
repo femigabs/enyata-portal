@@ -9,18 +9,27 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from 'react-router-dom';
 import comp from '../../Assets/Images/computer-img.png';
 import Cookies from "js-cookie";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const Admin = () => {
 
-    const history = useHistory()
     const [passwordShown, setPasswordShown] = useState(false);
 
+    const [states, setStates] = useState({
+        items: [],
+        errorMessage: '',
+        loading:false
+      })
+      setTimeout(() => {
+        setStates({ errorMessage: "" })
+      }, 10000);
     const togglePasswordVisibility = () => {
         setPasswordShown(passwordShown ? false : true);
     };
-
+    const history = useHistory()
     const onSubmit = (state) => {
         console.log(state)
         axios.post("/api/v1/admin/login", state)
@@ -30,10 +39,16 @@ const Admin = () => {
                 history.push("/adminboard")
             })
             .catch(err => {
-                console.log(err.response)
+               setStates({
+                   errorMessage: err.response.data.message,
+                   loading: false
+            });
+            })
+            setStates({
+                loading: true
             })
     };
-
+  
     const { register, handleSubmit, errors } = useForm();
 
     return (
@@ -81,6 +96,15 @@ const Admin = () => {
                                     <i className="eye-icon" onClick={togglePasswordVisibility}>{eye}</i>
                                     <p>{errors.password && errors.password.message}</p>
                                 </div>
+                                    {states.loading && <Loader
+                                    type="ThreeDots"
+                                    color="#00BFFF"
+                                    height={100}
+                                    width={100}
+                                    timeout={10000}
+                                    />}
+                                    {states.errorMessage &&
+                                    <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
                                 <div className="col-md-12">
                                     <button type="submit" className="btn btn-primary btn-block">Sign In</button>
                                     <div className="admin-text">

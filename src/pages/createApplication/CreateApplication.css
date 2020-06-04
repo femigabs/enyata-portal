@@ -1,6 +1,11 @@
 .createapp {
     display: flex
 }
+.createform p {
+    display: block;
+    text-align: left;
+    color: red;
+}
 .create-contents label {
     display: block;
     text-align: left;

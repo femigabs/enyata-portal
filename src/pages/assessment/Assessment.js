@@ -6,12 +6,19 @@ import hourglass from '../../Assets/Images/hourglass (1).png';
 import Cookies from "js-cookie";
 import axios from "axios";
 import Moment from 'react-moment';
-import Countdown, { zeroPad } from 'react-countdown';
+import Countdown, {zeroPad } from 'react-countdown';
 import { useHistory } from 'react-router-dom';
+import Skeleton, {SkeletonTheme}  from 'react-loading-skeleton';
 
 const Assessment = () => {
 
     const history = useHistory()
+
+    const [disable, setDisable] = useState( {
+        disable: false,
+        errorMessage: '',
+        loading:"true"
+        })
 
     const renderer = ({ minutes, seconds }) => {
         return <div>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></div>
@@ -31,6 +38,29 @@ const Assessment = () => {
             history.push("/quiz");
         }
 
+        useEffect(() => {
+            axios.get("/api/v1/getQuestion",{
+                "headers": {
+                    "Content-Type": "application/json",
+                    "token": Cookies.get("token")
+                }
+            })
+                .then(response => {
+                    console.log(response)
+                    setDisable({
+                        loading:false
+                    })
+                })
+                .catch(err => {
+                    console.log(err.response.data.message)
+                    setDisable({
+                        disable:true,
+                        errorMessage:err.response.data.message,
+                        loading: false
+                    })
+                })
+        }, []);
+
         return (
             <div>
                 <div className="menu">
@@ -39,6 +69,12 @@ const Assessment = () => {
                 <div className="assessment">
                     <SideNav />
                     <div className="container assessment-contents">
+                    {disable.loading? <SkeletonTheme color="#2B3C4E" highlightColor="rgb(145, 155, 167)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
+                    <>
                         <div className="assessment-heading">
                             <div className="ass">
                                 <h1>Take Assessment</h1>
@@ -58,11 +94,13 @@ const Assessment = () => {
                             <div className="card-body take-ass">
                                 <img src={hourglass} />
                                 <p>We have 4 days left until the next assessment <br />Watch this space</p>
-                                <button onClick={handleSubmit} className="btn btn-default">Take Assessment</button>
+                                <button onClick={handleSubmit} disabled={disable.disable}className="btn btn-default">Take Assessment</button>
+                                {disable.errorMessage && 
+                                <h5 className="error" style={{ color: "Red" }}> {disable.errorMessage}</h5>}
                             </div>
                         </div>
-
-                    </div>
+                    </>
+                } </div> 
                 </div>
             </div>
         )

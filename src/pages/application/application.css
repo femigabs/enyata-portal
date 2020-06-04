@@ -17,6 +17,10 @@
     font-weight: normal;
     font-size: 14px;
 }
+.application p {
+    text-align: left;
+    color: red;
+}
 .form-body {
     padding: 53px 70px 40px 70px;
     border-radius: 8px;
@@ -27,12 +31,16 @@
     border-radius: 3px;
     height: 50px;
     margin-bottom: 50px;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
 }
 .cv label {
     cursor: pointer;
+    padding-top: 12px;
+}
+.cv p {
+    margin-top: -9px;
 }
 .cv img {
     padding-right: 15px;
