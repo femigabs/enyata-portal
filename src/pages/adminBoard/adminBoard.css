@@ -26,19 +26,23 @@
     font-weight: 300;
     font-size: 48px;
     padding-bottom: 20px;
-    border-bottom: 4px solid #006DF0;
     border-radius: 4px;
     width: 130px;
 }
 .application-info h5 {
     font-size: 14px;
     font-weight: normal;
-    
 }
 .application-info p {
     font-size: 12px;;
 }
+.application-curr h2 {
+    border-bottom: 4px solid #006DF0;
+}
 .application-total h2 {
+    border-bottom: 4px solid #00F026;
+}
+.academy h2 {
     border-bottom: 4px solid #F09000;
 }
 .dash-info {
@@ -51,31 +55,35 @@
 }
 .history {
     padding: 25px 35px 100px 35px;
-    border: 1px solid #ECECF9;
-    border-radius: 4px;
 }
-.history h5 {
-    margin-bottom: 13px;
-    
+.history {
+    text-align: left;
 }
-.history-info {
-    margin-top: 75px;
-    border-bottom: 1px solid #CECECE;
+.history p {
+    font-family: Nunito Sans;
+    font-weight: normal;
+    font-size: 12px;
+    margin-bottom: 32px;
+    text-align: left;
 }
-.history-info a {
-    color: blue;
-    text-decoration: none;
+.table-row:hover {
+    box-shadow: 8px 18px 20px rgba(79, 79, 79, 0.3);
+    border-radius: 8px;
+    border-left: 7px solid #5ABEFD;
+    border-radius: 8px;
 }
-.take-assessment {
+td {
+    padding: 20px 30px;
+}
+.create-assessment {
     padding: 25px 35px 100px 35px;
     border: 1px solid #ECECF9;
     border-radius: 4px;
 }
-.take-assessment p {
-    margin-top: 140px;
+.create-assessment p {
+    margin-top: 70px;
     margin-bottom: 25px;
 }
-.take-assessment button {
+.create-assessment button {
     background-color: #B1B1B1;
 }
-

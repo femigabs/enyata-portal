@@ -4,9 +4,13 @@ import AdminNav from '../../components/adminNav/AdminNav';
 import Cookies from "js-cookie";
 import menud from '../../Assets/Icons/menu.svg';
 import axios from "axios";
+import { useHistory } from 'react-router-dom'
 import Moment from 'react-moment';
 
 const AdminBoard = () => {
+
+    const history = useHistory()
+
     useEffect(() => {
         let hamburger = document.getElementById("img"),
             menuLinK = document.getElementById("adminnav")
@@ -94,6 +98,11 @@ const AdminBoard = () => {
 
     const day = <Moment format="DD.MM.YY">{state.data.Application_date}</Moment>
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        history.push("/composeassessment");
+    }
+
     return (
         <div>
             <div className="menud">
@@ -118,28 +127,34 @@ const AdminBoard = () => {
                         </div>
                         <div className="col-md-3 academy">
                             <h5>Academy's</h5>
-                            <h2>{academy.data.count}</h2>
+                            <h2>{academy.data.count}4</h2>
                             <p>so far</p>
                         </div>
                     </div>
                     <div className="row dash-info">
                         <div className="col-md-6">
                             <div className="history">
-                                <h5>History</h5>
+                                <h6>History</h6>
                                 <p>Last Update, {day} </p>
-                            </div>
-                            <div className="card history">
-                                <div className="card-body">
+                                <div className="history-info">
                                     <table
-                                        id="dtVerticalScrollExample"
-                                        className="table table-striped table-bordered table-sm"
-                                        cellspacing="0"
+                                        className="table table-body table-sm"
                                         width="100%">
-                                            <tr>
-                                                <td>academy 1</td>
-                                                <td>academy 2</td>
-                                                <td>academy 3</td>
-                                            </tr>
+                                        <tr className="table-row">
+                                            <td>academy 1</td>
+                                            <td>academy 2</td>
+                                            <td>academy 3</td>
+                                        </tr>
+                                        <tr className="table-row">
+                                            <td>academy 1</td>
+                                            <td>academy 2</td>
+                                            <td>academy 3</td>
+                                        </tr>
+                                        <tr className="table-row">
+                                            <td>academy 1</td>
+                                            <td>academy 2</td>
+                                            <td>academy 3</td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -149,7 +164,7 @@ const AdminBoard = () => {
                                 <div className="card-body">
                                     <h6>Create Assessment</h6>
                                     <p>Create test question for an incoming academy <br />students</p>
-                                    <button className="btn btn-default">Create Assessment</button>
+                                    <button onClick={handleSubmit} className="btn btn-default">Create Assessment</button>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,43 @@
+.take-ass {
+    margin-top: 65px;
+}
+.quiz-button button {
+    margin-top: 85px;
+    margin-bottom: 75px;
+    width: 125px;
+    background-color: #2B3C4E;
+    color: #ffffff;
+}
+.finish-button button {
+    width: 205px;
+    background-color: #B1B1B1;
+    color: #ffffff;
+}
+.quiz p {
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+}
+.quiz h3 {
+    /* font-weight: 300;
+    font-size: 30px; */
+    font-weight: bold;
+}
+/* .body {
+    width: 406px;
+} */
+.quiz-form {
+    padding-bottom: 70px;
+}
+.questions {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    letter-spacing: -0.02em;  
+}
+.questions input {
+    margin-left: 470px;
+    
+}
+.questions label {
+    margin-right: 450px;
+} 

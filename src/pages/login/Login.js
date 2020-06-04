@@ -1,33 +1,36 @@
-import React, { useState } from 'react'
-import './Login.css'
-import UserLogo from '../../components/userLogo/UserLogo'
-import { useForm } from 'react-hook-form'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-import Cookies from 'js-cookie'
+import React, { useState } from 'react';
+import './Login.css';
+import UserLogo from '../../components/userLogo/UserLogo';
+import { useForm } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from "js-cookie"
 
 const eye = <FontAwesomeIcon icon={faEye} />
 
 const Login = () => {
-  const [passwordShown, setPasswordShown] = useState(false)
 
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [states, setStates] = useState({
+    items: [],
+    errorMessage: ''
+  })
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true)
   }
 
-  const onSubmit = state => {
-    console.log(state)
+  const history = useHistory()
 
-    axios
-      .post('/api/v1/login', state)
+  const onSubmit = (state) => {
+    axios.post("/api/v1/login", state)
       .then(response => {
-        console.log(response.data)
-        Cookies.set('token', response.data.token)
+        Cookies.set('token', response.data.token);
+        history.push("/dashboard")
       })
       .catch(err => {
-        console.log(err.response)
+        setStates({ errorMessage: err.response.data.message });
       })
   }
   const { register, handleSubmit, errors } = useForm()
@@ -76,20 +79,13 @@ const Login = () => {
               </i>
               <p>{errors.password && errors.password.message}</p>
             </div>
-            <div className='col-md-12'>
-              <button type='submit' className='btn btn-primary btn-block'>
-                Sign Up
-              </button>
-              <div className='login-text'>
-                <span>
-                  Don't have an account yet?{' '}
-                  <Link to='/signup' className='link'>
-                    Sign up
-                  </Link>
-                </span>
-                <span>
-                  <Link to='/'>Forgot password?</Link>
-                </span>
+            {states.errorMessage &&
+              <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
+            <div className="col-md-12">
+              <button type="submit" className="btn btn-primary btn-block">Sign In</button>
+              <div className="login-text">
+                <span>Don't have an account yet? <Link to='/signup' className="link">Sign up</Link></span>
+                <span><Link to='/' className="link">Forgot password?</Link></span>
               </div>
             </div>
           </div>

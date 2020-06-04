@@ -4,9 +4,14 @@ import SideNav from '../../components/sideNav/SideNav';
 import menu from '../../Assets/Icons/menu.svg';
 import Cookies from "js-cookie";
 import axios from "axios";
-import Moment from 'react-moment';
+import moment from 'moment';
+import { useHistory } from 'react-router-dom';
+
 
 const DashBoard = () => {
+
+    const history = useHistory()
+
     useEffect(() => {
         let hamburger = document.getElementById("img"),
             menuLink = document.getElementById("sidenav")
@@ -53,7 +58,14 @@ const DashBoard = () => {
             });
     }, []);
 
-    const day = <Moment format="DD.MM.YY">{state.data.Application_date}</Moment>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        history.push("/assessment");
+    }
+
+    const status = state.data.Application_status
+    const d = state.data.Application_date
+    const date = moment(d).format("DD.MM.YY")
 
     return (
         <div>
@@ -70,12 +82,12 @@ const DashBoard = () => {
                     <div className="row application-info">
                         <div className="col-md-3 application-date">
                             <h5>Date of Application</h5>
-                            <h2>{day}</h2>
+                            <h2>{date}</h2>
                             <p>4 days since applied</p>
                         </div>
                         <div className="col-md-3 application-status">
                             <h5>Application Status</h5>
-                            <h2>{state.data.Application_status}</h2>
+                            <h2>{status}</h2>
                             <p>we will get back to you</p>
                         </div>
                     </div>
@@ -96,7 +108,7 @@ const DashBoard = () => {
                                 <div className="card-body">
                                     <h6>Take Assessment</h6>
                                     <p>We have 4 days left until the next assessment <br />Watch this space</p>
-                                    <button className="btn btn-default">Take Assessment</button>
+                                    <button onClick={handleSubmit} className="btn btn-default">Take Assessment</button>
                                 </div>
                             </div>
                         </div>
