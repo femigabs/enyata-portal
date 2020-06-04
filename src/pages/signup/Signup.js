@@ -61,7 +61,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type="text"
-                                    placeholder="FirstName"
                                     name="first_name"
                                     ref={register({
                                         required: "First Name Required",
@@ -78,7 +77,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type="text"
-                                    placeholder="LastName"
                                     name="last_name"
                                     ref={register({
                                         required: "Last Name Required",
@@ -95,7 +93,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type="text"
-                                    placeholder="Email"
                                     name="email_address"
                                     ref={register({
                                         required: "Email Required",
@@ -111,11 +108,14 @@ const Signup = () => {
                                 <label>Phone Number</label>
                                 <input
                                     className="form-control"
-                                    type="number"
-                                    placeholder="Phone Number"
+                                    type="text"
                                     name="phone_number"
                                     ref={register({
-                                        required: "Phone Number Required"
+                                        required: "Phone Number Required",
+                                        pattern: {
+                                            value: /^\d{11}$/,
+                                            message: "Invalid Phone Number"
+                                        }
                                     })}
                                 />
                                 <p>{errors.phone_number && errors.phone_number.message}</p>
@@ -125,7 +125,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type={passwordShown ? "text" : "password"}
-                                    placeholder="Password"
                                     name="password"
                                     ref={register({
                                         required: "Password Required",
@@ -143,7 +142,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type={passwordShown ? "text" : "password"}
-                                    placeholder="Confirm Password"
                                     name="password_confirmation"
                                     ref={register({
                                         required: "Confirm Password",

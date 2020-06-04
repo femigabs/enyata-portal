@@ -23,10 +23,11 @@
     font-size: 14px;
 }
 .link {
-    color: black
+    color:#ffffff
 }
 .login-text Link {
     text-decoration: none;
+    
 }
 .eye-icon {
     float: right;
@@ -38,13 +39,13 @@
 i:hover {
     color: #00fcb6;
     cursor: pointer;
-  }
-  .login-text {
-      display: flex;
-      justify-content: space-between;
-  }
-  .login p {
-      display: block;
-      text-align: left;
-      color: red;
-  }
+}
+.login-text {
+    display: flex;
+    justify-content: space-between;
+}
+.login p {
+    display: block;
+    text-align: left;
+    color: red;
+}

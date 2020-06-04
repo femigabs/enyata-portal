@@ -19,7 +19,8 @@ const CreateApplication = () => {
       setTimeout(() => {
         setStates({ errorMessage: "" })
       }, 10000);
-    const { register, handleSubmit } = useForm();
+    
+    const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = (state) => {
         console.log(state)
@@ -78,23 +79,28 @@ const CreateApplication = () => {
                                 name="link_url"
                                 ref={
                                     register({
-                                        required: "LINK REQUIRED",
+                                        required: "Link Required",
                                     })
                                 }
                             />
+                            <p>{errors.link_url && errors.link_url.message}</p>
                         </div>
                         <div className="form-group col-md-6">
                             <label>Application closure date</label>
                             <input
                                 className="form-control input"
                                 type="text"
+                                placeholder="yyyy/mm/dd"
                                 name="closure_date"
-                                ref={
-                                    register({
-                                        required: "Date REQUIRED",
-                                    })
-                                }
+                                ref={register({
+                                    required: "Closure Date Required",
+                                    pattern: {
+                                        value:  /^\d{4}(\/)(((0)[0-9])|((1)[0-2]))(\/)([0-2][0-9]|(3)[0-1])$/i,
+                                        message: "Wrong Closure Date Format"
+                                    }
+                                })}
                             />
+                            <p>{errors.closure_date && errors.closure_date.message}</p>
                         </div>
                         <div className="form-group col-md-6">
                             <label>Batch ID</label>
@@ -102,12 +108,15 @@ const CreateApplication = () => {
                                 className="form-control input"
                                 type="text"
                                 name="batch_id"
-                                ref={
-                                    register({
-                                        required: "BATCH ID REQUIRED",
-                                    })
-                                }
+                                ref={register({
+                                    required: "Batch ID Required",
+                                    pattern: {
+                                        value:  /^\d/,
+                                        message: "Batch ID Must Be A Number "
+                                    }
+                                })}
                             />
+                            <p>{errors.batch_id && errors.batch_id.message}</p>
                         </div>
                         <div className="col-md-12">
                             <label>Instructions</label>
@@ -117,10 +126,11 @@ const CreateApplication = () => {
                                 name="instruction"
                                 ref={
                                     register({
-                                        required: "INSTRUCTIONS REQUIRED",
+                                        required: "Instructions Required",
                                     })
                                 }
                             />
+                            <p>{errors.instruction && errors.instruction.message}</p>
                         </div>
                         <div className="form-group col-md-6" style={{ display: "none" }}>
                             <label>file_url</label>

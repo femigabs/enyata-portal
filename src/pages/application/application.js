@@ -32,7 +32,7 @@ const Application = (props) => {
     const d = new Date()
     const date = moment(d).format("YYYY/MM/DD")
 
-    const { register, handleSubmit } = useForm({
+    const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             created_at: date,
             closure_date: batch_id.slice(2),
@@ -87,8 +87,11 @@ const Application = (props) => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="row">
                                 <div className="col-md-4 col-md-offset-4 cv">
-                                    <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
+                                    <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} ref={register({
+                                            required: "Please Upload CV"
+                                        })} />
                                     <label htmlFor="file"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
+                                    <p>{errors.pick_file && errors.pick_file.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>First Name</label>
@@ -96,13 +99,15 @@ const Application = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="first_name"
-                                        ref={
-                                            register({
-                                                required: "FIRSTNAME REQUIRED",
-                                                minLength: 3
-                                            })
-                                        }
+                                        ref={register({
+                                            required: "First Name Required",
+                                            minLength: {
+                                                value: 3,
+                                                message: "Too Short"
+                                            }
+                                        })}
                                     />
+                                    <p>{errors.first_name && errors.first_name.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Last Name</label>
@@ -110,13 +115,15 @@ const Application = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="last_name"
-                                        ref={
-                                            register({
-                                                required: "LASTNAME REQUIRED",
-                                                minLength: 3
-                                            })
-                                        }
+                                        ref={register({
+                                            required: "Last Name Required",
+                                            minLength: {
+                                                value: 3,
+                                                message: "Too Short"
+                                            }
+                                        })}
                                     />
+                                    <p>{errors.last_name && errors.last_name.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Email</label>
@@ -124,26 +131,32 @@ const Application = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="email"
-                                        ref={
-                                            register({
-                                                required: "EMAIL REQUIRED"
-                                            })
-                                        }
+                                        ref={register({
+                                            required: "Email Required",
+                                            pattern: {
+                                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                                message: "Invalid Email Address"
+                                            }
+                                        })}
                                     />
+                                     <p>{errors.email && errors.email.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Date of Birth</label>
                                     <input
                                         className="form-control"
                                         type="text"
-                                        placeholder="dd/mm/yyyy"
+                                        placeholder="yyyy/mm/dd"
                                         name="date_of_birth"
-                                        ref={
-                                            register({
-                                                required: "DATE OF BIRTH REQUIRED"
-                                            })
-                                        }
+                                        ref={register({
+                                            required: "Date of Birth Required",
+                                            pattern: {
+                                                value:  /^\d{4}(\/)(((0)[0-9])|((1)[0-2]))(\/)([0-2][0-9]|(3)[0-1])$/i,
+                                                message: "Wrong Date of Birth Format"
+                                            }
+                                        })}
                                     />
+                                     <p>{errors.date_of_birth && errors.date_of_birth.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Address</label>
@@ -153,10 +166,10 @@ const Application = (props) => {
                                         name="address"
                                         ref={
                                             register({
-                                                required: "ADDRESS REQUIRED"
-                                            })
-                                        }
+                                                required: "Address Required"
+                                            })}
                                     />
+                                    <p>{errors.address && errors.address.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>University</label>
@@ -166,10 +179,10 @@ const Application = (props) => {
                                         name="university"
                                         ref={
                                             register({
-                                                required: "UNIVERSITY REQUIRED"
-                                            })
-                                        }
+                                                required: "University Required"
+                                            })}
                                     />
+                                    <p>{errors.university && errors.university.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Course of Study</label>
@@ -179,23 +192,25 @@ const Application = (props) => {
                                         name="course_of_study"
                                         ref={
                                             register({
-                                                required: "COURSE OF STUDY REQUIRED"
-                                            })
-                                        }
+                                                required: "Course Of Study Reqruired"
+                                            })}
                                     />
+                                     <p>{errors.course_of_study && errors.course_of_study.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>CGPA</label>
                                     <input
                                         className="form-control"
                                         type="text"
-                                        name="cgpa"
-                                        ref={
-                                            register({
-                                                required: "CGPA REQUIRED",
-                                            })
-                                        }
+                                        name="cgpa"                                        ref={register({
+                                            required: "CGPA Required",
+                                            pattern: {
+                                                value: /\b[1-5]\b/,
+                                                message: "CGPA Must Be A Number Type Not Exceed 5"
+                                            }
+                                        })}
                                     />
+                                    <p>{errors.cgpa && errors.cgpa.message}</p>
                                 </div>
                                 <div className="form-group col-md-6" style={{ display: "none" }}>
                                     <label>Created Date</label>
