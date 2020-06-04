@@ -99,7 +99,7 @@ const Admin = () => {
                                     {states.loading && <Loader
                                     type="ThreeDots"
                                     color="#00BFFF"
-                                    height={100}
+                                    height={20}
                                     width={100}
                                     timeout={10000}
                                     />}

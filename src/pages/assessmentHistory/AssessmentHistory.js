@@ -263,7 +263,7 @@ const AssessmentHistory = () => {
                 <td>{items.batch_id}</td>
                 <td><Moment format="DD/MM/YY">{items.date_composed}</Moment></td>
                 <td>{items.number_of_question}</td>
-                <td>{items.time_allocated}</td>
+                <td>{items.time_allocated} min</td>
                 <td>{items.status}</td>
             </tr>
         })

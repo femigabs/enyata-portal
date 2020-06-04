@@ -66,9 +66,7 @@
     margin-bottom: 32px;
     text-align: left;
 }
-.history-info {
-    margin-top: 75px;
-}
+
 .table-row:hover {
     box-shadow: 8px 18px 20px rgba(79, 79, 79, 0.3);
     border-radius: 8px;

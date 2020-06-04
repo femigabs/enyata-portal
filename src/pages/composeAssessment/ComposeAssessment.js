@@ -5,6 +5,8 @@ import AdminNav from '../../components/adminNav/AdminNav';
 import menu from '../../Assets/Icons/menu.svg';
 import Plus from '../../Assets/Icons/createapp-icon.png';
 import Cookies from "js-cookie";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import Moment from 'react-moment';
@@ -35,6 +37,16 @@ const ComposeAssessment = () => {
         time_min: "00",
         time_sec: "00"
     })
+    const [states, setStates] = useState({
+        items: [],
+        successMessage:"",
+        errorMessage: '',
+        loading:false
+      })
+      setTimeout(() => {
+        setStates({ errorMessage: "" })
+      }, 10000);
+    
 
     const handleTime = (e) => {
         e.preventDefault()
@@ -208,9 +220,9 @@ const ComposeAssessment = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let number_of_question = questions.length;
-        let time_allocated = (parseInt(time.time_min) + (parseInt(time.time_sec) / 60 )).toFixed(2);
+        let time_allocated = time.time_min
         let assRequest = { time_allocated, number_of_question };
-
+        console.log(assRequest)
         axios.post("/api/v1/assessment", questions, {
             "headers": {
                 "Content-Type": "application/json",
@@ -219,9 +231,17 @@ const ComposeAssessment = () => {
         })
             .then(response => {
                 console.log(response.data)
+                setStates({
+                    successMessage:response.data.message,
+                    loading: false
+                })
             })
             .catch(err => {
                 console.log(err.response.data)
+                setStates({
+                    errorMessage:err.response.data.message,
+                    loading: false
+                })
             })
 
         axios.post("/api/v1/assessmentHistory", assRequest, {
@@ -236,6 +256,9 @@ const ComposeAssessment = () => {
             .catch(err => {
                 console.log(err.response.data)
             })
+        setStates({
+            loading:true
+        })
     }
 
     return (
@@ -370,6 +393,17 @@ const ComposeAssessment = () => {
                                 <div className="col-md-6 quiz-button">
                                     <button disabled={questionStep.nextDisabled || questionStep.currentQuestion == 29} onClick={handleNext} className="btn btn-primary">Next</button>
                                 </div>
+                                {states.loading && <Loader
+                                    type="ThreeDots"
+                                    color="#00BFFF"
+                                    height={30}
+                                    width={100}
+                                    timeout={10000}
+                            />}
+                                {states.errorMessage &&
+                                <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                 {states.successMessage&&
+                                <h5 className="success" style={{ color: "Green" }}> {states.successMessage} </h5>}
                                 <div className="col-md-12 finish-button">
                                     <button onClick={handleSubmit} type="submit" className="btn btn-default">Finish</button>
                                 </div>

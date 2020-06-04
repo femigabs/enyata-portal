@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Plus from '../../Assets/Icons/createapp-icon.png';
 import moment from 'moment';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 import Cookies from "js-cookie";
 
 
@@ -24,7 +26,8 @@ const Application = (props) => {
     const [states, setStates] = useState({
         items: [],
         errorMessage: '',
-        message:""
+        message:"",
+        loading: false
       })
       setTimeout(() => {
         setStates({ errorMessage: "" })
@@ -54,11 +57,20 @@ const Application = (props) => {
             })
             .catch(err => {
                 if(err.response.data.message== "Authorization Failed"){
-                    setStates({errorMessage:"Login in "})
+                    setStates({
+                        errorMessage:"Login in ",
+                        loading: false
+                })
                 }else{
-                    setStates({errorMessage:err.response.data.message})
+                    setStates({
+                        errorMessage:err.response.data.message,
+                        loading: false
+                    })
                 }
             })
+        setStates({
+            loading: true
+        })
     };
     const uploadFile = async (e) => {
         const files = e.target.files[0];
@@ -87,9 +99,7 @@ const Application = (props) => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="row">
                                 <div className="col-md-4 col-md-offset-4 cv">
-                                    <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} ref={register({
-                                            required: "Please Upload CV"
-                                        })} />
+                                    <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
                                     <label htmlFor="file"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
                                     <p>{errors.pick_file && errors.pick_file.message}</p>
                                 </div>
@@ -250,10 +260,17 @@ const Application = (props) => {
                                     />
                                 </div>
                                 <div className="col-md-6 col-md-offset-3">
-                                {states.errorMessage &&
-                                <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
-                                {states.Message &&
-                                <h5 className="success" style={{ color: "Green" }}> {states.rMessage} </h5>}
+                                    {states.loading && <Loader
+                                        type="ThreeDots"
+                                        color="#00BFFF"
+                                        height={30}
+                                        width={100}
+                                        timeout={10000}
+                                    />}
+                                    {states.errorMessage &&
+                                    <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                    {states.Message &&
+                                    <h5 className="success" style={{ color: "Green" }}> {states.rMessage} </h5>}
                                     <button type="submit" className="btn btn-primary btn-block">Submit</button>
                                 </div>
                             </div>

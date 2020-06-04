@@ -11,13 +11,18 @@ const Count_down = () => {
     };
     const [answer,setAnswer] = useState([
         {
-            "question_id": "",
-            "user_answer": "",
+            "question_id": "1",
+            "user_answer": "a",
 
         },
         {
-            "question_id": "",
-            "user_answer": "",
+            "question_id": "2",
+            "user_answer": "b",
+
+        },
+        {
+            "question_id": "3",
+            "user_answer": "c",
 
         }
 
