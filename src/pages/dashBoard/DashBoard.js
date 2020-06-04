@@ -118,7 +118,7 @@ const DashBoard = () => {
                                 <div className="card-body">
                                     <h6>Assessment</h6>
                                     <p>We have 4 days left until the next assessment <br />Watch this space</p>
-                                    <button onClick={handleSubmit} className="btn btn-default">Take Assessment</button>
+                                    <button onClick={handleSubmit} className="btn btn-success">Take Assessment</button>
                                 </div>
                             </div>
                         </div>

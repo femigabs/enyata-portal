@@ -94,7 +94,7 @@ const Assessment = () => {
                             <div className="card-body take-ass">
                                 <img src={hourglass} />
                                 <p>We have 4 days left until the next assessment <br />Watch this space</p>
-                                <button onClick={handleSubmit} disabled={disable.disable}className="btn btn-default">Take Assessment</button>
+                                <button onClick={handleSubmit} disabled={disable.disable} className="btn btn-success">Take Assessment</button>
                                 {disable.errorMessage && 
                                 <h5 className="error" style={{ color: "Red" }}> {disable.errorMessage}</h5>}
                             </div>

@@ -10,10 +10,6 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import Cookies from "js-cookie";
 
-
-
-
-
 const Application = (props) => {
 
     const history = useHistory()
@@ -35,7 +31,7 @@ const Application = (props) => {
     const d = new Date()
     const date = moment(d).format("YYYY/MM/DD")
 
-    const { register, handleSubmit, errors } = useForm({
+    const { register, handleSubmit, errors, watch } = useForm({
         defaultValues: {
             created_at: date,
             closure_date: batch_id.slice(2),
@@ -101,7 +97,7 @@ const Application = (props) => {
                                 <div className="col-md-4 col-md-offset-4 cv">
                                 <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
                                     <label htmlFor="file"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
-                                    <p>{errors.pick_file && errors.pick_file.message}</p>
+                                    <p>{errors.cv_url && errors.cv_url.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>First Name</label>
@@ -238,7 +234,10 @@ const Application = (props) => {
                                         type="text"
                                         name="cv_url"
                                         value={image.data}
-                                        ref={register()}
+                                        ref={register({
+                                            // required: "Please Upload CV",
+                                            // validate: (value) => value === watch('file_url') || "Upload CV"
+                                        })}
                                     />
                                 </div>
                                 <div className="form-group col-md-6" style={{ display: "none" }}>

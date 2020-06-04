@@ -170,7 +170,7 @@ const AdminBoard = () => {
                                 <div className="card-body">
                                     <h6>Create Assessment</h6>
                                     <p>Create test question for an incoming academy <br />students</p>
-                                    <button onClick={handleSubmit} className="btn btn-default">Create Assessment</button>
+                                    <button onClick={handleSubmit} className="btn btn-success">Create Assessment</button>
                                 </div>
                             </div>
                         </div>

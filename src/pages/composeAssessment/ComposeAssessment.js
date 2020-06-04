@@ -405,7 +405,7 @@ const ComposeAssessment = () => {
                                  {states.successMessage&&
                                 <h5 className="success" style={{ color: "Green" }}> {states.successMessage} </h5>}
                                 <div className="col-md-12 finish-button">
-                                    <button onClick={handleSubmit} type="submit" className="btn btn-default">Finish</button>
+                                    <button onClick={handleSubmit} type="submit" className="btn btn-success">Finish</button>
                                 </div>
                             </div>
                         </div>

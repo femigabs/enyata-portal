@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Admin.css';
-import AdminLogo from '../../components/adminLogo/AdminLogo';
 import white from '../../Assets/Images/enyata-logo2.png'
+import AdminLogo from '../../components/adminLogo/AdminLogo'
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -55,10 +55,7 @@ const Admin = () => {
         <div className="admin" >
             <div className=" col-md-4 col-md-offset-4 admin-flex">
                 <div className="adminLogo">
-                    <div className="whit">
-                        <img src={white} alt="enyata white" />
-                    </div>
-                    <h1>enyata</h1>
+                    <AdminLogo />
                     <h3>Admin Log In</h3>
                     <div className="">
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -108,7 +105,6 @@ const Admin = () => {
                                 <div className="col-md-12">
                                     <button type="submit" className="btn btn-primary btn-block">Sign In</button>
                                     <div className="admin-text">
-                                        <span><Link to='/'>Forgot password?</Link></span>
                                     </div>
 
                                 </div>

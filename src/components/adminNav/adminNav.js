@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './AdminNav.css';
 import board from '../../Assets/Icons/dashboard-icon.png';
 import create from '../../Assets/Icons/createapp-icon.png';
@@ -58,7 +58,7 @@ const AdminNav = () => {
                 <div className="ad-image">
                     {/* <label htmlFor="file">Choose a files</label>
                     {loading ? "loading..." : <img src={image} alt="" />} */}
-                    <img src={profile} alt=""  />
+                    <img src={profile} alt="" />
                 </div>
                 <h3>{state.data.first_name} {state.data.last_name}</h3>
                 <p>{state.data.email}</p>
@@ -143,7 +143,7 @@ const AdminNav = () => {
                             textDecoration: "none"
                         }}
                         exact to="/assessmenthistory"
->
+                    >
                         <img className="img" src={history} alt="asshistory" />
                         Assessment History
                     </NavLink>
@@ -165,9 +165,9 @@ const AdminNav = () => {
                         Results
                     </NavLink>
                 </div>
-                                <div className="adminnav-links">
+                <div className="adminnav-links">
                     <NavLink
-                        onClick={()=> Cookies.remove('token')}
+                        onClick={() => Cookies.remove('token')}
                         className="nav-link"
                         style={{ textDecoration: "none" }}
                         activeStyle={{
