@@ -11,7 +11,10 @@ import Cookies from "js-cookie"
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const Signup = () => {
-
+    const [spinner, setSpinner] = useState({
+        spin: false
+    })
+    
     const [passwordShown, setPasswordShown] = useState(false);
 
 
@@ -19,6 +22,7 @@ const Signup = () => {
         setPasswordShown(passwordShown ? false : true);
     };
 
+    
     const history = useHistory()
 
     const onSubmit = (state) => {
@@ -33,8 +37,11 @@ const Signup = () => {
             .catch(err => {
                 console.log(err.response)
             })
+        setSpinner({
+            spin: true
+        })
     };
-
+    // const {spin} = spinner
     const { register, handleSubmit, errors, watch } = useForm();
 
     return (
@@ -139,11 +146,19 @@ const Signup = () => {
                                         validate: (value) => value === watch('password') || "Password does not not match"
                                     })}
                                 />
-                                <i className="eye-icon" onClick={togglePasswordVisiblity}>{eye}</i>
+                                <i className="eye-icon" 
+                                onClick={togglePasswordVisiblity}>
+                                    {/* {eye} */}
+                                    </i>
                                 <p>{errors.password_confirmation && errors.password_confirmation.message}</p>
                             </div>
                             <div className="col-md-6 col-md-offset-3">
-                                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                            
+                                <button type="submit" className="btn btn-primary btn-block"  disabled={spinner.spin}>
+                                {spinner.spin && <div class="spinner-border text-success" role="status">
+                                    {/* <span class="sr-only">Sign Up</span> */}
+                                </div>} Signup   </button>
+                                 
                                 <span>Already have an account? <Link to='/login' className="link">Sign in</Link></span>
                             </div>
                         </div>

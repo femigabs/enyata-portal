@@ -42,3 +42,7 @@ i:hover {
     text-align: left;
     color: red;
 }
+.btn-block p {
+    color: white;
+    
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AdminNav.css';
 import board from '../../Assets/Icons/dashboard-icon.png';
 import create from '../../Assets/Icons/createapp-icon.png';
@@ -9,9 +9,9 @@ import history from '../../Assets/Icons/asshistory-icon.png';
 import logout from '../../Assets/Icons/logout-icon.png';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
+import Cookies from "js-cookie"
 
 const AdminNav = () => {
-    
 
     const [image, setImage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -31,7 +31,24 @@ const AdminNav = () => {
             console.log(err)
         };
     };
-
+    
+    // const [state, setState] = useState({ data: [] });
+    // useEffect(() => {
+    //     axios.get("/api/v1/getTotal", {
+    //         "headers": {
+    //             "Content-Type": "application/json",
+    //             "token": Cookies.get("token")
+    //         }
+    //     })
+    //         .then(response => {
+    //             setState({
+    //                 data: response.data
+    //             })
+    //         })
+    //         .catch((err) => {
+    //             console.log("Error:", err.message);
+    //         });
+    // }, []);
     return (
         <div className="adminnav">
             <div className="profile">
@@ -145,8 +162,9 @@ const AdminNav = () => {
                         Results
                     </NavLink>
                 </div>
-                                <div className="adminnav-links">
-                    <NavLink
+                                <div className="adminnav-links" >
+                    <NavLink 
+                    onClick={()=> Cookies.remove('token')}
                         className="nav-link"
                         style={{ textDecoration: "none" }}
                         activeStyle={{
@@ -168,3 +186,4 @@ const AdminNav = () => {
 }
 
 export default AdminNav
+
