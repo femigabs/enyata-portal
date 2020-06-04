@@ -8,6 +8,7 @@ import axios from "axios";
 import Moment from 'react-moment';
 import Countdown, {zeroPad } from 'react-countdown';
 import { useHistory } from 'react-router-dom';
+import Skeleton  from 'react-loading-skeleton';
 
 const Assessment = () => {
 
@@ -16,6 +17,7 @@ const Assessment = () => {
     const [disable, setDisable] = useState( {
         disable: false,
         errorMessage: '',
+        loading:"true"
         })
 
     const renderer = ({ minutes, seconds }) => {
@@ -45,12 +47,16 @@ const Assessment = () => {
             })
                 .then(response => {
                     console.log(response)
+                    setDisable({
+                        loading:false
+                    })
                 })
                 .catch(err => {
                     console.log(err.response.data.message)
                     setDisable({
                         disable:true,
-                        errorMessage:err.response.data.message
+                        errorMessage:err.response.data.message,
+                        loading: false
                     })
                 })
         }, []);
@@ -63,6 +69,8 @@ const Assessment = () => {
                 <div className="assessment">
                     <SideNav />
                     <div className="container assessment-contents">
+                    {disable.loading? <Skeleton variant="react"/>:
+                    <>
                         <div className="assessment-heading">
                             <div className="ass">
                                 <h1>Take Assessment</h1>
@@ -87,8 +95,8 @@ const Assessment = () => {
                                 <h5 className="error" style={{ color: "Red" }}> {disable.errorMessage}</h5>}
                             </div>
                         </div>
-
-                    </div> //}
+                    </>
+                } </div> 
                 </div>
             </div>
         )

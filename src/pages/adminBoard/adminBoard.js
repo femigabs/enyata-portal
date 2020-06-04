@@ -6,7 +6,7 @@ import menud from '../../Assets/Icons/menu.svg';
 import axios from "axios";
 import { useHistory} from 'react-router-dom'
 import Moment from 'react-moment';
-
+import Skeleton from "react-loading-skeleton"
 const AdminBoard = () => {
 
     const history = useHistory()
@@ -21,7 +21,10 @@ const AdminBoard = () => {
         })
     })
 
-    const [state, setState] = useState({ data: [] });
+    const [state, setState] = useState({ 
+        data: [],
+        loading:true
+    });
     useEffect(() => {
         axios.get("/api/v1/getTotal", {
             "headers": {
@@ -31,7 +34,8 @@ const AdminBoard = () => {
         })
             .then(response => {
                 setState({
-                    data: response.data
+                    data: response.data,
+                    loading:false
                 })
             })
             .catch((err) => {
@@ -121,6 +125,8 @@ const AdminBoard = () => {
             <div className="dash">
                 <AdminNav />
                 <div className="container dash-contents">
+                    {state.loading ? <Skeleton/>:
+                    <>
                     <div className="dash-heading">
                         <h1>Dashboard</h1>
                     </div>
@@ -165,7 +171,8 @@ const AdminBoard = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </>
+            }</div>
             </div>
         </div>
     )

@@ -6,6 +6,7 @@ import logout from '../../Assets/Icons/logout-icon.png';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import Cookies from "js-cookie"
+import Skeleton from 'react-loading-skeleton';
 
 const SideNav = () => {
 
@@ -53,7 +54,7 @@ const SideNav = () => {
                     <label htmlFor="file">Choose a files</label>
                     {loading ? "loading..." : <img src={image} alt="" />}
                 </div>
-        <h3>{state.data.first_name } {state.data.last_name}</h3>
+        <h3>{state.data.first_name} {state.data.last_name}</h3>
                 <p>{state.data.email}</p>
             </div>
             <div className="sidenav-text">

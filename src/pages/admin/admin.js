@@ -9,7 +9,8 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from 'react-router-dom';
 import comp from '../../Assets/Images/computer-img.png';
 import Cookies from "js-cookie";
-import Skeleton from 'react-loading-skeleton';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -19,7 +20,8 @@ const Admin = () => {
 
     const [states, setStates] = useState({
         items: [],
-        errorMessage: ''
+        errorMessage: '',
+        loading:false
       })
       setTimeout(() => {
         setStates({ errorMessage: "" })
@@ -37,7 +39,13 @@ const Admin = () => {
                 history.push("/adminboard")
             })
             .catch(err => {
-               setStates({errorMessage: err.response.data.message});
+               setStates({
+                   errorMessage: err.response.data.message,
+                   loading: false
+            });
+            })
+            setStates({
+                loading: true
             })
     };
   
@@ -88,8 +96,15 @@ const Admin = () => {
                                     <i className="eye-icon" onClick={togglePasswordVisibility}>{eye}</i>
                                     <p>{errors.password && errors.password.message}</p>
                                 </div>
-                                {states.errorMessage &&
-                                <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
+                                    {states.loading && <Loader
+                                    type="ThreeDots"
+                                    color="#00BFFF"
+                                    height={100}
+                                    width={100}
+                                    timeout={10000}
+                                    />}
+                                    {states.errorMessage &&
+                                    <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
                                 <div className="col-md-12">
                                     <button type="submit" className="btn btn-primary btn-block">Sign In</button>
                                     <div className="admin-text">

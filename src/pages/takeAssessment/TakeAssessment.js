@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import CountDown from '../../components/CountDown'
+import Skeleton from "react-loading-skeleton"
 
 const TakeAssessment = () => {
 
@@ -13,7 +14,8 @@ const TakeAssessment = () => {
 
     const [count, setCount] = useState(0)
     const [state, setState] = useState({
-        question: []
+        question: [],
+        loading:true
     })
     const [selectAnswer, setSelectAnswer] = useState([])
 
@@ -57,33 +59,14 @@ const TakeAssessment = () => {
         })
             .then((response) => response.json())
             .then((json) => {
-                setState({ question: json })
+                setState({ 
+                    question: json,
+                    loading:false
+                })
             })
             .catch(err => {
                 console.log("Error:", err.response);
-                if (err.response.data.message == "Assessment already taken"){
-                history.push("/dashboard")
-                }
             });
-            // axios.get(url,{
-            //     "headers": {
-            //         "Content-Type": "application/json",
-            //         "token": Cookies.get("token")
-            //     }
-            // })
-            //     .then(response => {
-            //         console.log(response)
-            //         setState({ question: response })
-            //     })
-            //     .catch(err => {
-            //         console.log(err.response.data.message)
-                // setStates({errorMessage:err.response.data.message})
-                // if(err.response.data.message== "Authorization Failed"){
-                //     setStates({errorMessage:"Login in "})
-                // }else{
-                //     setStates({errorMessage:err.response.data.message})
-                // }
-            // })
     }, []);
 
     const handleFinish = (e) => {
@@ -123,7 +106,6 @@ const TakeAssessment = () => {
         setCount(count - 1)
     }
 
-    const answer = selectAnswer
 
     return (
         <div>
@@ -133,6 +115,8 @@ const TakeAssessment = () => {
             <div className="assessment">
                 <SideNav />
                 <div className="container assessment-contents">
+                    {state.loading? <Skeleton variant="react"/>:
+                    <>
                     <div className="assessment-heading">
                         <div className="ass">
                             <h1>Take Assessment</h1>
@@ -181,9 +165,9 @@ const TakeAssessment = () => {
                                 <button onClick={handleFinish} className="btn btn-default">Finish</button>
                             </div>
                         </div>
-
                     </div>
-                </div>
+                    </>
+                }</div>
             </div>
         </div>
     )

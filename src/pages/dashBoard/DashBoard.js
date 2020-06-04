@@ -39,9 +39,9 @@ const DashBoard = () => {
                 })
             })
             .catch((err) => {
-                if(err.response.data.message){
-                    history.push("/login")
-                }
+                // if(err.response.data.message){
+                //     history.push("/login")
+                // }
                 console.log("Error:", err.response.data.message);
             });
     }, []);
