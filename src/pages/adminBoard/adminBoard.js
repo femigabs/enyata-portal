@@ -6,7 +6,7 @@ import menud from '../../Assets/Icons/menu.svg';
 import axios from "axios";
 import { useHistory} from 'react-router-dom'
 import Moment from 'react-moment';
-import Skeleton from "react-loading-skeleton"
+import Skeleton , { SkeletonTheme } from "react-loading-skeleton";
 const AdminBoard = () => {
 
     const history = useHistory()
@@ -125,7 +125,11 @@ const AdminBoard = () => {
             <div className="dash">
                 <AdminNav />
                 <div className="container dash-contents">
-                    {state.loading ? <Skeleton/>:
+                    {state.loading ? <SkeletonTheme color=" #5ABEFD" highlightColor="rgb(184, 164, 164)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
                     <>
                     <div className="dash-heading">
                         <h1>Dashboard</h1>

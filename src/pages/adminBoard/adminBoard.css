@@ -38,6 +38,7 @@
 }
 .application-curr h2 {
     border-bottom: 4px solid #006DF0;
+    color: rgb(184, 164, 164)
 }
 .application-total h2 {
     border-bottom: 4px solid #00F026;

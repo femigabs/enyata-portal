@@ -122,7 +122,15 @@ const Admin = () => {
                     <img src={comp} alt="computer" />
                 </div>
             </div>
+           
+           
+           
+                    <div className= " background">
+                        <img src={comp} alt="computer" />
+                    </div>
         </div>
+        
+       
     )
 }
 

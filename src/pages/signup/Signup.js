@@ -24,6 +24,7 @@ const Signup = () => {
         setPasswordShown(passwordShown ? false : true);
     };
 
+    
     const history = useHistory()
     const onSubmit = (state) => {
         console.log(state)
@@ -44,8 +45,9 @@ const Signup = () => {
             setStates({
                 loading: true
             })
+        
     };
-
+    // const {spin} = spinner
     const { register, handleSubmit, errors, watch } = useForm();
 
     return (
@@ -148,7 +150,10 @@ const Signup = () => {
                                         validate: (value) => value === watch('password') || "Password does not not match"
                                     })}
                                 />
-                                <i className="eye-icon" onClick={togglePasswordVisiblity}>{eye}</i>
+                                <i className="eye-icon" 
+                                onClick={togglePasswordVisiblity}>
+                                    {/* {eye} */}
+                                    </i>
                                 <p>{errors.password_confirmation && errors.password_confirmation.message}</p>
                             </div>
                             <div className="col-md-6 col-md-offset-3">
