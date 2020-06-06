@@ -33,7 +33,6 @@ const TakeAssessment = () => {
                 "user_answer": e.target.value,
             }
         }
-
     }
     console.log(selectAnswer)
 
