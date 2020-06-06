@@ -53,11 +53,11 @@ const Admin = () => {
 
     return (
         <div className="admin" >
-            <div className=" col-md-4 col-md-offset-4 admin-flex">
-                <div className="adminLogo">
+            <div className=" col-md-4 col-md-offset-4 ">
+                <div >
                     <AdminLogo />
                     <h3>Admin Log In</h3>
-                    <div className="">
+                    <div className="admin-form">
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-row">
                                 <div className="form-group col-md-12">
@@ -103,7 +103,9 @@ const Admin = () => {
                                     {states.errorMessage &&
                                     <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
                                 <div className="col-md-12">
-                                    <button type="submit" className="btn btn-primary btn-block">Sign In</button>
+                                    <button type="submit"
+                                     className="btn btn-primary btn-block"
+                                    >Sign In</button>
                                     <div className="admin-text">
                                     </div>
 
@@ -114,16 +116,15 @@ const Admin = () => {
                 </div>
 
 
-                <div className=" background">
-                    <img src={comp} alt="computer" />
-                </div>
             </div>
            
            
+            <div className=" background">
+                    <img src={comp} alt="computer" />
+                   
+                </div>
            
-                    <div className= " background">
-                        <img src={comp} alt="computer" />
-                    </div>
+                   
         </div>
         
        

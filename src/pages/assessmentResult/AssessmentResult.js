@@ -66,6 +66,29 @@ const AssessmentResult = () => {
 
     const { currentSort } = sortState
 
+    const [batch, SetBatch] = useState()
+    useEffect(() => {
+        fetch("/api/v1/getBatch", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "token": Cookies.get("token")
+            },
+            mode: "cors",
+          })
+            .then((response) => response.json())
+            .then((json) => {
+                SetBatch(
+                    json.rows
+                )
+               
+            })
+            .catch((err) => {
+              console.log("Error:", err.message);
+            });
+    },[]);
+
+
     const url = `/api/v1/specific_batch/${value.value}`
     const [state, setState] = useState({ 
         data: [],
@@ -105,6 +128,16 @@ const AssessmentResult = () => {
             </tr>
         })
     }
+
+    let batch_id
+    if(batch){
+        batch_id = batch.map((items)=>{
+            return(
+            <option value={items.batch_id}>Batch {items.batch_id}</option>
+            )
+        })
+    }
+
     return (
         <div>
             <div className="menu">
@@ -122,12 +155,7 @@ const AssessmentResult = () => {
                     <div className="dashboard-heading">
                         <h1>Results -
                         <select class="browser-default custom-select batch-select" onChange={handleChange}>
-                                <option selected value="1">Batch 1</option>
-                                <option value="2">Batch 2</option>
-                                <option value="3">Batch 3</option>
-                                <option value="4">Batch 4</option>
-                                <option value="5">Batch 5</option>
-                                <option value="6">Batch 6</option>
+                                {batch_id}
                             </select></h1>
                         <p>Comprises of all that applied for batch {value.value}</p>
                     </div>
