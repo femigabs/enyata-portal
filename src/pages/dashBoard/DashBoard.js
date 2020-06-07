@@ -13,18 +13,8 @@ const DashBoard = () => {
 
     const history = useHistory()
 
-    useEffect(() => {
-        let hamburger = document.getElementById("img"),
-            menuLink = document.getElementById("sidenav")
-
-        hamburger.addEventListener('click', function (e) {
-            menuLink.classList.toggle('hidden-xs')
-            e.preventDefault()
-        })
-    })
-   
-
     const [state, setState] = useState({data: []});
+
     useEffect(() => {
         axios.get("/api/v1/application", {
             "headers": {
@@ -42,7 +32,7 @@ const DashBoard = () => {
                 console.log("Error:", err.response.data.message);
                
             });
-    }, []);
+    },[]);
 
     const [update, setUpdate] = useState({ updates: [], loading: true});
     useEffect(() => {
@@ -73,9 +63,6 @@ const DashBoard = () => {
     const date = moment(d).format("DD.MM.YY")
     return (
         <div>
-            <div className="menu">
-                <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-            </div>
             <div className="dashboard">
                 <SideNav />
                 <div className="container dashboard-contents">
@@ -117,7 +104,7 @@ const DashBoard = () => {
                             <div className="card take-assessment">
                                 <div className="card-body">
                                     <h6>Assessment</h6>
-                                    <p>We have 4 days left until the next assessment <br />Watch this space</p>
+                                    <p>Check back for the next assessment <br />Watch this space</p>
                                     <button onClick={handleSubmit} className="btn btn-success">Take Assessment</button>
                                 </div>
                             </div>

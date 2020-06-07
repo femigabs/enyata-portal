@@ -18,21 +18,12 @@ const Assessment = () => {
         disable: false,
         errorMessage: '',
         loading:"true"
-        })
+    })
 
     const renderer = ({ minutes, seconds }) => {
         return <div>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></div>
     };
-        useEffect(() => {
-            let hamburger = document.getElementById("img"),
-                menuLink = document.getElementById("sidenav")
-
-            hamburger.addEventListener('click', function (e) {
-                menuLink.classList.toggle('hidden-xs')
-                e.preventDefault()
-            })
-        });
-
+       
         const handleSubmit = (e) => {
             e.preventDefault();
             history.push("/assessment/quiz");
@@ -63,9 +54,6 @@ const Assessment = () => {
 
         return (
             <div>
-                <div className="menu">
-                    <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-                </div>
                 <div className="assessment">
                     <SideNav />
                     <div className="container assessment-contents">
@@ -93,7 +81,7 @@ const Assessment = () => {
                         <div className="card">
                             <div className="card-body take-ass">
                                 <img src={hourglass} />
-                                <p>We have 4 days left until the next assessment <br />Watch this space</p>
+                                <p>Check back for the next assessment  <br />Watch this space</p>
                                 <button onClick={handleSubmit} disabled={disable.disable} className="btn btn-success">Take Assessment</button>
                                 {disable.errorMessage && 
                                 <h5 className="error" style={{ color: "Red" }}> {disable.errorMessage}</h5>}

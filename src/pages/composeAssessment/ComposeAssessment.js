@@ -256,19 +256,6 @@ const ComposeAssessment = () => {
         }
     }
 
-
-
-
-    useEffect(() => {
-        let hamburger = document.getElementById("img"),
-            menuLink = document.getElementById("sidenav")
-
-        hamburger.addEventListener('click', function (e) {
-            menuLink.classList.toggle('hidden-xs')
-            e.preventDefault()
-        })
-    })
-
     const handleSubmit = (e) => {
         e.preventDefault()
         let number_of_question = questions.length;
@@ -315,9 +302,6 @@ const ComposeAssessment = () => {
 
     return (
         <div>
-            <div className="menu">
-                <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-            </div>
             <div className="compose">
                 <AdminNav />
                 <div className="compose-structure">

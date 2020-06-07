@@ -12,15 +12,6 @@ import Skeleton , { SkeletonTheme } from "react-loading-skeleton";
 const sort = <FontAwesomeIcon className="fa fa-sort" icon={faSort} />;
 
 const AssessmentResult = () => {
-    useEffect(() => {
-        let hamburger = document.getElementById("img"),
-            menuLink = document.getElementById("sidenav")
-
-        hamburger.addEventListener('click', function (e) {
-            menuLink.classList.toggle('hidden-xs')
-            e.preventDefault()
-        })
-    })
     const [value, setValue] = useState({
         value: 1
     });
@@ -33,7 +24,6 @@ const AssessmentResult = () => {
         currentSort: "default"
     })
 
-    // fn function will use to sort the items in the array before we display it in the table
     const sortTypes = {
         up: {
             class: 'sort-up',
@@ -48,9 +38,6 @@ const AssessmentResult = () => {
             fn: (a, b) => a
         }
     };
-
-    // method called every time the sort button is clicked
-    // it will change the currentSort value to the next one
     const onSortChange = () => {
         const { currentSort } = sortState;
         let nextSort;
@@ -140,9 +127,6 @@ const AssessmentResult = () => {
 
     return (
         <div>
-            <div className="menu">
-                <img src={menu} alt="" id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-            </div>
             <div className="dashboard">
                 <AdminNav />
                 <div className="container dashboard-contents">
