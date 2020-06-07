@@ -158,7 +158,7 @@ const TakeAssessment = (props) => {
                                 <button disabled={count == state.question.length - 1} onClick={handleNext} className="btn btn-primary">Next</button>
                             </div>
                             <div className="col-md-12 finish-button">
-                                <button onClick={handleFinish} className="btn btn-default">Finish</button>
+                                <button onClick={handleFinish} className="btn btn-success">Finish</button>
                             </div>
                         </div>
 
