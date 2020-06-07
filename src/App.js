@@ -27,8 +27,8 @@ function App() {
         <Route exact path='/dashboard' component={DashBoard} />
         <Route exact path='/application/:id' component={Application} />
         <Route exact path='/assessment' component={Assessment} />
-        <Route exact path='/completed' component={CompletedAssessment} />
-        <Route exact path='/quiz' component={TakeAssessment} />
+        <Route exact path='/assessment/:quiz/:completed' component={CompletedAssessment} />
+        <Route exact path='/assessment/:quiz' component={TakeAssessment} />
         <Route exact path='/admin' component={Admin} />
         <Route exact path='/adminboard' component={AdminBoard} />
         <Route exact path='/adminentries' component={AdminEntries} />

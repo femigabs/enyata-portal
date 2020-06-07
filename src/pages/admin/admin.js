@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Admin.css';
-import white from '../../Assets/Images/enyata-logo2.png'
-import AdminLogo from '../../components/adminLogo/AdminLogo'
+import AdminLogo from '../../components/adminLogo/AdminLogo';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +8,8 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from 'react-router-dom';
 import comp from '../../Assets/Images/computer-img.png';
 import Cookies from "js-cookie";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from 'react-loader-spinner';
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 
@@ -21,11 +20,11 @@ const Admin = () => {
     const [states, setStates] = useState({
         items: [],
         errorMessage: '',
-        loading:false
-      })
-      setTimeout(() => {
+        loading: false
+    })
+    setTimeout(() => {
         setStates({ errorMessage: "" })
-      }, 10000);
+    }, 10000);
     const togglePasswordVisibility = () => {
         setPasswordShown(passwordShown ? false : true);
     };
@@ -39,25 +38,25 @@ const Admin = () => {
                 history.push("/adminboard")
             })
             .catch(err => {
-               setStates({
-                   errorMessage: err.response.data.message,
-                   loading: false
-            });
+                setStates({
+                    errorMessage: err.response.data.message,
+                    loading: false
+                });
             })
-            setStates({
-                loading: true
-            })
+        setStates({
+            loading: true
+        })
     };
-  
+
     const { register, handleSubmit, errors } = useForm();
 
     return (
         <div className="admin" >
-            <div className=" col-md-4 col-md-offset-4 admin-flex">
-                <div className="adminLogo">
+            <div className=" col-md-4 col-md-offset-4 ">
+                <div >
                     <AdminLogo />
                     <h3>Admin Log In</h3>
-                    <div className="">
+                    <div className="admin-form">
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-row">
                                 <div className="form-group col-md-12">
@@ -93,17 +92,19 @@ const Admin = () => {
                                     <i className="eye-icon" onClick={togglePasswordVisibility}>{eye}</i>
                                     <p>{errors.password && errors.password.message}</p>
                                 </div>
-                                    {states.loading && <Loader
+                                {states.loading && <Loader
                                     type="ThreeDots"
                                     color="#00BFFF"
                                     height={20}
                                     width={100}
                                     timeout={10000}
-                                    />}
-                                    {states.errorMessage &&
+                                />}
+                                {states.errorMessage &&
                                     <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
                                 <div className="col-md-12">
-                                    <button type="submit" className="btn btn-primary btn-block">Sign In</button>
+                                    <button type="submit"
+                                        className="btn btn-primary btn-block"
+                                    >Sign In</button>
                                     <div className="admin-text">
                                     </div>
 
@@ -114,19 +115,18 @@ const Admin = () => {
                 </div>
 
 
-                <div className=" background">
-                    <img src={comp} alt="computer" />
-                </div>
             </div>
-           
-           
-           
-                    <div className= " background">
-                        <img src={comp} alt="computer" />
-                    </div>
+
+
+            <div className=" background">
+                <img src={comp} alt="computer" />
+
+            </div>
+
+
         </div>
-        
-       
+
+
     )
 }
 
