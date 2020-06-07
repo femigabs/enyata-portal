@@ -31,7 +31,6 @@ const TakeAssessment = (props) => {
                 "user_answer": e.target.value,
             }
         }
-
     }
     console.log(selectAnswer)
 

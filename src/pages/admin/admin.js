@@ -113,20 +113,13 @@ const Admin = () => {
                         </form>
                     </div>
                 </div>
-
-
             </div>
-
 
             <div className=" background">
                 <img src={comp} alt="computer" />
 
             </div>
-
-
         </div>
-
-
     )
 }
 
