@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './ComposeAssessment.css';
-import { useForm } from "react-hook-form";
 import AdminNav from '../../components/adminNav/AdminNav';
 import menu from '../../Assets/Icons/menu.svg';
 import Plus from '../../Assets/Icons/createapp-icon.png';
@@ -9,7 +8,6 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
-import Moment from 'react-moment';
 
 const ComposeAssessment = () => {
 
@@ -109,7 +107,6 @@ const ComposeAssessment = () => {
             return false
         }
         return true
-
     }
 
     const [image, setImage] = useState();
@@ -357,7 +354,7 @@ const ComposeAssessment = () => {
                                         value={state.question}
                                         onChange={handleChange}
                                     />
-                                    <p className='error'>{state.questionError}</p>
+                                    <p className='errors'>{state.questionError}</p>
                                 </div>
                                 <div className="option-grid">
                                     <div className="">
@@ -369,7 +366,7 @@ const ComposeAssessment = () => {
                                             value={state.option_a}
                                             onChange={handleChange}
                                         />
-                                        <p className='error'>{state.option_aError}</p>
+                                        <p className='errors'>{state.option_aError}</p>
                                     </div>
                                     <div className="">
                                         <label>Option B</label>
@@ -380,7 +377,7 @@ const ComposeAssessment = () => {
                                             value={state.option_b}
                                             onChange={handleChange}
                                         />
-                                        <p className='error'>{state.option_bError}</p>
+                                        <p className='errors'>{state.option_bError}</p>
                                     </div>
                                 </div>
                                 <div className="option-grid2">
@@ -393,7 +390,7 @@ const ComposeAssessment = () => {
                                             value={state.option_c}
                                             onChange={handleChange}
                                         />
-                                        <p className='error'>{state.option_cError}</p>
+                                        <p className='errors'>{state.option_cError}</p>
                                     </div>
                                     <div className="">
                                         <label>Option D</label>
@@ -404,7 +401,7 @@ const ComposeAssessment = () => {
                                             value={state.option_d}
                                             onChange={handleChange}
                                         />
-                                        <p className='error'>{state.option_dError}</p>
+                                        <p className='errors'>{state.option_dError}</p>
                                     </div>
                                 </div>
                                 <div className="form-group answer">
@@ -416,7 +413,7 @@ const ComposeAssessment = () => {
                                         value={state.option_answer}
                                         onChange={handleChange}
                                     />
-                                    <p className='error'>{state.option_answerError}</p>
+                                    <p className='errors'>{state.option_answerError}</p>
                                 </div>
                             </div>
                             <div className="form-group col-md-6" style={{ display: "none" }}>
@@ -443,7 +440,7 @@ const ComposeAssessment = () => {
                                     timeout={10000}
                                 />}
                                 {states.errorMessage &&
-                                    <h5 className="errors" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                    <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
                                 {states.successMessage &&
                                     <h5 className="success" style={{ color: "Green" }}> {states.successMessage} </h5>}
                                 <div className="col-md-12 finish-button">

@@ -120,12 +120,15 @@
     font-weight: 500;
     padding-top: 20px;
 }
-.error {
+.errors {
     display: block;
     text-align: left;
     color: red;
 }
 .finish-button {
     margin-bottom: 30px;
+}
+.quiz {
+    margin-right: 100px;
 }
 
