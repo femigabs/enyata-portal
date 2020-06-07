@@ -35,7 +35,7 @@ const Application = (props) => {
         defaultValues: {
             created_at: date,
             closure_date: batch_id.slice(2),
-            batch_id: batch_id.slice(0, 1)
+            batch_id: batch_id.slice(0, 2).replace(/=/g,"")
         }
     });
     const onSubmit = (state) => {

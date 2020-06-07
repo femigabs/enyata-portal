@@ -291,14 +291,14 @@ const AssessmentHistory = () => {
                         <h1>Assessment History</h1>
                     </div>
                     <div className="table-body">
-                        <table className="table table-responsive table-sm" cellspacing="0" width="100%">
+                        <table className="table table-responsive table-sm" width="100%">
                             <thead className="table-head">
                                 <tr>
-                                    <th class="th-sm">Batch</th>
-                                    <th class="th-sm">Date Composed</th>
-                                    <th class="th-sm">Number of Questions</th>
-                                    <th class="th-sm">Time Allocated</th>
-                                    <th class="th-sm">Status</th>
+                                    <th className="th-sm">Batch</th>
+                                    <th className="th-sm">Date Composed</th>
+                                    <th className="th-sm">Number of Questions</th>
+                                    <th className="th-sm">Time Allocated</th>
+                                    <th className="th-sm">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
