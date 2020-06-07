@@ -76,6 +76,7 @@
 .textarea{
     border: 1px solid black;
     color: black;
+    margin-bottom: 10px;
 }
 
 .option-grid{
@@ -119,3 +120,12 @@
     font-weight: 500;
     padding-top: 20px;
 }
+.error {
+    display: block;
+    text-align: left;
+    color: red;
+}
+.finish-button {
+    margin-bottom: 30px;
+}
+

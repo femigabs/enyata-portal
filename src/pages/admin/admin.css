@@ -3,20 +3,16 @@
     background-size: cover;
     height: 100em;
     display: flex;
-}
-    
-
- .background img{
-    width: 30%; 
+}    
+.background img{
+    width: 35%;
     height: 100%;
     position: absolute;
     top: 15%;
-    margin-left: 3%;
+    right: 0;
     overflow-x: hidden;
-    background-repeat: no-repeat;
-   
-}
-
+    background-repeat: no-repeat;    
+}    
 a {
     color: #ffffff;
 }
@@ -26,7 +22,7 @@ a {
     font-weight: bold;
 }
 .admin h3 {
-    color: #ffffff;   
+    color: #ffffff;
 }
 .admin label {
     display: block;

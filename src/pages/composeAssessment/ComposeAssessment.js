@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
- import './ComposeAssessment.css';
+import './ComposeAssessment.css';
 import { useForm } from "react-hook-form";
 import AdminNav from '../../components/adminNav/AdminNav';
 import menu from '../../Assets/Icons/menu.svg';
@@ -22,7 +22,13 @@ const ComposeAssessment = () => {
         option_b: "",
         option_c: "",
         option_d: "",
-        option_answer: ""
+        option_answer: "",
+        questionError: "",
+        option_aError: "",
+        option_bError: "",
+        option_cError: "",
+        option_dError: "",
+        option_answerError: ""
     });
 
     const [questions, updateQuestions] = useState([]);
@@ -39,14 +45,14 @@ const ComposeAssessment = () => {
     })
     const [states, setStates] = useState({
         items: [],
-        successMessage:"",
+        successMessage: "",
         errorMessage: '',
-        loading:false
-      })
-      setTimeout(() => {
+        loading: false
+    })
+    setTimeout(() => {
         setStates({ errorMessage: "" })
-      }, 10000);
-    
+    }, 10000);
+
 
     const handleTime = (e) => {
         e.preventDefault()
@@ -57,11 +63,53 @@ const ComposeAssessment = () => {
     }
 
     const handleChange = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
+    }
+
+    const validAnswerRegex = RegExp(/[A-Da-d]{1}$/)
+
+    const validate = () => {
+        let questionError = "";
+        let option_aError = "";
+        let option_bError = "";
+        let option_cError = "";
+        let option_dError = "";
+        let option_answerError = ""
+
+        if (!state.question) {
+            questionError = "Please fill in question field"
+        }
+
+        if (!state.option_a) {
+            option_aError = "Please fill in Option A field"
+        }
+
+        if (!state.option_b) {
+            option_bError = "Please fill in Option B field"
+        }
+
+        if (!state.option_c) {
+            option_cError = "Please fill in Option C field"
+        }
+
+        if (!state.option_d) {
+            option_dError = "Please fill in Option D field"
+        }
+
+        if (!validAnswerRegex.test(state.option_answer)) {
+            option_answerError = "Answer Field Must Contain either a,b,c or d"
+        }
+
+        if (questionError || option_aError || option_bError || option_cError || option_dError || option_answerError) {
+            setState({ questionError, option_aError, option_bError, option_cError, option_dError, option_answerError });
+            return false
+        }
+        return true
+
     }
 
     const [image, setImage] = useState();
@@ -83,14 +131,18 @@ const ComposeAssessment = () => {
 
     const handleNext = (e) => {
         e.preventDefault()
-        const { currentQuestion } = questionStep
-        console.log(questionStep)
-        console.log(questions)
-        console.log(state)
+        const { currentQuestion } = questionStep;
+        console.log(questionStep);
+        console.log(questions);
 
-        if (currentQuestion == questions.length ) {
+        const isValid = validate();
+        if (isValid) {
+            console.log(state)
+        }
+
+        if (currentQuestion == questions.length) {
             if (state.question && state.option_a && state.option_b && state.option_answer) {
-                updateQuestions([...questions, state])
+                updateQuestions([ ...questions, state])
 
                 setState({
                     file_url: "",
@@ -146,8 +198,8 @@ const ComposeAssessment = () => {
                 })
 
                 setQuestionStep({
-                    currentQuestion: currentQuestion + 1,
-                    prevDisabled: false,
+                    currentQuestion: currentQuestion,
+                    prevDisabled: false
                 })
             }
 
@@ -232,14 +284,14 @@ const ComposeAssessment = () => {
             .then(response => {
                 console.log(response.data)
                 setStates({
-                    successMessage:response.data.message,
+                    successMessage: response.data.message,
                     loading: false
                 })
             })
             .catch(err => {
                 console.log(err.response.data)
                 setStates({
-                    errorMessage:err.response.data.message,
+                    errorMessage: err.response.data.message,
                     loading: false
                 })
             })
@@ -257,7 +309,7 @@ const ComposeAssessment = () => {
                 console.log(err.response.data)
             })
         setStates({
-            loading:true
+            loading: true
         })
     }
 
@@ -321,6 +373,7 @@ const ComposeAssessment = () => {
                                         value={state.question}
                                         onChange={handleChange}
                                     />
+                                    <p className='error'>{state.questionError}</p>
                                 </div>
                                 <div className="option-grid">
                                     <div className="">
@@ -332,6 +385,7 @@ const ComposeAssessment = () => {
                                             value={state.option_a}
                                             onChange={handleChange}
                                         />
+                                        <p className='error'>{state.option_aError}</p>
                                     </div>
                                     <div className="">
                                         <label>Option B</label>
@@ -342,6 +396,7 @@ const ComposeAssessment = () => {
                                             value={state.option_b}
                                             onChange={handleChange}
                                         />
+                                        <p className='error'>{state.option_bError}</p>
                                     </div>
                                 </div>
                                 <div className="option-grid2">
@@ -354,6 +409,7 @@ const ComposeAssessment = () => {
                                             value={state.option_c}
                                             onChange={handleChange}
                                         />
+                                        <p className='error'>{state.option_cError}</p>
                                     </div>
                                     <div className="">
                                         <label>Option D</label>
@@ -364,6 +420,7 @@ const ComposeAssessment = () => {
                                             value={state.option_d}
                                             onChange={handleChange}
                                         />
+                                        <p className='error'>{state.option_dError}</p>
                                     </div>
                                 </div>
                                 <div className="form-group answer">
@@ -375,6 +432,7 @@ const ComposeAssessment = () => {
                                         value={state.option_answer}
                                         onChange={handleChange}
                                     />
+                                    <p className='error'>{state.option_answerError}</p>
                                 </div>
                             </div>
                             <div className="form-group col-md-6" style={{ display: "none" }}>
@@ -391,7 +449,7 @@ const ComposeAssessment = () => {
                                     <button disabled={questionStep.prevDisabled} onClick={handlePrevious} className="btn btn-primary">Previous</button>
                                 </div>
                                 <div className="col-md-6 quiz-button">
-                                    <button disabled={questionStep.nextDisabled || questionStep.currentQuestion == 29} onClick={handleNext} className="btn btn-primary">Next</button>
+                                    <button disabled={questionStep.nextDisabled || questionStep.currentQuestion == 30} onClick={handleNext} className="btn btn-primary">Next</button>
                                 </div>
                                 {states.loading && <Loader
                                     type="ThreeDots"
@@ -399,11 +457,11 @@ const ComposeAssessment = () => {
                                     height={30}
                                     width={100}
                                     timeout={10000}
-                            />}
+                                />}
                                 {states.errorMessage &&
-                                <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
-                                 {states.successMessage&&
-                                <h5 className="success" style={{ color: "Green" }}> {states.successMessage} </h5>}
+                                    <h5 className="errors" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                {states.successMessage &&
+                                    <h5 className="success" style={{ color: "Green" }}> {states.successMessage} </h5>}
                                 <div className="col-md-12 finish-button">
                                     <button onClick={handleSubmit} type="submit" className="btn btn-success">Finish</button>
                                 </div>

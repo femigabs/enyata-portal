@@ -90,7 +90,7 @@ const Login = () => {
             {states.loading && <Loader
               type="ThreeDots"
               color="#00BFFF"
-              height={30}
+              height={100}
               width={100}
               timeout={10000}
             />}
@@ -101,7 +101,6 @@ const Login = () => {
               <button type="submit" className="btn btn-primary btn-block">Sign In</button>
               <div className="login-text">
                 <span>Don't have an account yet? <Link to='/signup' className="link">Sign up</Link></span>
-                {/* <span><Link to='/' className="link">Forgot password?</Link></span> */}
               </div>
             </div>
           </div>

@@ -35,7 +35,7 @@ const Assessment = () => {
 
         const handleSubmit = (e) => {
             e.preventDefault();
-            history.push("/quiz");
+            history.push("/assessment/quiz");
         }
 
         useEffect(() => {

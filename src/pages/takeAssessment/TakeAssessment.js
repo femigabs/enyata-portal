@@ -6,16 +6,14 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import CountDown from '../../components/CountDown'
-import Skeleton, {SkeletonTheme} from "react-loading-skeleton"
 
-const TakeAssessment = () => {
+const TakeAssessment = (props) => {
 
     const history = useHistory()
 
     const [count, setCount] = useState(0)
     const [state, setState] = useState({
-        question: [],
-        loading:true
+        question: []
     })
     const [selectAnswer, setSelectAnswer] = useState([])
 
@@ -58,13 +56,13 @@ const TakeAssessment = () => {
         })
             .then((response) => response.json())
             .then((json) => {
-                setState({ 
-                    question: json,
-                    loading:false
-                })
+                setState({ question: json })
             })
             .catch(err => {
-                console.log("Error:", err.response);
+                console.log("Error:", err);
+                // if (err.response.data.message == "Assessment already taken"){
+                // history.push("/dashboard")
+                // }
             });
     }, []);
 
@@ -79,7 +77,7 @@ const TakeAssessment = () => {
         })
             .then(response => {
                 console.log(response.data)
-                history.push("/completed")
+                history.push("/assessment/quiz/completed")
             })
             .catch(err => {
                 console.log(err.response)
@@ -105,6 +103,7 @@ const TakeAssessment = () => {
         setCount(count - 1)
     }
 
+    const answer = selectAnswer
 
     return (
         <div>
@@ -114,12 +113,6 @@ const TakeAssessment = () => {
             <div className="assessment">
                 <SideNav />
                 <div className="container assessment-contents">
-                    {state.loading? <SkeletonTheme color="#2B3C4E" highlightColor="rgb(145, 155, 167)">
-                        <p>
-                            <Skeleton count={2} />
-                        </p>
-                        </SkeletonTheme>:
-                    <>
                     <div className="assessment-heading">
                         <div className="ass">
                             <h1>Take Assessment</h1>
@@ -165,12 +158,12 @@ const TakeAssessment = () => {
                                 <button disabled={count == state.question.length - 1} onClick={handleNext} className="btn btn-primary">Next</button>
                             </div>
                             <div className="col-md-12 finish-button">
-                                <button onClick={handleFinish} className="btn btn-success">Finish</button>
+                                <button onClick={handleFinish} className="btn btn-default">Finish</button>
                             </div>
                         </div>
+
                     </div>
-                    </>
-                }</div>
+                </div>
             </div>
         </div>
     )
