@@ -6,8 +6,9 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Plus from '../../Assets/Icons/createapp-icon.png';
 import moment from 'moment';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 import Cookies from "js-cookie";
-
 
 const Application = (props) => {
 
@@ -18,18 +19,25 @@ const Application = (props) => {
     const batch_id = params.get("id");
 
     const [image, setImage] = useState({ data: [] });
-
+    const [states, setStates] = useState({
+        items: [],
+        errorMessage: '',
+        message:"",
+        loading: false
+      })
+      setTimeout(() => {
+        setStates({ errorMessage: "" })
+      }, 10000);
     const d = new Date()
     const date = moment(d).format("YYYY/MM/DD")
 
-    const { register, handleSubmit } = useForm({
+    const { register, handleSubmit, errors, watch } = useForm({
         defaultValues: {
             created_at: date,
             closure_date: batch_id.slice(2),
             batch_id: batch_id.slice(0, 1)
         }
     });
-
     const onSubmit = (state) => {
         console.log(state)
         axios.post("/api/v1/application", state, {
@@ -40,16 +48,26 @@ const Application = (props) => {
         })
             .then(response => {
                 console.log(response)
+                setStates({message:response.data.message})
                 history.push("/dashboard")
             })
             .catch(err => {
-                console.log(err.response)
-                if (err.response.data.message == "Authorization Failed") {
-                    history.push("/signup")
+                if(err.response.data.message== "Authorization Failed"){
+                    setStates({
+                        errorMessage:"Login in ",
+                        loading: false
+                })
+                }else{
+                    setStates({
+                        errorMessage:err.response.data.message,
+                        loading: false
+                    })
                 }
             })
+        setStates({
+            loading: true
+        })
     };
-
     const uploadFile = async (e) => {
         const files = e.target.files[0];
         console.log(e.target.files[0])
@@ -78,8 +96,9 @@ const Application = (props) => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="row">
                                 <div className="col-md-4 col-md-offset-4 cv">
-                                    <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
+                                <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
                                     <label htmlFor="file"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
+                                    <p>{errors.cv_url && errors.cv_url.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>First Name</label>
@@ -87,13 +106,15 @@ const Application = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="first_name"
-                                        ref={
-                                            register({
-                                                required: "FIRSTNAME REQUIRED",
-                                                minLength: 3
-                                            })
-                                        }
+                                        ref={register({
+                                            required: "First Name Required",
+                                            minLength: {
+                                                value: 3,
+                                                message: "Too Short"
+                                            }
+                                        })}
                                     />
+                                    <p>{errors.first_name && errors.first_name.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Last Name</label>
@@ -101,13 +122,15 @@ const Application = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="last_name"
-                                        ref={
-                                            register({
-                                                required: "LASTNAME REQUIRED",
-                                                minLength: 3
-                                            })
-                                        }
+                                        ref={register({
+                                            required: "Last Name Required",
+                                            minLength: {
+                                                value: 3,
+                                                message: "Too Short"
+                                            }
+                                        })}
                                     />
+                                    <p>{errors.last_name && errors.last_name.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Email</label>
@@ -115,26 +138,32 @@ const Application = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="email"
-                                        ref={
-                                            register({
-                                                required: "EMAIL REQUIRED"
-                                            })
-                                        }
+                                        ref={register({
+                                            required: "Email Required",
+                                            pattern: {
+                                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                                message: "Invalid Email Address"
+                                            }
+                                        })}
                                     />
+                                     <p>{errors.email && errors.email.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Date of Birth</label>
                                     <input
                                         className="form-control"
                                         type="text"
-                                        placeholder="dd/mm/yyyy"
+                                        placeholder="yyyy/mm/dd"
                                         name="date_of_birth"
-                                        ref={
-                                            register({
-                                                required: "DATE OF BIRTH REQUIRED"
-                                            })
-                                        }
+                                        ref={register({
+                                            required: "Date of Birth Required",
+                                            pattern: {
+                                                value:  /^\d{4}(\/)(((0)[0-9])|((1)[0-2]))(\/)([0-2][0-9]|(3)[0-1])$/i,
+                                                message: "Wrong Date of Birth Format"
+                                            }
+                                        })}
                                     />
+                                     <p>{errors.date_of_birth && errors.date_of_birth.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Address</label>
@@ -144,10 +173,10 @@ const Application = (props) => {
                                         name="address"
                                         ref={
                                             register({
-                                                required: "ADDRESS REQUIRED"
-                                            })
-                                        }
+                                                required: "Address Required"
+                                            })}
                                     />
+                                    <p>{errors.address && errors.address.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>University</label>
@@ -157,10 +186,10 @@ const Application = (props) => {
                                         name="university"
                                         ref={
                                             register({
-                                                required: "UNIVERSITY REQUIRED"
-                                            })
-                                        }
+                                                required: "University Required"
+                                            })}
                                     />
+                                    <p>{errors.university && errors.university.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Course of Study</label>
@@ -170,23 +199,25 @@ const Application = (props) => {
                                         name="course_of_study"
                                         ref={
                                             register({
-                                                required: "COURSE OF STUDY REQUIRED"
-                                            })
-                                        }
+                                                required: "Course Of Study Reqruired"
+                                            })}
                                     />
+                                     <p>{errors.course_of_study && errors.course_of_study.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>CGPA</label>
                                     <input
                                         className="form-control"
                                         type="text"
-                                        name="cgpa"
-                                        ref={
-                                            register({
-                                                required: "CGPA REQUIRED",
-                                            })
-                                        }
+                                        name="cgpa"                                        ref={register({
+                                            required: "CGPA Required",
+                                            pattern: {
+                                                value: /\b[1-5]\b/,
+                                                message: "CGPA Must Be A Number Type Not Exceed 5"
+                                            }
+                                        })}
                                     />
+                                    <p>{errors.cgpa && errors.cgpa.message}</p>
                                 </div>
                                 <div className="form-group col-md-6" style={{ display: "none" }}>
                                     <label>Created Date</label>
@@ -204,7 +235,10 @@ const Application = (props) => {
                                         type="text"
                                         name="cv_url"
                                         value={image.data}
-                                        ref={register()}
+                                        ref={register({
+                                            // required: "Please Upload CV",
+                                            // validate: (value) => value === watch('file_url') || "Upload CV"
+                                        })}
                                     />
                                 </div>
                                 <div className="form-group col-md-6" style={{ display: "none" }}>
@@ -226,6 +260,17 @@ const Application = (props) => {
                                     />
                                 </div>
                                 <div className="col-md-6 col-md-offset-3">
+                                    {states.loading && <Loader
+                                        type="ThreeDots"
+                                        color="#00BFFF"
+                                        height={30}
+                                        width={100}
+                                        timeout={10000}
+                                    />}
+                                    {states.errorMessage &&
+                                    <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                    {states.Message &&
+                                    <h5 className="success" style={{ color: "Green" }}> {states.rMessage} </h5>}
                                     <button type="submit" className="btn btn-primary btn-block">Submit</button>
                                 </div>
                             </div>

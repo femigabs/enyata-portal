@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import Skeleton , { SkeletonTheme } from "react-loading-skeleton"
 
 
 const DashBoard = () => {
@@ -21,26 +22,29 @@ const DashBoard = () => {
             e.preventDefault()
         })
     })
+   
 
-    const [state, setState] = useState({ data: [] });
+    const [state, setState] = useState({data: []});
     useEffect(() => {
         axios.get("/api/v1/application", {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
             }
+            
         })
-            .then(response => {
+            .then(response =>{
                 setState({
-                    data: response.data
+                    data: response.data,
                 })
             })
             .catch((err) => {
-                console.log("Error:", err.message);
+                console.log("Error:", err.response.data.message);
+               
             });
     }, []);
 
-    const [update, setUpdate] = useState({ updates: [] });
+    const [update, setUpdate] = useState({ updates: [], loading: true});
     useEffect(() => {
         axios.get("/api/v1/getUpdate", {
             "headers": {
@@ -50,7 +54,8 @@ const DashBoard = () => {
         })
             .then(response => {
                 setUpdate({
-                    updates: response.data
+                    updates: response.data,
+                    loading:false
                 })
             })
             .catch((err) => {
@@ -66,7 +71,6 @@ const DashBoard = () => {
     const status = state.data.Application_status
     const d = state.data.Application_date
     const date = moment(d).format("DD.MM.YY")
-
     return (
         <div>
             <div className="menu">
@@ -75,6 +79,12 @@ const DashBoard = () => {
             <div className="dashboard">
                 <SideNav />
                 <div className="container dashboard-contents">
+                {update.loading ? <SkeletonTheme color="#2B3C4E" highlightColor="rgb(145, 155, 167)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
+                    <>
                     <div className="dashboard-heading">
                         <h1>Dashboard</h1>
                         <p>Your Application is currently being review, you wil be notified if successful</p>
@@ -82,7 +92,7 @@ const DashBoard = () => {
                     <div className="row application-info">
                         <div className="col-md-3 application-date">
                             <h5>Date of Application</h5>
-                            <h2>{date}</h2>
+                            <h2>{state.data.Application_date && date}</h2>
                             <p>4 days since applied</p>
                         </div>
                         <div className="col-md-3 application-status">
@@ -108,14 +118,16 @@ const DashBoard = () => {
                                 <div className="card-body">
                                     <h6>Take Assessment</h6>
                                     <p>We have 4 days left until the next assessment <br />Watch this space</p>
-                                    <button onClick={handleSubmit} className="btn btn-default">Take Assessment</button>
+                                    <button onClick={handleSubmit} className="btn btn-success">Take Assessment</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    </>
+                }</div>
             </div>
-        </div>
+          
+                </div>
     )
 }
 

@@ -4,23 +4,28 @@ import UserLogo from '../../components/userLogo/UserLogo';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye} from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from 'react-router-dom';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 import Cookies from "js-cookie"
 
+
 const eye = <FontAwesomeIcon icon={faEye} />;
-
 const Signup = () => {
-
     const [passwordShown, setPasswordShown] = useState(false);
 
-
+    const [states, setStates] = useState({
+        items: [],
+        errorMessage: '',
+        loading: false
+      })
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
     };
 
+    
     const history = useHistory()
-
     const onSubmit = (state) => {
         console.log(state)
 
@@ -32,9 +37,17 @@ const Signup = () => {
             })
             .catch(err => {
                 console.log(err.response)
+                setStates({
+                    errorMessage: err.response.data.message,
+                    loading:false
+                })
             })
+            setStates({
+                loading: true
+            })
+        
     };
-
+    // const {spin} = spinner
     const { register, handleSubmit, errors, watch } = useForm();
 
     return (
@@ -50,7 +63,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type="text"
-                                    placeholder="FirstName"
                                     name="first_name"
                                     ref={register({
                                         required: "First Name Required",
@@ -67,7 +79,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type="text"
-                                    placeholder="LastName"
                                     name="last_name"
                                     ref={register({
                                         required: "Last Name Required",
@@ -84,7 +95,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type="text"
-                                    placeholder="Email"
                                     name="email_address"
                                     ref={register({
                                         required: "Email Required",
@@ -100,11 +110,14 @@ const Signup = () => {
                                 <label>Phone Number</label>
                                 <input
                                     className="form-control"
-                                    type="number"
-                                    placeholder="Phone Number"
+                                    type="text"
                                     name="phone_number"
                                     ref={register({
-                                        required: "Phone Number Required"
+                                        required: "Phone Number Required",
+                                        pattern: {
+                                            value: /^\d{11}$/,
+                                            message: "Invalid Phone Number"
+                                        }
                                     })}
                                 />
                                 <p>{errors.phone_number && errors.phone_number.message}</p>
@@ -114,7 +127,6 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type={passwordShown ? "text" : "password"}
-                                    placeholder="Password"
                                     name="password"
                                     ref={register({
                                         required: "Password Required",
@@ -132,17 +144,29 @@ const Signup = () => {
                                 <input
                                     className="form-control"
                                     type={passwordShown ? "text" : "password"}
-                                    placeholder="Confirm Password"
                                     name="password_confirmation"
                                     ref={register({
                                         required: "Confirm Password",
                                         validate: (value) => value === watch('password') || "Password does not not match"
                                     })}
                                 />
-                                <i className="eye-icon" onClick={togglePasswordVisiblity}>{eye}</i>
+                                <i className="eye-icon" 
+                                onClick={togglePasswordVisiblity}>
+                                    {/* {eye} */}
+                                    </i>
                                 <p>{errors.password_confirmation && errors.password_confirmation.message}</p>
                             </div>
                             <div className="col-md-6 col-md-offset-3">
+                                {states.loading && <Loader
+                                    type="ThreeDots"
+                                    color="#00BFFF"
+                                    height={30}
+                                    width={100}
+                                    timeout={10000}
+                                />}
+                                {states.errorMessage &&
+                                    <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>
+                                }
                                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                                 <span>Already have an account? <Link to='/login' className="link">Sign in</Link></span>
                             </div>

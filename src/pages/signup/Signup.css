@@ -37,8 +37,12 @@ i:hover {
     color: #00fcb6;
     cursor: pointer;
   }
-  .signup p {
+.signup p {
     display: block;
     text-align: left;
     color: red;
+}
+.btn-block p {
+    color: white;
+    
 }

@@ -6,14 +6,16 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import CountDown from '../../components/CountDown'
+import Skeleton, {SkeletonTheme} from "react-loading-skeleton"
 
-const TakeAssessment = (props) => {
+const TakeAssessment = () => {
 
     const history = useHistory()
 
     const [count, setCount] = useState(0)
     const [state, setState] = useState({
-        question: []
+        question: [],
+        loading:true
     })
     const [selectAnswer, setSelectAnswer] = useState([])
 
@@ -57,13 +59,13 @@ const TakeAssessment = (props) => {
         })
             .then((response) => response.json())
             .then((json) => {
-                setState({ question: json })
+                setState({ 
+                    question: json,
+                    loading:false
+                })
             })
             .catch(err => {
-                console.log("Error:", err);
-                // if (err.response.data.message == "Assessment already taken"){
-                // history.push("/dashboard")
-                // }
+                console.log("Error:", err.response);
             });
     }, []);
 
@@ -104,7 +106,6 @@ const TakeAssessment = (props) => {
         setCount(count - 1)
     }
 
-    const answer = selectAnswer
 
     return (
         <div>
@@ -114,6 +115,12 @@ const TakeAssessment = (props) => {
             <div className="assessment">
                 <SideNav />
                 <div className="container assessment-contents">
+                    {state.loading? <SkeletonTheme color="#2B3C4E" highlightColor="rgb(145, 155, 167)">
+                        <p>
+                            <Skeleton count={2} />
+                        </p>
+                        </SkeletonTheme>:
+                    <>
                     <div className="assessment-heading">
                         <div className="ass">
                             <h1>Take Assessment</h1>
@@ -160,12 +167,12 @@ const TakeAssessment = (props) => {
                                 <button disabled={count == state.question.length - 1} onClick={handleNext} className="btn btn-primary">Next</button>
                             </div>
                             <div className="col-md-12 finish-button">
-                                <button onClick={handleFinish} className="btn btn-default">Finish</button>
+                                <button onClick={handleFinish} className="btn btn-success">Finish</button>
                             </div>
                         </div>
-
                     </div>
-                </div>
+                    </>
+                }</div>
             </div>
         </div>
     )

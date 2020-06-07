@@ -39,6 +39,11 @@ sub {
     margin-top: 21px;
     margin-bottom: 25px;
 }
-.take-ass button {
-    background-color: #B1B1B1;
+.take-ass button:disabled {
+    background-color: #CECECE;
+    border: none;
+}
+.take-ass button:disabled:hover {
+    background-color:  #CECECE;
+    border: none;
 }

@@ -7,16 +7,21 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from "js-cookie"
-
-const eye = <FontAwesomeIcon icon={faEye} />
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
+const eye = <FontAwesomeIcon icon={faEye} />;
 
 const Login = () => {
 
   const [passwordShown, setPasswordShown] = useState(false);
   const [states, setStates] = useState({
     items: [],
-    errorMessage: ''
+    errorMessage: '',
+    loading: false
   })
+  setTimeout(() => {
+    setStates({ errorMessage: "" })
+  }, 10000);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true)
   }
@@ -30,10 +35,16 @@ const Login = () => {
         history.push("/dashboard")
       })
       .catch(err => {
-        setStates({ errorMessage: err.response.data.message });
+        setStates({
+          errorMessage: err.response.data.message,
+          loading: false
+        });
       })
-  }
-  const { register, handleSubmit, errors } = useForm()
+    setStates({
+      loading: true
+    })
+  };
+  const { register, handleSubmit, errors } = useForm();
 
   return (
     <div className='login'>
@@ -79,13 +90,21 @@ const Login = () => {
               </i>
               <p>{errors.password && errors.password.message}</p>
             </div>
+            {states.loading && <Loader
+              type="ThreeDots"
+              color="#00BFFF"
+              height={30}
+              width={100}
+              timeout={10000}
+            />}
             {states.errorMessage &&
-              <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>}
+              <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>
+            }
             <div className="col-md-12">
               <button type="submit" className="btn btn-primary btn-block">Sign In</button>
               <div className="login-text">
                 <span>Don't have an account yet? <Link to='/signup' className="link">Sign up</Link></span>
-                <span><Link to='/' className="link">Forgot password?</Link></span>
+                {/* <span><Link to='/' className="link">Forgot password?</Link></span> */}
               </div>
             </div>
           </div>
