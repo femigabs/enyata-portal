@@ -47,7 +47,7 @@ const Count_down = () => {
     return (
         <>
             <Countdown onComplete={Complete}
-                date={Date.now() + 180000}
+                date={Date.now() + 18000}
                 renderer={renderer}
             />
         </>
