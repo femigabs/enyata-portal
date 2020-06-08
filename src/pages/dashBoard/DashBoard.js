@@ -61,6 +61,15 @@ const DashBoard = () => {
     const status = state.data.Application_status
     const d = state.data.Application_date
     const date = moment(d).format("DD.MM.YY")
+    const applied_date = moment(d).format("YYY.MM.DD")
+
+    let current_date = new Date()
+    const now = moment( current_date).format("YYY.MM.DD")
+    const end = moment(applied_date);
+    current_date  = moment(now)
+    const duration = moment.duration(current_date.diff(end)); 
+    const days_left= duration.days();
+
     return (
         <div>
             <div className="dashboard">
@@ -80,7 +89,7 @@ const DashBoard = () => {
                         <div className="col-md-3 application-date">
                             <h5>Date of Application</h5>
                             <h2>{state.data.Application_date && date}</h2>
-                            <p>4 days since applied</p>
+                            <p>{days_left} days since applied</p>
                         </div>
                         <div className="col-md-3 application-status">
                             <h5>Application Status</h5>

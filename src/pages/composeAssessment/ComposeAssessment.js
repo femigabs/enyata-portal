@@ -68,7 +68,7 @@ const ComposeAssessment = () => {
         })
     }
 
-    const validAnswerRegex = RegExp(/[A-Da-d]{1}$/)
+    const validAnswerRegex = RegExp(/^[A-Da-d]{1}$/)
 
     const validate = () => {
         let questionError = "";
