@@ -311,7 +311,7 @@ const ComposeAssessment = () => {
                         <div className="">
                             <div className="compose-file">
                                 <div className="cv">
-                                    <input className="inputfile" id="file_img" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
+                                    <input className="inputfile" id="file_img" type="file" name="pick_file" accept=".png, .jpg" onChange={uploadFile} />
                                     <label htmlFor="file_img"><img src={Plus} alt="createapp-icon" /> Upload file</label>
                                 </div>
                                 <div className="time">

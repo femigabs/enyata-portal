@@ -250,7 +250,7 @@ const AssessmentHistory = () => {
     let itemsToRender;
     if (history.data) {
         itemsToRender = history.data.map((items, index) => {
-            return <tr key={index} className="tab_row">
+            return <tr className="tab_row" key={index}>
                 <td>{items.batch_id}</td>
                 <td><Moment format="DD/MM/YY">{items.date_composed}</Moment></td>
                 <td>{items.number_of_question}</td>
@@ -418,7 +418,7 @@ const AssessmentHistory = () => {
                                             <button disabled={questionStep.nextDisabled || questionStep.currentQuestion == 29} onClick={handleNext} className="btn btn-primary">Next</button>
                                         </div>
                                         <div className="col-md-12 finish-button">
-                                            <button onClick={handleSubmit} type="submit" className="btn btn-default">Finish</button>
+                                            <button onClick={handleSubmit} type="submit" className="btn btn-success">Finish</button>
                                         </div>
                                     </div>
                                 </div>
