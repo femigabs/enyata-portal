@@ -14,20 +14,24 @@ const Application = (props) => {
 
     const history = useHistory()
 
+    if (!Cookies.get("token")) {
+        history.push("/login")
+    }
+
     const search = props.location.search;
     const params = new URLSearchParams(search);
     const batch_id = params.get("id");
-
+    const closure_date = batch_id.slice(2).replace(/=/g, "");
     const [image, setImage] = useState({ data: [] });
     const [states, setStates] = useState({
         items: [],
         errorMessage: '',
-        message:"",
+        message: "",
         loading: false
-      })
-      setTimeout(() => {
+    })
+    setTimeout(() => {
         setStates({ errorMessage: "" })
-      }, 10000);
+    }, 10000);
     const d = new Date()
     const date = moment(d).format("YYYY/MM/DD")
 
@@ -35,7 +39,7 @@ const Application = (props) => {
         defaultValues: {
             created_at: date,
             closure_date: batch_id.slice(2),
-            batch_id: batch_id.slice(0, 2).replace(/=/g,"")
+            batch_id: batch_id.slice(0, 2).replace(/=/g, "")
         }
     });
     const onSubmit = (state) => {
@@ -48,18 +52,18 @@ const Application = (props) => {
         })
             .then(response => {
                 console.log(response)
-                setStates({message:response.data.message})
+                setStates({ message: response.data.message })
                 history.push("/dashboard")
             })
             .catch(err => {
-                if(err.response.data.message== "Authorization Failed"){
+                if (err.response.data.message == "Authorization Failed") {
                     setStates({
-                        errorMessage:"Login in ",
+                        errorMessage: "Login in ",
                         loading: false
-                })
-                }else{
+                    })
+                } else {
                     setStates({
-                        errorMessage:err.response.data.message,
+                        errorMessage: err.response.data.message,
                         loading: false
                     })
                 }
@@ -95,7 +99,7 @@ const Application = (props) => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="row">
                                 <div className="col-md-4 col-md-offset-4 cv">
-                                <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
+                                    <input className="inputfile" id="file" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
                                     <label htmlFor="file"><img src={Plus} alt="createapp-icon" /> Upload CV</label>
                                     <p>{errors.cv_url && errors.cv_url.message}</p>
                                 </div>
@@ -145,7 +149,7 @@ const Application = (props) => {
                                             }
                                         })}
                                     />
-                                     <p>{errors.email && errors.email.message}</p>
+                                    <p>{errors.email && errors.email.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Date of Birth</label>
@@ -157,12 +161,12 @@ const Application = (props) => {
                                         ref={register({
                                             required: "Date of Birth Required",
                                             pattern: {
-                                                value:  /^\d{4}(\/)(((0)[0-9])|((1)[0-2]))(\/)([0-2][0-9]|(3)[0-1])$/i,
+                                                value: /^\d{4}(\/)(((0)[0-9])|((1)[0-2]))(\/)([0-2][0-9]|(3)[0-1])$/i,
                                                 message: "Wrong Date of Birth Format"
                                             }
                                         })}
                                     />
-                                     <p>{errors.date_of_birth && errors.date_of_birth.message}</p>
+                                    <p>{errors.date_of_birth && errors.date_of_birth.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Address</label>
@@ -201,7 +205,7 @@ const Application = (props) => {
                                                 required: "Course Of Study Reqruired"
                                             })}
                                     />
-                                     <p>{errors.course_of_study && errors.course_of_study.message}</p>
+                                    <p>{errors.course_of_study && errors.course_of_study.message}</p>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>CGPA</label>
@@ -264,10 +268,13 @@ const Application = (props) => {
                                         timeout={10000}
                                     />}
                                     {states.errorMessage &&
-                                    <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                        <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
                                     {states.Message &&
-                                    <h5 className="success" style={{ color: "Green" }}> {states.rMessage} </h5>}
-                                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                                        <h5 className="success" style={{ color: "Green" }}> {states.rMessage} </h5>}
+                                    {closure_date < date && <h5  style={{ color: "Red" }}> Application is closed</h5>}
+                                    {console.log(closure_date < date)}
+                                    {console.log(closure_date)}
+                                    <button type="submit" disabled={closure_date < date} className="btn btn-primary btn-block">Submit</button>
                                 </div>
                             </div>
                         </form>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AssessmentResult.css';
 import AdminNav from '../../components/adminNav/AdminNav';
-import menu from '../../Assets/Icons/menu.svg';
+import {useHistory} from "react-router-dom"
 import Cookies from "js-cookie";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +17,12 @@ const AssessmentResult = () => {
     });
     const handleChange = (e) => {
         setValue({ value: e.target.value })
+    }
+
+    const history = useHistory()
+
+    if(!Cookies.get("token")){
+        history.push("/admin")
     }
 
     const [sorting, setSorting] = useState(null)

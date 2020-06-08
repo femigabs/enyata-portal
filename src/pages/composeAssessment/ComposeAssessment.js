@@ -13,6 +13,10 @@ const ComposeAssessment = () => {
 
     const history = useHistory()
 
+    if(!Cookies.get("token")){
+        history.push("/admin")
+    }
+
     const [state, setState] = useState({
         file_url: "",
         question: "",

@@ -19,7 +19,9 @@ const Assessment = () => {
         errorMessage: '',
         loading:"true"
     })
-
+    if(!Cookies.get("token")){
+        history.push("/login")
+    }
     const renderer = ({ minutes, seconds }) => {
         return <div>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></div>
     };

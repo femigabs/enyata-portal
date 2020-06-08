@@ -15,6 +15,9 @@ const DashBoard = () => {
 
     const [state, setState] = useState({data: []});
 
+    if(!Cookies.get("token")){
+        history.push("/login")
+    }
     useEffect(() => {
         axios.get("/api/v1/application", {
             "headers": {
@@ -30,7 +33,6 @@ const DashBoard = () => {
             })
             .catch((err) => {
                 console.log("Error:", err.response.data.message);
-               
             });
     },[]);
 
