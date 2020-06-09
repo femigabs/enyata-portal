@@ -46,11 +46,19 @@ const Assessment = () => {
                 })
                 .catch(err => {
                     console.log(err.response.data.message)
+                    if(err.response.data.message=="Error getting Batch_id"){
+                        setDisable({
+                        disable:true,
+                        errorMessage:"Apply to take Assessment",
+                        loading: false
+                        })
+                    }else{
                     setDisable({
                         disable:true,
                         errorMessage:err.response.data.message,
                         loading: false
                     })
+                }
                 })
         }, []);
 
