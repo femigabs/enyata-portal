@@ -6,20 +6,23 @@
     padding-top: 50px;
 }
 
-.compose-heading h1{
+.compose-structure h1{
     font-weight: 100;
     text-align: left;
 }
 
-.compose-heading h3{
+.questionsteps{
     font-weight: 500;
     text-align: left;
     font-size: 18px;
+    padding-top: 62px;
 }
-
+.forms {
+    padding-top: 0;
+}
 .compose-file {
     display: flex;
-    padding-top: 40px;
+    padding-top: 20px;
 }
 
 .compose-file .cv{
@@ -30,7 +33,7 @@
 
 .time{
     padding-left: 10%;
-    width: 25%;
+    width: 30%;
 }
 .time h2{
     font-size: 15px;
