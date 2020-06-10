@@ -3,7 +3,7 @@ import './CreateApplication.css';
 import AdminNav from '../../components/adminNav/AdminNav';
 import Sign from '../../Assets/Icons/createapp-icon.png';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 import { useForm } from "react-hook-form";
@@ -11,6 +11,12 @@ import Cookies from "js-cookie";
 
 
 const CreateApplication = () => {
+
+    const history = useHistory()
+
+    if(!Cookies.get("token")){
+        history.push("/admin")
+    }
 
     const [image, setImage] = useState({ data: [] });
     const [states, setStates] = useState({

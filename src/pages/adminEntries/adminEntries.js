@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AdminEntries.css';
 import AdminNav from '../../components/adminNav/AdminNav';
-import menu from '../../Assets/Icons/menu.svg';
+import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,12 @@ import Skeleton , { SkeletonTheme } from "react-loading-skeleton";
 const sort = <FontAwesomeIcon icon={faSort} />;
 
 const AdminEntries = () => {
-
+    const history = useHistory()
+    
+    if(!Cookies.get("token")){
+        history.push("/admin")
+    }
+    
     const [value, setValue] = useState({
         value:1
     });

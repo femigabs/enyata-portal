@@ -11,6 +11,10 @@ const AdminBoard = () => {
 
     const history = useHistory()
 
+    if(!Cookies.get("token")){
+        history.push("/admin")
+    }
+    
     const [state, setState] = useState({ 
         data: [],
         loading:true
@@ -30,9 +34,6 @@ const AdminBoard = () => {
             })
             .catch((err) => {
                 console.log(err.response);
-                if(err.response.data.message=="Authorization Failed"){
-                    history.push("/admin")
-                }
             });
     }, []);
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AssessmentHistory.css';
 import { useForm } from "react-hook-form";
 import AdminNav from '../../components/adminNav/AdminNav';
-import menu from '../../Assets/Icons/menu.svg';
+import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import axios from "axios";
 import Plus from "../../Assets/Icons/createapp-icon.png";
@@ -21,6 +21,12 @@ const AssessmentHistory = () => {
         option_answer: ""
     });
 
+    const histor = useHistory()
+
+    if(!Cookies.get("token")){
+        histor.push("/admin")
+    }
+    
     const [questions, updateQuestions] = useState([]);
 
     const [questionStep, setQuestionStep] = useState({

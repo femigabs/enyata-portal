@@ -13,6 +13,10 @@ const ComposeAssessment = () => {
 
     const history = useHistory()
 
+    if(!Cookies.get("token")){
+        history.push("/admin")
+    }
+
     const [state, setState] = useState({
         file_url: "",
         question: "",
@@ -68,7 +72,7 @@ const ComposeAssessment = () => {
         })
     }
 
-    const validAnswerRegex = RegExp(/[A-Da-d]{1}$/)
+    const validAnswerRegex = RegExp(/^[A-Da-d]{1}$/)
 
     const validate = () => {
         let questionError = "";
