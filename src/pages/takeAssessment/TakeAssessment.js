@@ -34,16 +34,6 @@ const TakeAssessment = (props) => {
     }
     console.log(selectAnswer)
 
-    useEffect(() => {
-        let hamburger = document.getElementById("img"),
-            menuLink = document.getElementById("sidenav")
-
-        hamburger.addEventListener('click', function (e) {
-            menuLink.classList.toggle('hidden-xs')
-            e.preventDefault()
-        })
-    })
-
     const url = `/api/v1/getQuestion`
     useEffect(() => {
         fetch(url, {
@@ -60,9 +50,6 @@ const TakeAssessment = (props) => {
             })
             .catch(err => {
                 console.log("Error:", err);
-                // if (err.response.data.message == "Assessment already taken"){
-                // history.push("/dashboard")
-                // }
             });
     }, []);
 
@@ -103,13 +90,8 @@ const TakeAssessment = (props) => {
         setCount(count - 1)
     }
 
-    const answer = selectAnswer
-
     return (
         <div>
-            <div className="menu">
-                <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-            </div>
             <div className="assessment">
                 <SideNav />
                 <div className="container assessment-contents">
@@ -159,7 +141,7 @@ const TakeAssessment = (props) => {
                                 <button disabled={count == state.question.length - 1} onClick={handleNext} className="btn btn-primary">Next</button>
                             </div>
                             <div className="col-md-12 finish-button">
-                                <button onClick={handleFinish} className="btn btn-default">Finish</button>
+                                <button onClick={handleFinish} className="btn btn-success">Finish</button>
                             </div>
                         </div>
 

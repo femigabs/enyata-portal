@@ -47,7 +47,7 @@ const Signup = () => {
             })
         
     };
-    // const {spin} = spinner
+
     const { register, handleSubmit, errors, watch } = useForm();
 
     return (

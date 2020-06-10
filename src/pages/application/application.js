@@ -209,7 +209,7 @@ const Application = (props) => {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        name="cgpa"                                        ref={register({
+                                        name="cgpa" ref={register({
                                             required: "CGPA Required",
                                             pattern: {
                                                 value: /\b[1-5]\b/,
@@ -235,10 +235,7 @@ const Application = (props) => {
                                         type="text"
                                         name="cv_url"
                                         value={image.data}
-                                        ref={register({
-                                            // required: "Please Upload CV",
-                                            // validate: (value) => value === watch('file_url') || "Upload CV"
-                                        })}
+                                        ref={register()}
                                     />
                                 </div>
                                 <div className="form-group col-md-6" style={{ display: "none" }}>

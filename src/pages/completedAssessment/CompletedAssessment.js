@@ -16,15 +16,6 @@ const CompletedAssessment = () => {
     const renderer = ({ minutes, seconds }) => {
         return <span>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></span>
     };
-        useEffect(() => {
-            let hamburger = document.getElementById("img"),
-                menuLink = document.getElementById("sidenav")
-
-            hamburger.addEventListener('click', function (e) {
-                menuLink.classList.toggle('hidden-xs')
-                e.preventDefault()
-            })
-        })
 
         const handleSubmit = (e) => {
             e.preventDefault()
@@ -34,9 +25,6 @@ const CompletedAssessment = () => {
 
         return (
             <div>
-                <div className="menu">
-                    <img src={menu} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-                </div>
                 <div className="assessment">
                     <SideNav />
                     <div className="container assessment-contents">

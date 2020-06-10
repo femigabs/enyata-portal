@@ -223,19 +223,6 @@ const AssessmentHistory = () => {
             })
     }
 
-
-    useEffect(() => {
-        let hamburger = document.getElementById("img"),
-            menuLink = document.getElementById("sidenav")
-
-        hamburger.addEventListener('click', function (e) {
-            menuLink.classList.toggle('hidden-xs')
-            e.preventDefault()
-        });
-    });
-
-
-
     const url = `/api/v1/getHistory`
     const [history, getHistory] = useState({ 
         data: [],
@@ -275,9 +262,6 @@ const AssessmentHistory = () => {
 
     return (
         <div>
-            <div className="menu">
-                <img src={menu} alt="" id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-            </div>
             <div className="dashboard">
                 <AdminNav />
                 <div className="container dashboard-contents">

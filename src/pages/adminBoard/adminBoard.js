@@ -11,16 +11,6 @@ const AdminBoard = () => {
 
     const history = useHistory()
 
-    useEffect(() => {
-        let hamburger = document.getElementById("img"),
-            menuLinK = document.getElementById("adminnav")
-
-        hamburger.addEventListener('click', function (e) {
-            menuLinK.classList.toggle('hidden-xs')
-            e.preventDefault()
-        })
-    })
-
     const [state, setState] = useState({ 
         data: [],
         loading:true
@@ -119,9 +109,6 @@ const AdminBoard = () => {
 
     return (
         <div>
-            <div className="menud">
-                <img src={menud} id="img" className="visible-xs" style={{ height: "45px", marginLeft: "87%", paddingTop: "10px" }} />
-            </div>
             <div className="dash">
                 <AdminNav />
                 <div className="container dash-contents">
