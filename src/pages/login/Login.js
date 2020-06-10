@@ -103,7 +103,7 @@ const Login = () => {
             <div className="col-md-12">
               <button type="submit" className="btn btn-primary btn-block">Sign In</button>
               <div className="login-text">
-                <span>Don't have an account yet? <Link to='/signup' className="link">Sign up</Link></span>
+                <span>Don't have an account yet? <Link to='/signup' className="link">Sign up</Link> <Link to='/email' className="link">Forget Password</Link></span>
               </div>
             </div>
           </div>

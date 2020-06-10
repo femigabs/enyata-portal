@@ -15,6 +15,8 @@ import CreateApplication from './pages/createApplication/CreateApplication';
 import ComposeAssessment from './pages/composeAssessment/ComposeAssessment';
 import AssessmentResult from './pages/assessmentResult/AssessmentResult';
 import AssessmentHistory from './pages/assessmentHistory/AssessmentHistory';
+import Email from './pages/email/Email';
+import ForgetPassword from './pages/forgetPassword/ForgetPassword';
 import Error_page from './pages/error/Error';
 
 
@@ -36,6 +38,8 @@ function App() {
         <Route exact path='/composeassessment' component={ComposeAssessment} />
         <Route exact path='/results' component={AssessmentResult} />
         <Route exact path='/assessmenthistory' component={AssessmentHistory} />
+        <Route exact path='/email' component={Email} />
+        <Route exact path='/forgetPassword' component={ForgetPassword} />
         <Route component={Error_page}/>
       </Switch>
     </div>
