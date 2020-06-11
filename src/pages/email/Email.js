@@ -66,7 +66,7 @@ const Email = () => {
               />
               <p>{errors.email_address && errors.email_address.message}</p>
             </div>
-            <div className="col-md-12">
+            <div className="col-md-6 col-md-offset-3">
             {states.loading && <Loader
               type="ThreeDots"
               color="#00BFFF"

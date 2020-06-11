@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ResetPassword";
+import "./ResetPassword.css";
 import UserLogo from "../../components/userLogo/UserLogo";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -130,7 +130,7 @@ const ResetPassword = (props) => {
                 </h4>
               )}
             </div>
-            <div className="col-md-12">
+            <div className="col-md-6 col-md-offset-3">
               <button type="submit" className="btn btn-primary btn-block">
                 Submit
               </button>
