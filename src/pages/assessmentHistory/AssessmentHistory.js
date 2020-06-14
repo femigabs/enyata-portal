@@ -11,17 +11,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const AssessmentHistory = (props) => {
 
-    const [state, setState] = useState({
-        file_url: "",
-        question: "",
-        option_a: "",
-        option_b: "",
-        option_c: "",
-        option_d: "",
-        option_answer: "",
-        id: "",
-        batch_id: "",
-    });
+    const [state, setState] = useState({});
 
     const [isInEditMode, setIsInEditMode] = useState(false)
 
@@ -29,10 +19,11 @@ const AssessmentHistory = (props) => {
         data: []
     });
 
-    if(!Cookies.get("token")){
-        history.push("/admin")
+    const histor = useHistory()
+    if (!Cookies.get("token")) {
+        histor.push("/admin")
     }
-    
+  
     const [questionStep, setQuestionStep] = useState({
         currentQuestion: 0,
         prevDisabled: true,
@@ -108,32 +99,8 @@ const AssessmentHistory = (props) => {
         console.log(questionStep)
         console.log(questions.data)
 
-        if (currentQuestion == 0) {
-            // let copy = [...questions]
-            // copy[currentQuestion] = state
-            // updateQuestions([...copy])
-
-            setState({
-                file_url: questions.data[currentQuestion - 1].file_url,
-                question: questions.data[currentQuestion - 1].question,
-                option_a: questions.data[currentQuestion - 1].option_a,
-                option_b: questions.data[currentQuestion - 1].option_b,
-                option_c: questions.data[currentQuestion - 1].option_c,
-                option_d: questions.data[currentQuestion - 1].option_d,
-                option_answer: questions.data[currentQuestion - 1].option_answer
-            })
-
-            setQuestionStep({
-                currentQuestion: currentQuestion - 1,
-                prevDisabled: true,
-            })
-        } else {
-            // if (state.question && state.option_a && state.option_b && state.option_answer) {
-            //     let copy = [...questions]
-            //     copy[currentQuestion] = state
-            //     updateQuestions([...copy])
-            // }
-
+        if (currentQuestion >= 1) {
+            console.log('hello there')
             setState({
                 file_url: questions.data[currentQuestion - 1].file_url,
                 question: questions.data[currentQuestion - 1].question,
@@ -142,14 +109,16 @@ const AssessmentHistory = (props) => {
                 option_c: questions.data[currentQuestion - 1].option_c,
                 option_d: questions.data[currentQuestion - 1].option_d,
                 option_answer: questions.data[currentQuestion - 1].option_answer,
+                id: questions.data[currentQuestion - 1].id,
+                batch_id: questions.data[currentQuestion - 1].batch_id
             })
 
             setQuestionStep({
                 currentQuestion: currentQuestion - 1,
-                prevDisabled: false,
             })
-        }
+        } 
     }
+
     const [batch, setBatch_id] = useState()
     const selectAssessment = (batch_id) => {
         setBatch_id(batch_id)
@@ -159,6 +128,7 @@ const AssessmentHistory = (props) => {
     }
     console.log(batch)
     const handleSubmit = (e) => {
+        console.log(questionStep.currentQuestion)
         e.preventDefault();
         let time_allocated = time.time_min;
         let updateTime = { time_allocated };
@@ -239,17 +209,20 @@ const AssessmentHistory = (props) => {
                 updateQuestions({
                     data: response.data
                 })
-                setState({
-                    file_url: questions.data[questionStep.currentQuestion].file_url,
-                    question: questions.data[questionStep.currentQuestion].question,
-                    option_a: questions.data[questionStep.currentQuestion].option_a,
-                    option_b: questions.data[questionStep.currentQuestion].option_b,
-                    option_c: questions.data[questionStep.currentQuestion].option_c,
-                    option_d: questions.data[questionStep.currentQuestion].option_d,
-                    option_answer: questions.data[questionStep.currentQuestion].option_answer,
-                    id: questions.data[questionStep.currentQuestion].id,
-                    batch_id: questions.data[questionStep.currentQuestion].batch_id
-                })
+                if (questionStep.currentQuestion == 0) {
+                    console.log('haha')
+                    setState({
+                        file_url: response.data[questionStep.currentQuestion].file_url,
+                        question: response.data[questionStep.currentQuestion].question,
+                        option_a: response.data[questionStep.currentQuestion].option_a,
+                        option_b: response.data[questionStep.currentQuestion].option_b,
+                        option_c: response.data[questionStep.currentQuestion].option_c,
+                        option_d: response.data[questionStep.currentQuestion].option_d,
+                        option_answer: response.data[questionStep.currentQuestion].option_answer,
+                        id: response.data[questionStep.currentQuestion].id,
+                        batch_id: response.data[questionStep.currentQuestion].batch_id
+                    })
+                }
             })
             .catch(err => {
                 console.log(err.message)
@@ -273,7 +246,6 @@ const AssessmentHistory = (props) => {
                 console.log(err.message)
             })
     }, [batch]);
-    console.log(time)
 
     const changeEditMode = (e) => {
         e.preventDefault();
@@ -332,7 +304,7 @@ const AssessmentHistory = (props) => {
                                         readOnly
                                         className="form-control textarea"
                                         name="question"
-                                        value={questions.data[questionStep.currentQuestion].question}
+                                        value={state.question}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -343,7 +315,7 @@ const AssessmentHistory = (props) => {
                                             readOnly
                                             className="form-control"
                                             name="option_a"
-                                            value={questions.data[questionStep.currentQuestion].option_a}
+                                            value={state.option_a}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -353,7 +325,7 @@ const AssessmentHistory = (props) => {
                                             readOnly
                                             className="form-control"
                                             name="option_b"
-                                            value={questions.data[questionStep.currentQuestion].option_b}
+                                            value={state.option_b}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -365,7 +337,7 @@ const AssessmentHistory = (props) => {
                                             readOnly
                                             className="form-control"
                                             name="option_c"
-                                            value={questions.data[questionStep.currentQuestion].option_c}
+                                            value={state.option_c}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -375,7 +347,7 @@ const AssessmentHistory = (props) => {
                                             readOnly
                                             className="form-control"
                                             name="option_d"
-                                            value={questions.data[questionStep.currentQuestion].option_d}
+                                            value={state.option_d}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -386,7 +358,7 @@ const AssessmentHistory = (props) => {
                                         readOnly
                                         className="form-control"
                                         name="option_answer"
-                                        value={questions.data[questionStep.currentQuestion].option_answer}
+                                        value={state.option_answer}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -457,7 +429,7 @@ const AssessmentHistory = (props) => {
                                     className="form-control textarea"
                                     type="text"
                                     name="question"
-                                    deaultValue={questions.data[questionStep.currentQuestion].question}
+                                    value={state.question}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -468,7 +440,7 @@ const AssessmentHistory = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="option_a"
-                                        defaultValue={questions.data[questionStep.currentQuestion].option_a}
+                                        value={state.option_a}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -478,7 +450,7 @@ const AssessmentHistory = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="option_b"
-                                        defaultValue={questions.data[questionStep.currentQuestion].option_b}
+                                        value={state.option_b}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -490,7 +462,7 @@ const AssessmentHistory = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="option_c"
-                                        defaultValue={questions.data[questionStep.currentQuestion].option_c}
+                                        value={state.option_c}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -500,7 +472,7 @@ const AssessmentHistory = (props) => {
                                         className="form-control"
                                         type="text"
                                         name="option_d"
-                                        defaultValue={questions.data[questionStep.currentQuestion].option_d}
+                                        value={state.option_d}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -511,7 +483,7 @@ const AssessmentHistory = (props) => {
                                     className="form-control"
                                     type="text"
                                     name="option_answer"
-                                    defaultValue={questions.data[questionStep.currentQuestion].option_answer}
+                                    value={state.option_answer}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -526,13 +498,7 @@ const AssessmentHistory = (props) => {
                             />
                         </div>
                         <div className="quiz">
-                            {/* <div className="col-md-6 quiz-button">
-                                <button disabled={questionStep.prevDisabled || (questionStep.currentQuestion == 0)} onClick={handlePrevious} className="btn btn-primary">Previous</button>
-                            </div>
-                            <div className="col-md-6 quiz-button">
-                                <button disabled={questionStep.currentQuestion == questions.data.length - 1} onClick={handleNext} className="btn btn-primary">Next</button>
-                            </div> */}
-                            <div className="col-md-12 finish-button">
+                            <div className="col-md-12 finish-buttons">
                                 <button onClick={handleSubmit} type="submit" className="btn btn-success">Save</button>
                             </div>
                         </div>
