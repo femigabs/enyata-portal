@@ -31,8 +31,7 @@ const AssessmentHistory = (props) => {
     })
 
     const [time, setTime] = useState({
-        time_min: "00",
-        time: ""
+        time_min: "",
     })
 
     const handleTime = (e) => {
@@ -239,7 +238,7 @@ const AssessmentHistory = (props) => {
             .then(response => {
                 console.log(response)
                 setTime({
-                    time: response.data.time
+                    time_min: response.data.time
                 })
             })
             .catch(err => {
@@ -268,8 +267,8 @@ const AssessmentHistory = (props) => {
                                     <h2>Set Timer</h2>
                                     <div className="time-boxes">
                                         <div className="time-min">
-                                            <select disabled name="time" value={time.time} className="time-box" id="time" >
-                                                <option value={time.time} selected>{time.time}</option>
+                                            <select disabled name="time_min" value={time.time_min} className="time-box" id="time" >
+                                                <option value={time.time_min} selected>{time.time_min}</option>
                                                 <option value="5">05</option>
                                                 <option value="10">10</option>
                                                 <option value="15">15</option>
@@ -394,7 +393,7 @@ const AssessmentHistory = (props) => {
                                 <div className="time-boxes">
                                     <div className="time-min">
                                         <select name="time_min" value={time.time_min} onChange={handleTime} className="time-box" id="time" >
-                                            <option value={time.time} selected>{time.time}</option>
+                                            <option value={time.time_min} selected>{time.time_min}</option>
                                             <option value="5">05</option>
                                             <option value="10">10</option>
                                             <option value="15">15</option>
