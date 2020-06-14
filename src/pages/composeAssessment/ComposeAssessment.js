@@ -59,7 +59,7 @@ const ComposeAssessment = () => {
     }
 
     const handleChange = (e) => {
-         setState({
+        setState({
             ...state,
             [e.target.name]: e.target.value
         })
@@ -94,7 +94,7 @@ const ComposeAssessment = () => {
 
         if (!state.option_c) {
             isError = true;
-           errors.option_cError = "Please fill in Option C field"
+            errors.option_cError = "Please fill in Option C field"
         }
 
         if (!state.option_d) {
@@ -168,7 +168,7 @@ const ComposeAssessment = () => {
                     })
                 }
 
-            } else if (currentQuestion == questions.length-1) {
+            } else if (currentQuestion == questions.length - 1) {
                 console.log('hello2')
                 if (state.question && state.option_a && state.option_b && state.option_c && state.option_d && state.option_answer) {
                     let copy = [...questions]
@@ -224,7 +224,7 @@ const ComposeAssessment = () => {
         console.log(questions)
 
         if (currentQuestion == 1) {
-             console.log('hello here')
+            console.log('hello here')
             let copy = [...questions]
             copy[currentQuestion] = state
             updateQuestions([...copy])
@@ -244,7 +244,7 @@ const ComposeAssessment = () => {
                 prevDisabled: true,
             })
         } else {
-             console.log('hello here2')
+            console.log('hello here2')
             if (state.question && state.option_a && state.option_b && state.option_c && state.option_d && state.option_answer) {
                 let copy = [...questions]
                 copy[currentQuestion] = state
@@ -318,7 +318,7 @@ const ComposeAssessment = () => {
                 <AdminNav />
                 <div className="compose-structure">
                     <h1>Compose Assessment</h1>
-                    <h3 className="questionsteps">{questionStep.currentQuestion + 1}/30</h3>  
+                    <h3 className="questionsteps">{questionStep.currentQuestion + 1}/30</h3>
                     <form className="forms">
                         <div className="">
                             <div className="compose-file">
