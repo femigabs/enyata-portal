@@ -10,7 +10,10 @@ import CountDown from '../../components/CountDown'
 const TakeAssessment = (props) => {
 
     const history = useHistory()
-
+    if(!Cookies.get("token")){
+        history.push("/login")
+    }
+    
     const [count, setCount] = useState(0)
     const [state, setState] = useState({
         question: []

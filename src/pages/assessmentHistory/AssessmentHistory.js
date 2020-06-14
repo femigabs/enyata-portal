@@ -28,6 +28,13 @@ const AssessmentHistory = (props) => {
     const [questions, updateQuestions] = useState({
         data: []
     });
+    const history = useHistory()
+
+    if(!Cookies.get("token")){
+        history.push("/admin")
+    }
+    
+    const [questions, updateQuestions] = useState([]);
 
     const [questionStep, setQuestionStep] = useState({
         currentQuestion: 0,
