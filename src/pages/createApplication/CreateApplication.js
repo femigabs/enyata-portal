@@ -85,7 +85,7 @@ const CreateApplication = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="row createform">
                         <div className="form-group col-md-6 uploadfile">
-                            <input className="inputfile" id="file_url" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
+                            <input className="inputfile" id="file_url" type="file" name="pick_file" accept=".png, .jpg" onChange={uploadFile} />
                             <label htmlFor="file_url"><img src={Sign} alt="createapp-icon" /> Choose file </label>
                         </div>
                         <div className="form-group col-md-6">

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ComposeAssessment.css';
 import AdminNav from '../../components/adminNav/AdminNav';
-import menu from '../../Assets/Icons/menu.svg';
 import Plus from '../../Assets/Icons/createapp-icon.png';
 import Cookies from "js-cookie";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -57,7 +56,6 @@ const ComposeAssessment = () => {
 
 
     const handleTime = (e) => {
-        e.preventDefault()
         setTime({
             ...time,
             [e.target.name]: e.target.value
@@ -65,52 +63,62 @@ const ComposeAssessment = () => {
     }
 
     const handleChange = (e) => {
-        e.preventDefault();
-        setState({
+         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
 
-    const validAnswerRegex = RegExp(/^[A-Da-d]{1}$/)
-
+    const validAnswerRegex = RegExp(/^[a-d]{1}$/)
     const validate = () => {
-        let questionError = "";
-        let option_aError = "";
-        let option_bError = "";
-        let option_cError = "";
-        let option_dError = "";
-        let option_answerError = ""
+        let isError = false;
+        const errors = {
+            questionError: "",
+            option_aError: "",
+            option_bError: "",
+            option_cError: "",
+            option_dError: "",
+            option_answerError: ""
+        }
 
         if (!state.question) {
-            questionError = "Please fill in question field"
+            isError = true;
+            errors.questionError = "Please fill in question field"
         }
 
         if (!state.option_a) {
-            option_aError = "Please fill in Option A field"
+            isError = true;
+            errors.option_aError = "Please fill in Option A field"
         }
 
         if (!state.option_b) {
-            option_bError = "Please fill in Option B field"
+            isError = true;
+            errors.option_bError = "Please fill in Option B field"
         }
 
         if (!state.option_c) {
-            option_cError = "Please fill in Option C field"
+            isError = true;
+           errors.option_cError = "Please fill in Option C field"
         }
 
         if (!state.option_d) {
-            option_dError = "Please fill in Option D field"
+            isError = true;
+            errors.option_dError = "Please fill in Option D field"
         }
 
         if (!validAnswerRegex.test(state.option_answer)) {
-            option_answerError = "Answer Field Must Contain either a,b,c or d"
+            isError = true;
+            errors.option_answerError = "Answer Field Must Contain either a,b,c or d"
         }
 
-        if (questionError || option_aError || option_bError || option_cError || option_dError || option_answerError) {
-            setState({ questionError, option_aError, option_bError, option_cError, option_dError, option_answerError });
-            return false
+        if (isError) {
+            setState({
+                ...state,
+                ...errors
+            })
         }
-        return true
+
+        return isError;
     }
 
     const [image, setImage] = useState();
@@ -133,77 +141,82 @@ const ComposeAssessment = () => {
     const handleNext = (e) => {
         e.preventDefault()
         const { currentQuestion } = questionStep;
-        console.log(questionStep);
+        console.log(questionStep.currentQuestion);
         console.log(questions);
+        console.log(questions.length)
 
         const isValid = validate();
         if (isValid) {
-            console.log(state)
-        }
-
-        if (currentQuestion == questions.length) {
-            if (state.question && state.option_a && state.option_b && state.option_answer) {
-                updateQuestions([ ...questions, state])
-
-                setState({
-                    file_url: "",
-                    question: "",
-                    option_a: "",
-                    option_b: "",
-                    option_c: "",
-                    option_d: "",
-                    option_answer: ""
-                })
-
-                setQuestionStep({
-                    currentQuestion: currentQuestion + 1,
-                    prevDisabled: false
-                })
-            }
-
-        } else if (currentQuestion == questions.length - 1) {
-            if (state.question && state.option_a && state.option_b && state.option_answer) {
-                let copy = [...questions]
-                copy[currentQuestion] = state
-                updateQuestions([...copy])
-
-                setState({
-                    file_url: "",
-                    question: "",
-                    option_a: "",
-                    option_b: "",
-                    option_c: "",
-                    option_d: "",
-                    option_answer: "",
-                })
-
-                setQuestionStep({
-                    currentQuestion: currentQuestion + 1,
-                    prevDisabled: false,
-                })
-            }
+            console.log('Invalid Form')
         } else {
-            if (state.question && state.option_a && state.option_b && state.option_answer) {
-                let copy = [...questions]
-                copy[currentQuestion] = state
-                updateQuestions([...copy])
+            console.log(state)
+            console.log('Valid Form')
+            if (currentQuestion == questions.length) {
+                console.log('hello')
+                if (state.question && state.option_a && state.option_b && state.option_c && state.option_d && state.option_answer) {
+                    updateQuestions([...questions, state])
 
-                setState({
-                    file_url: questions[currentQuestion + 1].file_url,
-                    question: questions[currentQuestion + 1].question,
-                    option_a: questions[currentQuestion + 1].option_a,
-                    option_b: questions[currentQuestion + 1].option_b,
-                    option_c: questions[currentQuestion + 1].option_c,
-                    option_d: questions[currentQuestion + 1].option_d,
-                    option_answer: questions[currentQuestion + 1].option_answer,
-                })
+                    setState({
+                        file_url: "",
+                        question: "",
+                        option_a: "",
+                        option_b: "",
+                        option_c: "",
+                        option_d: "",
+                        option_answer: ""
+                    })
 
-                setQuestionStep({
-                    currentQuestion: currentQuestion,
-                    prevDisabled: false
-                })
+                    setQuestionStep({
+                        currentQuestion: currentQuestion + 1,
+                        prevDisabled: false
+                    })
+                }
+
+            } else if (currentQuestion == questions.length-1) {
+                console.log('hello2')
+                if (state.question && state.option_a && state.option_b && state.option_c && state.option_d && state.option_answer) {
+                    let copy = [...questions]
+                    copy[currentQuestion] = state
+                    updateQuestions([...copy])
+
+                    setState({
+                        file_url: "",
+                        question: "",
+                        option_a: "",
+                        option_b: "",
+                        option_c: "",
+                        option_d: "",
+                        option_answer: "",
+                    })
+
+                    setQuestionStep({
+                        currentQuestion: currentQuestion + 1,
+                        prevDisabled: false,
+                    })
+                }
+            } else {
+                if (state.question && state.option_a && state.option_b && state.option_c && state.option_d && state.option_answer) {
+                    console.log('hello3')
+                    let copy = [...questions]
+                    copy[currentQuestion] = state
+                    updateQuestions([...copy])
+
+                    setState({
+                        file_url: questions[currentQuestion + 1].file_url,
+                        question: questions[currentQuestion + 1].question,
+                        option_a: questions[currentQuestion + 1].option_a,
+                        option_b: questions[currentQuestion + 1].option_b,
+                        option_c: questions[currentQuestion + 1].option_c,
+                        option_d: questions[currentQuestion + 1].option_d,
+                        option_answer: questions[currentQuestion + 1].option_answer
+                    })
+
+                    setQuestionStep({
+                        currentQuestion: currentQuestion + 1,
+                        prevDisabled: false
+                    })
+                }
             }
-
         }
 
     }
@@ -215,6 +228,7 @@ const ComposeAssessment = () => {
         console.log(questions)
 
         if (currentQuestion == 1) {
+             console.log('hello here')
             let copy = [...questions]
             copy[currentQuestion] = state
             updateQuestions([...copy])
@@ -234,7 +248,8 @@ const ComposeAssessment = () => {
                 prevDisabled: true,
             })
         } else {
-            if (state.question && state.option_a && state.option_b && state.option_answer) {
+             console.log('hello here2')
+            if (state.question && state.option_a && state.option_b && state.option_c && state.option_d && state.option_answer) {
                 let copy = [...questions]
                 copy[currentQuestion] = state
                 updateQuestions([...copy])
@@ -306,16 +321,13 @@ const ComposeAssessment = () => {
             <div className="compose">
                 <AdminNav />
                 <div className="compose-structure">
-                    <div className="compose-heading">
-                        <h1>Compose Assessment</h1>
-                        <h3>{questionStep.currentQuestion + 1}/30</h3>
-                    </div>
-
-                    <form>
+                    <h1>Compose Assessment</h1>
+                    <h3 className="questionsteps">{questionStep.currentQuestion + 1}/30</h3>  
+                    <form className="forms">
                         <div className="">
                             <div className="compose-file">
                                 <div className="cv">
-                                    <input className="inputfile" id="file_img" type="file" name="pick_file" accept="pdf" onChange={uploadFile} />
+                                    <input className="inputfile" id="file_img" type="file" name="pick_file" accept=".png, .jpg" onChange={uploadFile} />
                                     <label htmlFor="file_img"><img src={Plus} alt="createapp-icon" /> Upload file</label>
                                 </div>
                                 <div className="time">
@@ -431,7 +443,7 @@ const ComposeAssessment = () => {
                             </div>
                             <div className="quiz">
                                 <div className="col-md-6 quiz-button">
-                                    <button disabled={questionStep.prevDisabled} onClick={handlePrevious} className="btn btn-primary">Previous</button>
+                                    <button disabled={questionStep.prevDisabled || (questionStep.currentQuestion == 0)} onClick={handlePrevious} className="btn btn-primary">Previous</button>
                                 </div>
                                 <div className="col-md-6 quiz-button">
                                     <button disabled={questionStep.nextDisabled || questionStep.currentQuestion == 30} onClick={handleNext} className="btn btn-primary">Next</button>
