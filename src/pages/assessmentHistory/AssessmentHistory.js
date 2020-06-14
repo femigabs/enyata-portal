@@ -99,7 +99,7 @@ const AssessmentHistory = (props) => {
         console.log(questionStep)
         console.log(questions.data)
 
-        if (currentQuestion == 0) {
+        if (currentQuestion >= 1) {
             console.log('hello there')
             setState({
                 file_url: questions.data[currentQuestion - 1].file_url,
@@ -108,31 +108,17 @@ const AssessmentHistory = (props) => {
                 option_b: questions.data[currentQuestion - 1].option_b,
                 option_c: questions.data[currentQuestion - 1].option_c,
                 option_d: questions.data[currentQuestion - 1].option_d,
-                option_answer: questions.data[currentQuestion - 1].option_answer
-            })
-
-            setQuestionStep({
-                currentQuestion: currentQuestion - 1,
-                prevDisabled: true,
-            })
-        } else {
-            console.log('hello there2')
-            setState({
-                file_url: questions.data[currentQuestion - 1].file_url,
-                question: questions.data[currentQuestion - 1].question,
-                option_a: questions.data[currentQuestion - 1].option_a,
-                option_b: questions.data[currentQuestion - 1].option_b,
-                option_c: questions.data[currentQuestion - 1].option_c,
-                option_d: questions.data[currentQuestion - 1].option_d,
                 option_answer: questions.data[currentQuestion - 1].option_answer,
+                id: questions.data[currentQuestion - 1].id,
+                batch_id: questions.data[currentQuestion - 1].batch_id
             })
 
             setQuestionStep({
                 currentQuestion: currentQuestion - 1,
-                prevDisabled: false,
             })
-        }
+        } 
     }
+
     const [batch, setBatch_id] = useState()
     const selectAssessment = (batch_id) => {
         setBatch_id(batch_id)
@@ -319,7 +305,7 @@ const AssessmentHistory = (props) => {
                                         readOnly
                                         className="form-control textarea"
                                         name="question"
-                                        value={questions.data[questionStep.currentQuestion].question}
+                                        value={state.question}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -330,7 +316,7 @@ const AssessmentHistory = (props) => {
                                             readOnly
                                             className="form-control"
                                             name="option_a"
-                                            value={questions.data[questionStep.currentQuestion].option_a}
+                                            value={state.option_a}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -340,7 +326,7 @@ const AssessmentHistory = (props) => {
                                             readOnly
                                             className="form-control"
                                             name="option_b"
-                                            value={questions.data[questionStep.currentQuestion].option_b}
+                                            value={state.option_b}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -352,7 +338,7 @@ const AssessmentHistory = (props) => {
                                             readOnly
                                             className="form-control"
                                             name="option_c"
-                                            value={questions.data[questionStep.currentQuestion].option_c}
+                                            value={state.option_c}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -362,7 +348,7 @@ const AssessmentHistory = (props) => {
                                             readOnly
                                             className="form-control"
                                             name="option_d"
-                                            value={questions.data[questionStep.currentQuestion].option_d}
+                                            value={state.option_d}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -373,7 +359,7 @@ const AssessmentHistory = (props) => {
                                         readOnly
                                         className="form-control"
                                         name="option_answer"
-                                        value={questions.data[questionStep.currentQuestion].option_answer}
+                                        value={state.option_answer}
                                         onChange={handleChange}
                                     />
                                 </div>
