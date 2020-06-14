@@ -92,7 +92,7 @@ const Login = () => {
               color="#00BFFF"
               height={100}
               width={100}
-              timeout={10000}
+              timeout={20000}
             />}
             {states.errorMessage &&
               <h4 className="error" style={{ color: "Red" }}> {states.errorMessage} </h4>
@@ -101,6 +101,7 @@ const Login = () => {
               <button type="submit" className="btn btn-primary btn-block">Sign In</button>
               <div className="login-text">
                 <span>Don't have an account yet? <Link to='/signup' className="link">Sign up</Link></span>
+                <span><Link className="link" to='/email'>Forgot password?</Link></span>
               </div>
             </div>
           </div>
