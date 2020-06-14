@@ -24,3 +24,8 @@
     border-radius: 8px;
     cursor: pointer;
 }
+.finish-buttons button {
+    width: 205px;
+    color: #ffffff;
+    margin-top: 20px;
+}
