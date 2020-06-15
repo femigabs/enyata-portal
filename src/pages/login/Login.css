@@ -1,0 +1,55 @@
+.login{
+    overflow-x: hidden;
+}
+.login h3 {
+    font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 56px;
+    font-weight: 500;
+    font-size: 24px;
+}
+.login button {
+    background-color: #2B3C4E;
+    color: #ffffff;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.login label {
+    display: block;
+    text-align: left;
+    font-weight: normal;
+    font-size: 14px;
+}
+.login span {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 14px;
+}
+.link {
+    color: black;
+    border: none;
+}
+.login-text Link {
+    text-decoration: none;
+    
+}
+.eye-icon {
+    float: right;
+    margin-right: 10px;
+    margin-left: -25px;
+    margin-top: -28px;
+    z-index: 2;
+}
+i:hover {
+    color: #00fcb6;
+    cursor: pointer;
+}
+.login-text {
+    display: flex;
+    justify-content: space-between;
+}
+.login p {
+    display: block;
+    text-align: left;
+    color: red;
+}

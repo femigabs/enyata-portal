@@ -1,0 +1,137 @@
+.compose{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}  
+.compose-structure{
+    padding-top: 50px;
+}
+
+.compose-structure h1{
+    font-weight: 100;
+    text-align: left;
+}
+
+.questionsteps{
+    font-weight: 500;
+    text-align: left;
+    font-size: 18px;
+    padding-top: 62px;
+}
+.forms {
+    padding-top: 0;
+}
+.compose-file {
+    display: flex;
+    padding-top: 20px;
+}
+
+.compose-file .cv{
+    width: 42%;
+    height: 120px;
+    margin-bottom: 0;
+}
+
+.time{
+    padding-left: 10%;
+    width: 30%;
+}
+.time h2{
+    font-size: 15px;
+    text-align: left;
+}
+.time-boxes {
+    display: flex;
+    justify-content: space-between;
+}
+.time-box {
+    border: none;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 58px;
+}
+.time-box option {
+    font-weight: 300;
+    font-size: 25px;
+}
+.time-min {
+    display: flex;
+}
+.time-boxes sub {
+    padding-top: 43px;
+}
+.time-sec {
+    display: flex;
+}
+
+.form{
+    text-align: left;
+    margin-right: 101px;
+}
+.my-question{
+    line-height: 2px;
+    margin-top: 25px;
+}
+.my-question label{
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+
+.textarea{
+    border: 1px solid black;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.option-grid{
+    display: grid;
+    padding-top: 25px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px;
+}
+
+.option-grid label{
+    font-weight: 500;
+}
+.option-grid input[type=text]{
+    border: 1px solid black;
+    color: black;
+}
+ .option-grid2{
+    display: grid;
+    padding-top: 25px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px;
+}
+.option-grid2 label{
+    font-weight: 500;
+}
+.option-grid2 input[type=text]{
+    border: 1px solid black;
+    color: black;
+}
+.answer {
+    margin-left: 35%;
+    margin-right: 4%;
+}
+.answer input {
+    width: 50%;
+    border: 1px solid black;
+    color: black;
+}
+.answer label{
+    margin-left: 21%;
+    font-weight: 500;
+    padding-top: 20px;
+}
+.errors {
+    display: block;
+    text-align: left;
+    color: red;
+}
+.finish-button {
+    margin-bottom: 30px;
+}
+.quiz {
+    margin-right: 100px;
+}
+

@@ -1,0 +1,17 @@
+.email button {
+    background-color: #2B3C4E;
+    color: #ffffff;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.email label {
+    display: block;
+    text-align: left;
+    font-weight: normal;
+    font-size: 14px;
+}
+.email p {
+    display: block;
+    text-align: left;
+    color: red;
+}

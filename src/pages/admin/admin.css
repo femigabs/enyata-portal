@@ -1,0 +1,76 @@
+.admin{
+    background: #111E2B;
+    background-size: cover;
+    height: 100em;
+    display: flex;
+}    
+.background img{
+    width: 35%;
+    height: 100%;
+    position: absolute;
+    top: 15%;
+    right: 0;
+    overflow-x: hidden;
+    background-repeat: no-repeat;    
+}    
+a {
+    color: #ffffff;
+}
+.admin button {
+    background-color: #ffffff;
+    color: #2B3C4E;
+    font-weight: bold;
+}
+.admin h3 {
+    color: #ffffff;
+}
+.admin label {
+    display: block;
+    text-align: left;
+    font-weight: normal;
+    font-size: 14px;
+    color: #ffffff;
+}
+.admin span {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 14px;
+}
+.admin-text Link {
+    text-decoration: none;
+}
+.eye-icon {
+    float: right;
+    margin-right: 10px;
+    margin-left: -25px;
+    margin-top: -28px;
+    z-index: 2;
+    color: #337ab7;
+}
+i:hover {
+    color: #00fcb6;
+    cursor: pointer;
+}
+.admin-text {
+    display: right;
+    justify-content: space-between;
+    text-align: right;
+}
+.admin p {
+    display: block;
+    text-align: left;
+    color: red;
+}
+.admin h3{
+    font-weight: 400;
+}
+form{
+    padding-top: 50px;
+    font-weight: 300;
+}
+input[type=text]{
+    background: none;
+}
+input[type=password]{
+    background: none;
+}

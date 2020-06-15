@@ -1,0 +1,43 @@
+.createapp {
+    display: flex
+}
+.createform p {
+    display: block;
+    text-align: left;
+    color: red;
+}
+.create-contents label {
+    display: block;
+    text-align: left;
+    font-weight: normal;
+    font-size: 14px;
+}
+.create-contents button {
+    margin-top: 45px;
+    background-color: #2B3C4E;
+    color: #ffffff;
+}
+.create-heading {
+    text-align: left;
+}
+.create-heading h1 {
+    font-weight: 300;
+    font-size: 43px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.uploadfile {
+    height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px dashed #2B3C4E;
+    border-radius: 6px;
+}
+.uploadfile label {
+    cursor: pointer;
+}
+.input {
+    border: 1.5px solid #2B3C4E!important;
+    border-radius: 4px;
+}
