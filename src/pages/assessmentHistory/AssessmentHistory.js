@@ -7,6 +7,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Plus from "../../Assets/Icons/createapp-icon.png";
 import Moment from 'react-moment';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const AssessmentHistory = (props) => {
@@ -48,17 +50,25 @@ const AssessmentHistory = (props) => {
         })
     }
 
+    const [states, setStates] = useState({
+        items: [],
+        successMessage: "",
+        errorMessage: '',
+        loading: false
+    })
+    setTimeout(() => {
+        setStates({ errorMessage: "" })
+    }, 10000);
+
     const [image, setImage] = useState();
     const uploadFile = async (e) => {
         const files = e.target.files[0];
-        console.log(e.target.files[0])
         const formData = new FormData();
         formData.append("upload_preset", "q3swu36z");
         formData.append("file", files);
         try {
             const res = await axios.post("https://api.cloudinary.com/v1_1/ddq1cxfz9/image/upload", formData);
             const fileUrl = res.data.secure_url;
-            console.log(fileUrl);
             setImage(fileUrl)
         } catch (err) {
             console.log(err)
@@ -68,11 +78,8 @@ const AssessmentHistory = (props) => {
     const handleNext = (e) => {
         e.preventDefault()
         const { currentQuestion } = questionStep
-        console.log(questionStep)
-        console.log(state)
-
+      
         if (currentQuestion >= 0) {
-            console.log('hello')
             setState({
                 file_url: questions.data[currentQuestion + 1].file_url,
                 question: questions.data[currentQuestion + 1].question,
@@ -95,11 +102,8 @@ const AssessmentHistory = (props) => {
     const handlePrevious = (e) => {
         e.preventDefault(e)
         const { currentQuestion } = questionStep
-        console.log(questionStep)
-        console.log(questions.data)
-
+    
         if (currentQuestion >= 1) {
-            console.log('hello there')
             setState({
                 file_url: questions.data[currentQuestion - 1].file_url,
                 question: questions.data[currentQuestion - 1].question,
@@ -125,9 +129,7 @@ const AssessmentHistory = (props) => {
             currentQuestion: 0
         })
     }
-    console.log(batch)
     const handleSubmit = (e) => {
-        console.log(questionStep.currentQuestion)
         e.preventDefault();
         let time_allocated = time.time_min;
         let updateTime = { time_allocated };
@@ -140,9 +142,16 @@ const AssessmentHistory = (props) => {
         })
             .then(response => {
                 console.log(response.data)
+                setStates({
+                    successMessage: response.data.message,
+                    loading: false
+                })
             })
             .catch(err => {
-                console.log(err.response.data)
+                setStates({
+                    errorMessage: err.response.data.message,
+                    loading: false
+                })
             })
         axios.put(`/api/v1/updateTime/${batch}`, updateTime, {
             "headers": {
@@ -156,6 +165,9 @@ const AssessmentHistory = (props) => {
             .catch(err => {
                 console.log(err.response.data)
             })
+        setStates({
+            loading: true
+        })
     }
 
     const url = `/api/v1/getHistory`
@@ -204,12 +216,10 @@ const AssessmentHistory = (props) => {
             }
         })
             .then(response => {
-                console.log(response)
                 updateQuestions({
                     data: response.data
                 })
                 if (questionStep.currentQuestion == 0) {
-                    console.log('haha')
                     setState({
                         file_url: response.data[questionStep.currentQuestion].file_url,
                         question: response.data[questionStep.currentQuestion].question,
@@ -497,6 +507,17 @@ const AssessmentHistory = (props) => {
                             />
                         </div>
                         <div className="quiz">
+                        {states.loading && <Loader
+                                    type="ThreeDots"
+                                    color="#00BFFF"
+                                    height={30}
+                                    width={100}
+                                    timeout={10000}
+                                />}
+                                {states.errorMessage &&
+                                    <h5 className="error" style={{ color: "Red" }}> {states.errorMessage} </h5>}
+                                {states.successMessage &&
+                                    <h5 className="success" style={{ color: "Green" }}> {states.successMessage} </h5>}
                             <div className="col-md-12 finish-buttons">
                                 <button onClick={handleSubmit} type="submit" className="btn btn-success">Save</button>
                             </div>
