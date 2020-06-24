@@ -9,7 +9,7 @@ const Count_down = () => {
     const renderer = ({ minutes, seconds }) => {
         return <span>{zeroPad(minutes)}<sub>min</sub> 0{zeroPad(seconds)}<sub>sec</sub></span>
     };
-    const [answer] = useState([
+    const [answer,setAnswer] = useState([
         {
             "question_id": "1",
             "user_answer": "a",
