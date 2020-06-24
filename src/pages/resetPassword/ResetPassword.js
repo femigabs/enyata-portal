@@ -35,7 +35,7 @@ const ResetPassword = (props) => {
 
   const onSubmit = (state) => {
     console.log(state)
-    axios.put("/api/v1/password_change", state, {
+    axios.put("https://academy-porta.herokuapp.com/api/v1/password_change", state, {
         "headers": {
             "Content-Type": "application/json",
             "token": token

@@ -134,7 +134,7 @@ const AssessmentHistory = (props) => {
         let time_allocated = time.time_min;
         let updateTime = { time_allocated };
 
-        axios.put(`/api/v1/update_question/${batch}`, state, {
+        axios.put(`https://academy-porta.herokuapp.com/api/v1/update_question/${batch}`, state, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
@@ -153,7 +153,7 @@ const AssessmentHistory = (props) => {
                     loading: false
                 })
             })
-        axios.put(`/api/v1/updateTime/${batch}`, updateTime, {
+        axios.put(`https://academy-porta.herokuapp.com/api/v1/updateTime/${batch}`, updateTime, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
@@ -170,7 +170,7 @@ const AssessmentHistory = (props) => {
         })
     }
 
-    const url = `/api/v1/getHistory`
+    const url = `https://academy-porta.herokuapp.com/api/v1/getHistory`
     const [history, getHistory] = useState({
         data: [],
         loading: true
@@ -209,7 +209,7 @@ const AssessmentHistory = (props) => {
     }
 
     useEffect(() => {
-        axios.get(`/api/v1/getQues/${batch}`, {
+        axios.get(`https://academy-porta.herokuapp.com/api/v1/getQues/${batch}`, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
@@ -239,7 +239,7 @@ const AssessmentHistory = (props) => {
     }, [batch]);
 
     useEffect(() => {
-        axios.get(`/api/v1/getTime/${batch}`, {
+        axios.get(`https://academy-porta.herokuapp.com/api/v1/getTime/${batch}`, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")

@@ -33,7 +33,7 @@ const CreateApplication = () => {
 
     const onSubmit = (state) => {
         console.log(state)
-        axios.post("/api/v1/createApplication", state, {
+        axios.post("https://academy-porta.herokuapp.com/api/v1/createApplication", state, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")

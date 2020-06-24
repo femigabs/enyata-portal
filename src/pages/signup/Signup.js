@@ -29,7 +29,7 @@ const Signup = () => {
     const onSubmit = (state) => {
         console.log(state)
 
-        axios.post("/api/v1/signup", state)
+        axios.post("https://academy-porta.herokuapp.com/api/v1/signup", state)
             .then(response => {
                 console.log(response.data)
                 Cookies.set('token', response.data.token);

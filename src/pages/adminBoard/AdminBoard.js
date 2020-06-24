@@ -20,7 +20,7 @@ const AdminBoard = () => {
         loading:true
     });
     useEffect(() => {
-        axios.get("/api/v1/getTotal", {
+        axios.get("https://academy-porta.herokuapp.com/api/v1/getTotal", {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
@@ -39,7 +39,7 @@ const AdminBoard = () => {
 
     const [academy, setAcademy] = useState({ data: [] });
     useEffect(() => {
-        axios.get("/api/v1/academySoFar", {
+        axios.get("https://academy-porta.herokuapp.com/api/v1/academySoFar", {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
@@ -57,7 +57,7 @@ const AdminBoard = () => {
 
     const [total, setTotal] = useState({ data: [] });
     useEffect(() => {
-        axios.get("/api/v1/academy", {
+        axios.get("https://academy-porta.herokuapp.com/api/v1/academy", {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
@@ -87,7 +87,7 @@ const AdminBoard = () => {
 
     const [currentAcademy, setCurrentAcademy] = useState();
     useEffect(() => {
-        axios.get("/api/v1/getCurrentAcademy", {
+        axios.get("https://academy-porta.herokuapp.com/api/v1/getCurrentAcademy", {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")

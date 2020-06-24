@@ -44,7 +44,7 @@ const Application = (props) => {
     });
     const onSubmit = (state) => {
         console.log(state)
-        axios.post("/api/v1/application", state, {
+        axios.post("https://academy-porta.herokuapp.com/api/v1/application", state, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")

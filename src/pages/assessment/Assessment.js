@@ -32,7 +32,7 @@ const Assessment = () => {
         }
 
         useEffect(() => {
-            axios.get("/api/v1/getQuestion",{
+            axios.get("https://academy-porta.herokuapp.com/api/v1/getQuestion",{
                 "headers": {
                     "Content-Type": "application/json",
                     "token": Cookies.get("token")

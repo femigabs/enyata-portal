@@ -19,7 +19,7 @@ const DashBoard = () => {
         history.push("/login")
     }
     useEffect(() => {
-        axios.get("/api/v1/application", {
+        axios.get("https://academy-porta.herokuapp.com/api/v1/application", {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")

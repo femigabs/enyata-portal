@@ -61,7 +61,7 @@ const AssessmentResult = () => {
 
     const [batch, SetBatch] = useState()
     useEffect(() => {
-        fetch("/api/v1/getBatch", {
+        fetch("https://academy-porta.herokuapp.com/api/v1/getBatch", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const AssessmentResult = () => {
     },[]);
 
 
-    const url = `/api/v1/specific_batch/${value.value}`
+    const url = `https://academy-porta.herokuapp.com/api/v1/specific_batch/${value.value}`
     const [state, setState] = useState({ 
         data: [],
         loading: true });

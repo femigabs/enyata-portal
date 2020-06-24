@@ -62,7 +62,7 @@ const AdminEntries = () => {
     const { currentSort } = sortState
 
 
-    const url = `/api/v1/specific_batch/${value.value}`
+    const url = `https://academy-porta.herokuapp.com/api/v1/specific_batch/${value.value}`
     const [state, setState] = useState({ 
         data: [],
         loading: true });

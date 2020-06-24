@@ -31,7 +31,7 @@ const Admin = () => {
     const history = useHistory()
     const onSubmit = (state) => {
         console.log(state)
-        axios.post("/api/v1/admin/login", state)
+        axios.post("https://academy-porta.herokuapp.com/api/v1/admin/login", state)
             .then(response => {
                 console.log(response.data)
                 Cookies.set('token', response.data.token);

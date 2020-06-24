@@ -278,7 +278,7 @@ const ComposeAssessment = () => {
         let time_allocated = time.time_min
         let assRequest = { time_allocated, number_of_question };
         console.log(assRequest)
-        axios.post("/api/v1/assessment", questions, {
+        axios.post("https://academy-porta.herokuapp.com/api/v1/assessment", questions, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
@@ -299,7 +299,7 @@ const ComposeAssessment = () => {
                 })
             })
 
-        axios.post("/api/v1/assessmentHistory", assRequest, {
+        axios.post("https://academy-porta.herokuapp.com/api/v1/assessmentHistory", assRequest, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")

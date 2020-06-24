@@ -24,7 +24,7 @@ const Email = () => {
   const history = useHistory();
 
   const onSubmit = (state) => {
-    axios.post("/api/v1/email", state)
+    axios.post("https://academy-porta.herokuapp.com/api/v1/email", state)
       .then(response => {
           setStates({
             successMessage:response.data.message,

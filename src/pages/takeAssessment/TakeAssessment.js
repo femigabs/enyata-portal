@@ -37,7 +37,7 @@ const TakeAssessment = (props) => {
     }
     console.log(selectAnswer)
 
-    const url = `/api/v1/getQuestion`
+    const url = `https://academy-porta.herokuapp.com/api/v1/getQuestion`
     useEffect(() => {
         fetch(url, {
             method: "GET",
@@ -59,7 +59,7 @@ const TakeAssessment = (props) => {
     const handleFinish = (e) => {
         e.preventDefault();
 
-        axios.post("/api/v1/userAns", selectAnswer, {
+        axios.post("https://academy-porta.herokuapp.com/api/v1/userAns", selectAnswer, {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
