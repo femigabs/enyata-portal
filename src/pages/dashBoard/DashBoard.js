@@ -38,7 +38,7 @@ const DashBoard = () => {
 
     const [update, setUpdate] = useState({ updates: [], loading: true});
     useEffect(() => {
-        axios.get("/api/v1/getUpdate", {
+        axios.get("https://academy-porta.herokuapp.com/api/v1/getUpdate", {
             "headers": {
                 "Content-Type": "application/json",
                 "token": Cookies.get("token")
