@@ -7,7 +7,6 @@ const Error_page = () => {
         <>
         <h4 className="error_page">
             <span style={{'color':'red'}}>Error: 404</span>  page not found
-            {/* <NavLink  className="error" to="/dashboard">Dashboard</NavLink> */}
         </h4>
         <NavLink className="btn btn-success" exact to="/login">Login</NavLink>
         </>
